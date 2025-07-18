@@ -36,4 +36,41 @@ document.addEventListener('DOMContentLoaded', () => {
   // 4. Initialize saved preference
   const saved = localStorage.getItem('theme');
   if (saved) setTheme(saved);
+
+  // 5. Tab switching in Services section
+  const tabs = document.querySelectorAll('.services-tabs .tab');
+  const panels = document.querySelectorAll('.tab-panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Skip if already active
+      if (tab.classList.contains('active')) return;
+
+      // Remove active class from all tabs
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      // Hide current panel with fade-out
+      panels.forEach(panel => {
+        if (panel.classList.contains('active')) {
+          panel.classList.add('fade-out');
+          setTimeout(() => {
+            panel.classList.remove('active', 'fade-out');
+          }, 300);
+        }
+      });
+
+      // Show new panel with fade-in
+      const targetId = tab.dataset.tab;
+      const newPanel = document.getElementById(targetId);
+      if (newPanel) {
+        setTimeout(() => {
+          newPanel.classList.add('active', 'fade-in');
+          setTimeout(() => {
+            newPanel.classList.remove('fade-in');
+          }, 300);
+        }, 300);
+      }
+    });
+  });
 });

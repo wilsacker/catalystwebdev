@@ -5,19 +5,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Catalyst</title>
   <link rel="stylesheet" href="./css/style.css" />
+  
+  <!-- Open Graph Meta Tags for Social Media -->
+  <meta property="og:title" content="Catalyst Web Development">
+  <meta property="og:description" content="Modern websites for growing businesses, built with clarity and care.">
+  <meta property="og:image" content="./images/Logo-placeholder.PNG">
+  <meta property="og:url" content="https://www.catalystwebdev.com">
+  <meta property="og:type" content="website">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./images/Logo-placeholder.PNG" sizes="32x32">
+  <link rel="icon" type="image/png" href="./images/Logo-placeholder.PNG" sizes="16x16">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
-    <img src="./images/Logo-placeholder.PNG" alt="Logo" />
-    <h1>Welcome to Catalyst</h1>
+    <div class="header-container">
+      <a href="#" class="header-left">
+        <img src="./images/Logo-placeholder.PNG" alt="Catalyst Logo" class="logo" />
+        <div class="site-title">
+          <h1>Catalyst</h1>
+          <p class="subtitle"><em>Web Development</em></p>
+        </div>
+      </a>
+
+      <nav class="header-nav">
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-right">
+        <a href="#cta" class="button cta-button">Let's Talk</a>
+        <div class="analog-switch" id="theme-toggle">
+          <div class="switch-knob"></div>
+        </div>
+      </div>
+    </div>
   </header>
 
   <main>
+    <section id="hero" class="hero">
+        <div class="hero-content">
+          <h1>
+            <span>You need a website?</span><br>
+        </h1>
+        <h3>
+            <span>We build websites.</span><br>
+            <span>Let’s talk.</span>
+        </h3>
+          <p class="hero-subtext">
+            You've got enough to do. Let us handle this part. Quick, easy, and stress-free. That's our process.
+          </p>
+          <div class="hero-cta">
+            <a href="#services" class="button primary">Get a Quote</a>
+            <a href="#process" class="button secondary">See Our Process</a>
+          </div>
+        </div>
+      </section>
+
+    <section id="services">
+      <!-- What you do: list your offerings -->
+    </section>
+
+    <section id="portfolio">
+      <!-- Showcase past projects or placeholder tiles -->
+    </section>
+
     <section id="about">
-      <h2>About</h2>
-      <p>This is a one-page site scaffold.</p>
+      <!-- About you and your mission -->
+    </section>
+
+    <section id="testimonials">
+      <!-- Optional: testimonials or social proof -->
+    </section>
+
+    <section id="cta">
+      <!-- Strong call to action (CTA) -->
+    </section>
+
+    <section id="contact">
+      <!-- Contact form or contact info -->
     </section>
   </main>
+
+  <footer>
+    <!-- Footer with links or copyright info -->
+  </footer>
 
   <script src="./js/main.js"></script>
 </body>

@@ -183,7 +183,39 @@
       </section>
 
     <section id="portfolio">
-      <!-- Showcase past projects or placeholder tiles -->
+      <div class="portfolio-header">
+        <h2>My Work</h2>
+        <p>Here are a few websites I’ve designed and developed. Click through to see them in action.</p>
+      </div>
+
+      <div class="portfolio-carousel">
+        <button class="carousel-btn left" aria-label="Previous project">&#10094;</button>
+        
+        <div class="carousel-track-container">
+          <ul class="carousel-track">
+            <!-- Each project goes in a <li>. Embed GIFs or short videos later -->
+            <li class="carousel-slide current-slide">
+              <a href="https://lillianrmorton.com" target="_blank" rel="noopener">
+                <video autoplay loop muted playsinline>
+                  <source src="./media/lillianrmorton-site-demo.mov" type="video/mov" />
+                  Your browser does not support the video tag.
+                </video>
+              </a>
+            </li>
+            <li class="carousel-slide">
+              <a href="https://example2.com" target="_blank" rel="noopener">
+                <video autoplay loop muted playsinline>
+                  <source src="./media/project2.mov" type="video/mov" />
+                  Your browser does not support the video tag.
+                </video>
+              </a>
+            </li>
+            <!-- Add more slides as needed -->
+          </ul>
+        </div>
+        
+        <button class="carousel-btn right" aria-label="Next project">&#10095;</button>
+      </div>
     </section>
 
     <section id="about">

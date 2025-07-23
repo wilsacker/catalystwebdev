@@ -73,4 +73,53 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+  // 6. Portfolio carousel
+  const carouselTrack = document.querySelector('.carousel-track');
+  const slides = document.querySelectorAll('.carousel-slide');
+  const prevBtn = document.querySelector('.carousel-btn.prev');
+  const nextBtn = document.querySelector('.carousel-btn.next');
+
+  let currentIndex = 0;
+  let slideInterval;
+
+  const updateCarousel = (index) => {
+    if (!carouselTrack) return;
+    const offset = -index * 100;
+    carouselTrack.style.transform = `translateX(${offset}%)`;
+  };
+
+  const showNextSlide = () => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    updateCarousel(currentIndex);
+  };
+
+  const showPrevSlide = () => {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    updateCarousel(currentIndex);
+  };
+
+  const startAutoSlide = () => {
+    slideInterval = setInterval(showNextSlide, 5000);
+  };
+
+  const stopAutoSlide = () => {
+    clearInterval(slideInterval);
+  };
+
+  nextBtn?.addEventListener('click', () => {
+    stopAutoSlide();
+    showNextSlide();
+    startAutoSlide();
+  });
+
+  prevBtn?.addEventListener('click', () => {
+    stopAutoSlide();
+    showPrevSlide();
+    startAutoSlide();
+  });
+
+  if (carouselTrack && slides.length > 0) {
+    updateCarousel(currentIndex);
+    startAutoSlide();
+  }
 });

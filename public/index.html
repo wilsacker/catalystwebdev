@@ -195,7 +195,7 @@
           <ul class="carousel-track">
             <!-- Each project goes in a <li>. Embed GIFs or short videos later -->
               <li class="carousel-slide current-slide">
-                <a href="https://example1.com" target="_blank" rel="noopener">
+                <a href="https://lillianrmorton.com" target="_blank" rel="noopener">
                   <video
                     autoplay
                     loop
@@ -203,13 +203,45 @@
                     playsinline
                     preload="none"
                     loading="lazy"
-                    poster="./media/project1-preview.jpg"
+                    poster="./media/lillianrmorton.com-site-demo-poster.jpg"
                   >
-                    <source src="./media/project1.mp4" type="video/mp4" />
+                    <source src="./media/lillianrmorton.com-site-demo.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 </a>
               </li>
+              <li class="carousel-slide">
+                <a href="https://sagepsychla.com" target="_blank" rel="noopener">
+                  <video
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+                    preload="none"
+                    loading="lazy"
+                    poster="./media/sagepsychla.com-site-demo-poster.jpg"
+                  >
+                    <source src="./media/sagepsychla.com-site-demo.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </a>
+              </li>
+              <!-- <li class="carousel-slide">
+                <a href="https://sagepsychla.com" target="_blank" rel="noopener">
+                  <video
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+                    preload="none"
+                    loading="lazy"
+                    poster="./media/sagepsychla.com-site-demo-poster.jpg"
+                  >
+                    <source src="./media/sagepsychla.com-site-demo.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </a>
+              </li> -->
             <!-- Add more slides as needed -->
           </ul>
         </div>
@@ -218,8 +250,47 @@
       </div>
     </section>
 
-    <section id="about">
-      <!-- About you and your mission -->
+    <section id="about" class="about-section">
+      <div class="about-header">
+        <h2>Elevate Your Digital Presence</h2>
+        <div class="about-tabs">
+          <button class="about-tab active" data-tab="web">Website Design & Development</button>
+          <button class="about-tab" data-tab="tech">Modern Technology Consulting</button>
+          <button class="about-tab" data-tab="business">Small Business Solutions</button>
+        </div>
+      </div>
+      <div class="about-content">
+        <div class="about-panel active" id="web">
+          <div class="about-text">
+            <h3>Website Design & Development</h3>
+            <p>Our expert team delivers bespoke website solutions that not only look great but also drive results. From responsive designs to e-commerce platforms, we create digital experiences that engage your audience and grow your online presence.</p>
+            <a href="#cta" class="button primary">Start Your Web Project</a>
+          </div>
+          <div class="about-image">
+            <img src="./images/Logo-placeholder.PNG" alt="Web Design" />
+          </div>
+        </div>
+        <div class="about-panel" id="tech">
+          <div class="about-text">
+            <h3>Modern Technology Consulting</h3>
+            <p>Stay ahead of the curve with our modern technology consulting services. We help agencies optimize their workflows, implement the latest tools, and develop scalable processes that boost efficiency and drive innovation.</p>
+            <a href="#cta" class="button primary">Revolutionize Your Agency</a>
+          </div>
+          <div class="about-image">
+            <img src="./images/Logo-placeholder.PNG" alt="Technology Consulting" />
+          </div>
+        </div>
+        <div class="about-panel" id="business">
+          <div class="about-text">
+            <h3>Small Business Solutions</h3>
+            <p>Unlock your small business's potential with our custom software and process solutions. From CRM systems to inventory management, we provide tailored tools that automate tasks, improve productivity, and fuel your growth.</p>
+            <a href="#cta" class="button primary">Optimize Your Business</a>
+          </div>
+          <div class="about-image">
+            <img src="./images/Logo-placeholder.PNG" alt="Business Solutions" />
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="testimonials">

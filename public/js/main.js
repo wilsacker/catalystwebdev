@@ -73,33 +73,89 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // 5b. Tab switching in About section
+  const aboutTabs = document.querySelectorAll('.about-tabs .tab');
+  const aboutPanels = document.querySelectorAll('.about-panel');
+
+  aboutTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      if (tab.classList.contains('active')) return;
+
+      // Deactivate all tabs and panels
+      aboutTabs.forEach(t => t.classList.remove('active'));
+      aboutPanels.forEach(panel => panel.classList.remove('active'));
+
+      // Activate selected tab and panel
+      tab.classList.add('active');
+      const targetId = tab.dataset.tab;
+      const targetPanel = document.getElementById(targetId);
+      if (targetPanel) {
+        targetPanel.classList.add('active');
+      }
+    });
+  });
+  
   // 6. Portfolio carousel
   const carouselTrack = document.querySelector('.carousel-track');
   const slides = document.querySelectorAll('.carousel-slide');
-  const prevBtn = document.querySelector('.carousel-btn.prev');
-  const nextBtn = document.querySelector('.carousel-btn.next');
+  const prevBtn = document.querySelector('.carousel-btn.left');
+  const nextBtn = document.querySelector('.carousel-btn.right');
 
   let currentIndex = 0;
   let slideInterval;
 
+  let lastDirection = 'right';
+
   const updateCarousel = (index) => {
     if (!carouselTrack) return;
-    const offset = -index * 100;
-    carouselTrack.style.transform = `translateX(${offset}%)`;
+
+    const currentSlide = document.querySelector('.carousel-slide.current-slide');
+    const newSlide = slides[index];
+
+    if (currentSlide === newSlide) return;
+
+    const incomingClass = lastDirection === 'right' ? 'slide-in-right' : 'slide-in-left';
+    const outgoingClass = lastDirection === 'right' ? 'slide-out-left' : 'slide-out-right';
+
+    // Reset animation classes on all slides
+    slides.forEach(slide => {
+      slide.classList.remove('slide-in-right', 'slide-in-left', 'slide-out-left', 'slide-out-right');
+    });
+
+    // Prepare new slide
+    newSlide.style.removeProperty('display'); // reset any inline display:none
+    void newSlide.offsetWidth; // Force reflow to restart animation
+
+    // Animate outgoing slide
+    if (currentSlide) {
+      currentSlide.classList.add(outgoingClass);
+
+      currentSlide.addEventListener('animationend', function handleOut() {
+        currentSlide.classList.remove('current-slide', outgoingClass);
+        currentSlide.style.display = 'none';
+        currentSlide.removeEventListener('animationend', handleOut);
+
+        newSlide.classList.add('current-slide');
+        newSlide.classList.add(incomingClass);
+      });
+    }
   };
 
   const showNextSlide = () => {
+    lastDirection = 'right';
     currentIndex = (currentIndex + 1) % slides.length;
     updateCarousel(currentIndex);
   };
 
   const showPrevSlide = () => {
+    lastDirection = 'left';
     currentIndex = (currentIndex - 1 + slides.length) % slides.length;
     updateCarousel(currentIndex);
   };
 
   const startAutoSlide = () => {
-    slideInterval = setInterval(showNextSlide, 5000);
+    slideInterval = setInterval(showNextSlide, 15000);
   };
 
   const stopAutoSlide = () => {

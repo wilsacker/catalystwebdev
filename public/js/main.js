@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const newPanel = document.getElementById(targetId);
       if (newPanel) {
         setTimeout(() => {
+          newPanel.style.display = 'flex';
           newPanel.classList.add('active', 'fade-in');
           setTimeout(() => {
             newPanel.classList.remove('fade-in');
@@ -75,25 +76,34 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 5b. Tab switching in About section
-  const aboutTabs = document.querySelectorAll('.about-tabs .tab');
+  const aboutTabs = document.querySelectorAll('.about-tabs .about-tab');
   const aboutPanels = document.querySelectorAll('.about-panel');
 
   aboutTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      if (tab.classList.contains('active')) return;
+    tab.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      const targetId = tab.dataset.tab;
+      const targetPanel = document.getElementById(targetId);
+      if (!targetPanel) return;
 
       // Deactivate all tabs and panels
       aboutTabs.forEach(t => t.classList.remove('active'));
-      aboutPanels.forEach(panel => panel.classList.remove('active'));
+      aboutPanels.forEach(panel => {
+        panel.classList.remove('active');
+        panel.style.display = 'none';
+      });
 
-      // Activate selected tab and panel
+      // Activate clicked tab and panel
       tab.classList.add('active');
-      const targetId = tab.dataset.tab;
-      const targetPanel = document.getElementById(targetId);
-      if (targetPanel) {
-        targetPanel.classList.add('active');
-      }
+      targetPanel.classList.add('active');
+      targetPanel.style.display = 'flex';
     });
+  });
+
+  // On load, hide all but the first active panel
+  aboutPanels.forEach((panel, index) => {
+    panel.style.display = panel.classList.contains('active') || index === 0 ? 'flex' : 'none';
   });
   
   // 6. Portfolio carousel

@@ -56,11 +56,11 @@ h4 {
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 5rem;
 }
 
 h2 {
-  font-size: 2.5rem;
+  font-size: 3rem;
 }
 
 h3 {
@@ -72,7 +72,7 @@ h4 {
 }
 
 p {
-  font-size: 1.25rem;
+  font-size: 1rem;
   color: var(--text-color);
 }
 
@@ -364,6 +364,7 @@ footer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   gap: 2rem;
   max-width: 1000px;
   margin: 0 auto;
@@ -549,13 +550,12 @@ footer {
 
 #about {
   padding: 6rem 2rem;
-  background-color: var(--bg-primary);
+  background-color: var(--bg-secondary);
   color: var(--text-color);
   text-align: center;
 }
 
 .about-header h2 {
-  font-size: 2.5rem;
   margin-bottom: 1rem;
 }
 
@@ -592,10 +592,10 @@ footer {
 
 .about-content {
   display: flex;
-  align-items: center;
+  align-items: stretch; /* Ensure children can be aligned individually */
   justify-content: center;
   flex-wrap: wrap;
-  gap: 3rem;
+  gap: 4rem;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -615,6 +615,8 @@ footer {
 .about-text {
   flex: 1 1 400px;
   text-align: left;
+  padding-right: 2rem;
+  align-self: center;
 }
 
 .about-text h3 {
@@ -626,20 +628,6 @@ footer {
   font-size: 1.2rem;
   line-height: 1.6;
   margin-bottom: 2rem;
-}
-
-.about-text .cta-button {
-  background-color: var(--accent-color);
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 50px;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
-}
-
-.about-text .cta-button:hover {
-  background-color: var(--accent-hover);
-  color: var(--text-color);
 }
 
 /* ===============================
@@ -664,18 +652,18 @@ footer {
 
 @media (max-width: 768px) {
   h1 {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
   }
 
   h2 {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 
   h3 {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 
   h4 {
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
 }

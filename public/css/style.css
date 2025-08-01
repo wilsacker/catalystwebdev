@@ -72,7 +72,7 @@ h4 {
 }
 
 p {
-  font-size: 1rem;
+  font-size: 1.25rem;
   color: var(--text-color);
 }
 
@@ -389,6 +389,7 @@ footer {
   padding: 2rem 2rem;
   max-width: 450px;
   width: 100%;
+  min-height: 220px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   flex: 1 1 500px;
@@ -635,7 +636,101 @@ footer {
    =============================== */
 
 #cta {
-  /* CTA section styles */
+  background-color: var(--bg-primary);
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.cta-header {
+  max-width: 800px;
+  margin: 0 auto 3rem;
+}
+
+.cta-header h2 {
+  font-size: 2.75rem;
+  margin-bottom: 1rem;
+}
+
+.cta-header p {
+  font-size: 1.25rem;
+  color: var(--text-color);
+  max-width: 700px;
+  margin: 0 auto;
+  margin-top: 3rem;
+}
+
+.pricing-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+/* Ensure horizontal card alignment and proper wrapping */
+.pricing-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+/* Enforce equal height and better alignment */
+.pricing-card {
+  background-color: var(--bg-secondary);
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1 1 300px;
+}
+
+.pricing-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.pricing-card .subtitle {
+  margin-bottom: 1.25rem;
+}
+
+.pricing-card .price {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin: 0;
+  margin-bottom: 1.5rem;
+}
+
+.pricing-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.pricing-card ul li {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.pricing-card .cta-button {
+  margin-top: auto;
+  align-self: center;
 }
 
 /* ===============================

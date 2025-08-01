@@ -385,9 +385,23 @@
     </section>
   </main>
 
-  <footer>
-    <!-- Footer with links or copyright info -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-left">
+        <p>&copy; <span id="year"></span> Catalyst Web Development</p>
+      </div>
+      <div class="footer-right">
+        <a href="https://github.com/wilsacker" target="_blank">GitHub</a>
+        <a href="mailto:wils@catalystwebdev.com">Email</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
   </footer>
+  
+  <script>
+    // Set current year dynamically
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 
   <script src="./js/main.js"></script>
 </body>

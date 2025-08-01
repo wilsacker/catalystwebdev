@@ -50,27 +50,18 @@ document.addEventListener('DOMContentLoaded', () => {
       tabs.forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
 
-      // Hide current panel with fade-out
+      // Hide all panels and remove active/fade classes
       panels.forEach(panel => {
-        if (panel.classList.contains('active')) {
-          panel.classList.add('fade-out');
-          setTimeout(() => {
-            panel.classList.remove('active', 'fade-out');
-          }, 300);
-        }
+        panel.classList.remove('active', 'fade-out', 'fade-in');
+        panel.style.display = 'none';
       });
 
-      // Show new panel with fade-in
+      // Show new panel instantly
       const targetId = tab.dataset.tab;
       const newPanel = document.getElementById(targetId);
       if (newPanel) {
-        setTimeout(() => {
-          newPanel.style.display = 'flex';
-          newPanel.classList.add('active', 'fade-in');
-          setTimeout(() => {
-            newPanel.classList.remove('fade-in');
-          }, 300);
-        }, 300);
+        newPanel.style.display = 'flex';
+        newPanel.classList.add('active');
       }
     });
   });

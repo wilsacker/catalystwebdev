@@ -805,6 +805,11 @@ footer {
   color: var(--text-color);
 }
 
+.direct-email-note {
+  margin-top: 1rem;
+  text-align: center;
+}
+
 /* Form Submit Modal */
 
 .modal.hidden {
@@ -869,10 +874,6 @@ footer {
     Footer
    =============================== */
 
-/* ===============================
-    Layout: Footer
-   =============================== */
-
    .site-footer {
     background-color: var(--nav-bg);
     color: var(--text-color);
@@ -890,6 +891,17 @@ footer {
     margin: 0 auto;
   }
   
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .footer-left .footer-logo {
+    height: 40px;
+    width: auto;
+  }
+
   .footer-left p {
     margin: 0;
     opacity: 0.75;
@@ -910,14 +922,22 @@ footer {
     opacity: 1;
     color: var(--accent-color);
   }
-  
-  @media (max-width: 600px) {
-    .footer-content {
-      flex-direction: column;
-      text-align: center;
-      gap: 1rem;
-    }
+
+  /* .footer-socials {
+    display: flex;
+    gap: 1rem;
   }
+
+  .footer-socials a {
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+    color: var(--text-color);
+  }
+
+  .footer-socials a:hover {
+    opacity: 1;
+    color: var(--accent-color);
+  } */
 
 /* ===============================
     Responsive Styling: Mobile
@@ -938,5 +958,13 @@ footer {
 
   h4 {
     font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
   }
 }

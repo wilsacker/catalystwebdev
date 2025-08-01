@@ -371,6 +371,10 @@
           <textarea name="message" placeholder="Tell me about your project" required></textarea>
           <button type="submit" class="button submit-button">Send Message</button>
         </form>
+        <p class="direct-email-note">
+          Or reach out directly at 
+          <a href="mailto:wils@catalystwebdev.com">wils@catalystwebdev.com</a>
+        </p>
       </div>
       <div id="thank-you-modal" class="modal hidden">
         <div class="modal-content">
@@ -388,11 +392,19 @@
   <footer class="site-footer">
     <div class="footer-content">
       <div class="footer-left">
+        <img src="./images/Logo-placeholder.PNG" alt="Catalyst Logo" class="footer-logo" />
         <p>&copy; <span id="year"></span> Catalyst Web Development</p>
       </div>
+      <!--
+      <div class="footer-socials">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      </div>
+      -->
       <div class="footer-right">
         <a href="https://github.com/wilsacker" target="_blank">GitHub</a>
-        <a href="mailto:wils@catalystwebdev.com">Email</a>
+        <!-- <a href="mailto:wils@catalystwebdev.com">Email</a> -->
         <a href="#contact">Contact</a>
       </div>
     </div>
@@ -402,7 +414,6 @@
     // Set current year dynamically
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
-
   <script src="./js/main.js"></script>
 </body>
 </html>

@@ -358,25 +358,30 @@
         <h2>Get in Touch</h2>
         <p>Have a project in mind? Let’s talk. Fill out the form and I’ll get back to you soon.</p>
       </div>
-      <form action="https://formsubmit.co/wils@catalystwebdev.com" method="POST" class="contact-form">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <input type="text" name="company" placeholder="Company (Optional)">
-        <input type="text" name="phone" placeholder="Phone (Optional)">
-        <textarea name="message" placeholder="Tell me about your project" required></textarea>
-        <button type="submit" class="button submit-button">Send Message</button>
-      </form>
-      <div id="thank-you-modal" class="modal hidden">
-      <div class="modal-content">
-        <h3>Thank you!</h3>
-        <p>Your message has been received. I’ll follow up soon with next steps.</p>
-        <p>In the meantime, feel free to get started with our 
-          <a href="/docs/intake-form.pdf" target="_blank" class="modal-link">intake form</a>.
-        </p>
-        <button class="close-modal button">Close</button>
+      <div class="contact-container">
+        <form action="https://formsubmit.co/wils@catalystwebdev.com" method="POST" class="contact-form">
+          <!-- Honeypot spam trap -->
+          <input type="text" name="_honey" style="display:none">
+          
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <input type="text" name="company" placeholder="Company (Optional)">
+          <input type="text" name="phone" placeholder="Phone (Optional)">
+          <textarea name="message" placeholder="Tell me about your project" required></textarea>
+          <button type="submit" class="button submit-button">Send Message</button>
+        </form>
       </div>
-    </div>
+      <div id="thank-you-modal" class="modal hidden">
+        <div class="modal-content">
+          <h3>Thank you!</h3>
+          <p>Your message has been received. I’ll follow up soon with next steps.</p>
+          <p>In the meantime, feel free to get started with our 
+            <a href="/docs/intake-form.pdf" target="_blank" class="modal-link">intake form</a>.
+          </p>
+          <button class="close-modal button">Close</button>
+        </div>
+      </div>
     </section>
   </main>
 

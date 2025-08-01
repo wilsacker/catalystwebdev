@@ -2,8 +2,23 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1. Smooth page load
   document.body.classList.add('loaded');
 
-  // 2. Smooth scroll for anchor nav links
+  // DOM Elements
   const navLinks = document.querySelectorAll('a[href^="#"]');
+  const toggle = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+  const tabs = document.querySelectorAll('.services-tabs .tab');
+  const panels = document.querySelectorAll('.tab-panel');
+  const aboutTabs = document.querySelectorAll('.about-tabs .about-tab');
+  const aboutPanels = document.querySelectorAll('.about-panel');
+  const carouselTrack = document.querySelector('.carousel-track');
+  const slides = document.querySelectorAll('.carousel-slide');
+  const prevBtn = document.querySelector('.carousel-btn.left');
+  const nextBtn = document.querySelector('.carousel-btn.right');
+  const contactForm = document.querySelector('.contact-form');
+  const thankYouModal = document.getElementById('thank-you-modal');
+  const closeModalBtn = document.querySelector('.close-modal');
+
+  // 2. Smooth scroll for anchor nav links
 
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
@@ -17,8 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 3. Analog theme toggle
-  const toggle = document.getElementById('theme-toggle');
-  const html = document.documentElement;
 
   const setTheme = (theme) => {
     html.setAttribute('data-theme', theme);
@@ -38,8 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (saved) setTheme(saved);
 
   // 5. Tab switching in Services section
-  const tabs = document.querySelectorAll('.services-tabs .tab');
-  const panels = document.querySelectorAll('.tab-panel');
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
@@ -67,8 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 5b. Tab switching in About section
-  const aboutTabs = document.querySelectorAll('.about-tabs .about-tab');
-  const aboutPanels = document.querySelectorAll('.about-panel');
 
   aboutTabs.forEach(tab => {
     tab.addEventListener('click', (e) => {
@@ -97,12 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     panel.style.display = panel.classList.contains('active') || index === 0 ? 'flex' : 'none';
   });
   
-  // 6. Portfolio carousel
-  const carouselTrack = document.querySelector('.carousel-track');
-  const slides = document.querySelectorAll('.carousel-slide');
-  const prevBtn = document.querySelector('.carousel-btn.left');
-  const nextBtn = document.querySelector('.carousel-btn.right');
-
+  // Carousel
   let currentIndex = 0;
   let slideInterval;
 
@@ -178,5 +182,27 @@ document.addEventListener('DOMContentLoaded', () => {
   if (carouselTrack && slides.length > 0) {
     updateCarousel(currentIndex);
     startAutoSlide();
+  }
+
+  // Contact Form
+  if (contactForm && thankYouModal) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const formData = new FormData(contactForm);
+      fetch(contactForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      }).then(() => {
+        thankYouModal.classList.remove('hidden');
+        contactForm.reset();
+      }).catch(() => {
+        alert('There was an error sending your message.');
+      });
+    });
+
+    closeModalBtn?.addEventListener('click', () => {
+      thankYouModal.classList.add('hidden');
+    });
   }
 });

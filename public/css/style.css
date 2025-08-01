@@ -60,7 +60,7 @@ h1 {
 }
 
 h2 {
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 
 h3 {
@@ -570,6 +570,7 @@ footer {
   display: flex;
   justify-content: center;
   gap: 2rem;
+  margin-top: 1rem;
   margin-bottom: 3rem;
   flex-wrap: wrap;
 }
@@ -647,16 +648,13 @@ footer {
 }
 
 .cta-header h2 {
-  font-size: 2.75rem;
   margin-bottom: 1rem;
 }
 
 .cta-header p {
-  font-size: 1.25rem;
   color: var(--text-color);
-  max-width: 700px;
   margin: 0 auto;
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 
 .pricing-options {
@@ -738,7 +736,136 @@ footer {
    =============================== */
 
 #contact {
-  /* Contact form and contact info */
+  padding: 6rem 2rem;
+  background-color: var(--bg-secondary);
+  color: var(--text-color);
+}
+
+.contact-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.contact-header {
+  text-align: center;
+}
+
+.contact-header h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.contact-header p {
+  font-size: 1.25rem;
+  max-width: 600px;
+  margin: 0 auto;
+  color: var(--text-color);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  background-color: var(--bg-primary);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: var(--font-base);
+  color: var(--text-color);
+  background-color: var(--bg-secondary);
+}
+
+.contact-form textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.contact-form button {
+  align-self: flex-start;
+  background-color: var(--accent-color);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.contact-form button:hover {
+  background-color: var(--accent-hover);
+  color: var(--text-color);
+}
+
+/* Form Submit Modal */
+
+.modal.hidden {
+  display: none;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: var(--bg-primary);
+  color: var(--text-color);
+  padding: 4rem;
+  border-radius: 12px;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content h3 {
+  margin-bottom: 1.5rem;
+}
+
+.modal-content p {
+  margin-bottom: 1.5rem;
+}
+
+.close-modal.button {
+  margin-top: 1rem;
+  background-color: var(--accent-color);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.close-modal.button:hover {
+  background-color: var(--accent-hover);
+  color: var(--text-color);
+}
+
+.modal-link {
+  color: var(--accent-color);
+  text-decoration: underline;
+}
+.modal-link:hover {
+  color: var(--accent-hover);
 }
 
 /* ===============================

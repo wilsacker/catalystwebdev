@@ -3,28 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="robots" content="noindex, nofollow">
   <title>Catalyst</title>
   <link rel="stylesheet" href="./css/style.css"/>
-  
-  <!-- Open Graph Meta Tags for Social Media -->
+
+  <!-- Meta Tags for Sharing -->
   <meta property="og:title" content="Catalyst Web Development">
   <meta property="og:description" content="Modern websites for growing businesses, built with clarity and care.">
-  <meta property="og:image" content="./images/Logo-placeholder.PNG">
+  <meta property="og:image" content="./images/CATALYST-LOGO.png">
   <meta property="og:url" content="https://www.catalystwebdev.com">
   <meta property="og:type" content="website">
-  
+
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="./images/Logo-placeholder.PNG" sizes="32x32">
-  <link rel="icon" type="image/png" href="./images/Logo-placeholder.PNG" sizes="16x16">
+  <link rel="icon" type="image/png" href="./images/CATALYST-LOGO.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="./images/CATALYST-LOGO.png" sizes="16x16">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Header Section -->
   <header>
     <div class="header-container">
       <a href="#" class="header-left">
-        <img src="./images/Logo-placeholder.PNG" alt="Catalyst Logo" class="logo" />
+        <img src="./images/CATALYST-LOGO.png" alt="Catalyst Logo" class="logo" />
         <div class="site-title">
           <h1>Catalyst</h1>
           <p class="subtitle"><em>Web Development</em></p>
@@ -50,6 +52,7 @@
   </header>
 
   <main>
+    <!-- Hero Section -->
     <section id="hero" class="hero">
         <div class="hero-content">
           <h1>
@@ -67,8 +70,45 @@
             <a href="#services" class="button secondary">See Our Process</a>
           </div>
         </div>
+      </section> 
+
+      <!-- Testimonials Section -->
+      <section id="testimonials" class="testimonials-section">
+        <div class="testimonials-header">
+          <h2>What Our Clients Say</h2>
+        </div>
+        <div class="testimonials-carousel">
+          <div class="testimonial-track">
+            <div class="testimonial-slide active">
+              <div class="testimonial-image">
+                <img src="./images/lillian-headshot.jpg" alt="Headshot photo of Lillian Morton">
+              </div>
+              <div class="testimonial-text">
+                <div class="testimonial-rating">
+                  ★★★★★
+                </div>
+                <p class="quote">“Wils was so easy to work with. He made a very stressful process much easier. He also had great ideas about the website layout, etc. and was amazing at sharing his thoughts. I absolutely love my website! The website is everything I envisioned it would be. I would highly recommend Wils to anyone in need of a website!”</p>
+                <p class="client-name">— Lillian Morton</p>
+              </div>
+            </div>
+            <div class="testimonial-slide">
+              <div class="testimonial-image">
+                <img src="./images/bio-image.jpg" alt="Headshot photo of Lisa Acker" class="lisa-headshot-offset">
+              </div>
+              <div class="testimonial-text">
+                <div class="testimonial-rating">
+                  ★★★★★
+                </div>
+                <p class="quote">“Working with Wils was an absolute pleasure. He really took the time to understand what I needed and translated that into a website that’s not only functional but also intuitive for my website users. His expertise and attention to detail showed at every step, and the final result exceeded my expectations.”</p>
+                <p class="client-name">— Lisa Acker</p>
+              </div>
+            </div>
+            <!-- Add more testimonial-slide blocks here as needed -->
+          </div>
+        </div>
       </section>
 
+      <!-- Services Section -->
       <section id="services" class="services">
         <div class="services-header">
           <h2>From Design to Launch — A Full-Service Process</h2>
@@ -182,6 +222,7 @@
         </div>
       </section>
 
+    <!-- Portfolio Section -->
     <section id="portfolio">
       <div class="portfolio-header">
         <h2>My Work</h2>
@@ -250,6 +291,7 @@
       </div>
     </section>
 
+    <!-- About Section -->
     <section id="about" class="about-section">
       <div class="about-header">
         <h2>Elevate Your Digital Presence</h2>
@@ -267,7 +309,7 @@
             <a href="#cta" class="button cta-button">Start Your Web Project</a>
           </div>
           <div class="about-image">
-            <img src="./images/Logo-placeholder.PNG" alt="Web Design" />
+            <img src="./images/CATALYST-LOGO.png" alt="Web Design" />
           </div>
         </div>
         <div class="about-panel" id="tech">
@@ -277,7 +319,7 @@
             <a href="#cta" class="button cta-button">Revolutionize Your Agency</a>
           </div>
           <div class="about-image">
-            <img src="./images/Logo-placeholder.PNG" alt="Technology Consulting" />
+            <img src="./images/CATALYST-LOGO.png" alt="Technology Consulting" />
           </div>
         </div>
         <div class="about-panel" id="business">
@@ -287,16 +329,13 @@
             <a href="#cta" class="button cta-button">Optimize Your Business</a>
           </div>
           <div class="about-image">
-            <img src="./images/Logo-placeholder.PNG" alt="Business Solutions" />
+            <img src="./images/CATALYST-LOGO.png" alt="Business Solutions" />
           </div>
         </div>
       </div>
     </section>
 
-    <section id="testimonials">
-      <!-- Optional: testimonials or social proof -->
-    </section>
-
+    <!-- CTA Section -->
     <section id="cta" class="cta-section">
       <div class="cta-header">
         <h2>Designed for busy business owners</h2>
@@ -353,6 +392,7 @@
       </div>
     </section>
 
+    <!-- Contact Section -->
     <section id="contact" class="contact-section">
       <div class="contact-header">
         <h2>Get in Touch</h2>
@@ -389,10 +429,11 @@
     </section>
   </main>
 
+  <!-- Footer Section -->
   <footer class="site-footer">
     <div class="footer-content">
       <div class="footer-left">
-        <img src="./images/Logo-placeholder.PNG" alt="Catalyst Logo" class="footer-logo" />
+        <img src="./images/CATALYST-LOGO.png" alt="Catalyst Logo" class="footer-logo" />
         <p>&copy; <span id="year"></span> Catalyst Web Development</p>
       </div>
       <!--

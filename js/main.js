@@ -205,4 +205,33 @@ document.addEventListener('DOMContentLoaded', () => {
       thankYouModal.classList.add('hidden');
     });
   }
+
+  // Testimonials Carousel
+  const testimonialTrack = document.querySelector('.testimonial-track');
+  const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+
+  let testimonialIndex = 0;
+
+  const updateTestimonial = (index) => {
+    testimonialSlides.forEach((slide, i) => {
+      slide.classList.remove('active');
+      slide.style.display = i === index ? 'flex' : 'none';
+    });
+
+    const current = testimonialSlides[index];
+    if (current) {
+      void current.offsetWidth; // Force reflow
+      current.classList.add('active');
+    }
+  };
+
+  const cycleTestimonials = () => {
+    testimonialIndex = (testimonialIndex + 1) % testimonialSlides.length;
+    updateTestimonial(testimonialIndex);
+  };
+
+  if (testimonialTrack && testimonialSlides.length > 0) {
+    updateTestimonial(testimonialIndex);
+    setInterval(cycleTestimonials, 8000);
+  }
 });

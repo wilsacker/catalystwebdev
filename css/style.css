@@ -280,87 +280,198 @@ footer {
     Sections: Hero
    =============================== */
 
-   #hero {
-    position: relative;
-    display: grid;
-    place-items: center;
-    min-height: 78vh;              /* slightly shorter so CTAs sit above the fold */
-    padding: 6rem 2rem 4rem;
-    text-align: center;
-    background: var(--bg-primary);
-    overflow: hidden;
-  }
-  
-  .hero-content {
-    max-width: 900px;              /* give the big headline room */
-    margin: 0 auto;
-  }
-  
-  #hero h1 {
-    letter-spacing: -0.02em;
-    margin-bottom: 0.6rem;
-  }
-  
-  .rotating-word {
-    font-weight: 800;              /* emphasize the changing word */
-    color: var(--accent-color);
-  }
-  
-  .hero-subtext {
-    font-size: 1.125rem;
-    opacity: 0.85;
-    margin: 0.25rem 0 1.75rem;
-  }
-  
-  .hero-cta {
-    display: inline-flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .hero-cta .button {
-    padding: 0.8rem 1.4rem;
-    border-radius: 999px;
-    font-weight: 700;
-    line-height: 1;
-    border: 2px solid transparent;
-  }
-  
-  .hero-cta .primary {
-    background-color: var(--accent-color);
-    color: #fff;
-  }
-  
-  .hero-cta .primary:hover,
-  .hero-cta .primary:focus-visible {
-    background-color: var(--accent-hover);
-    color: var(--text-color);
-  }
-  
-  .hero-cta .secondary {
-    background-color: transparent;
-    color: var(--text-color);
-    border-color: var(--border-color);
-  }
-  
-  .hero-cta .secondary:hover,
-  .hero-cta .secondary:focus-visible {
-    background-color: var(--bg-secondary);
-  }
-  
-  /* Subtle divider hinting there's more below */
-  #hero::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 10%;
-    right: 10%;
-    height: 1px;
-    background: var(--border-color);
-    opacity: 0.7;
-  }
+  #hero {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 78vh;              /* slightly shorter so CTAs sit above the fold */
+  padding: 6rem 2rem 4rem;
+  text-align: center;
+  /* Abstract digital gradient + subtle grid (light mode) */
+  background-image:
+    radial-gradient(1200px 700px at 0% 10%, rgba(80,180,101,0.35), rgba(80,180,101,0) 60%),
+    radial-gradient(900px 600px at 100% 20%, rgba(36,160,99,0.28), rgba(36,160,99,0) 65%),
+    radial-gradient(700px 700px at 25% 100%, rgba(40,120,255,0.18), rgba(40,120,255,0) 60%),
+    radial-gradient(800px 800px at 75% 85%, rgba(0,0,0,0.06), rgba(0,0,0,0) 60%),
+    /* grid lines */
+    linear-gradient(rgba(0,0,0,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.035) 1px, transparent 1px);
+  background-size:
+    cover,
+    cover,
+    cover,
+    cover,
+    44px 44px,
+    44px 44px;
+  background-position:
+    center,
+    center,
+    center,
+    center,
+    0 0,
+    0 0;
+  background-color: var(--bg-primary);
+  position: relative;
+  overflow: hidden; /* already present, keep it */
+}
+
+#hero #hero-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hero-content { position: relative; z-index: 1; }
+
+[data-theme="dark"] #hero {
+  background-image:
+    radial-gradient(1200px 700px at 0% 10%, rgba(80,180,101,0.28), rgba(80,180,101,0) 60%),
+    radial-gradient(900px 600px at 100% 25%, rgba(20,120,70,0.35), rgba(20,120,70,0) 65%),
+    radial-gradient(800px 800px at 30% 90%, rgba(0,180,170,0.22), rgba(0,180,170,0) 60%),
+    radial-gradient(900px 900px at 70% 80%, rgba(255,255,255,0.06), rgba(255,255,255,0) 60%),
+    /* grid lines, brighter in dark */
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size:
+    cover,
+    cover,
+    cover,
+    cover,
+    44px 44px,
+    44px 44px;
+  background-position:
+    center,
+    center,
+    center,
+    center,
+    0 0,
+    0 0;
+  background-color: var(--bg-primary);
+}
+
+.hero-content {
+  max-width: 1200px;              /* give the big headline room */
+  margin: 0 auto;
+}
+
+#hero h1 {
+  letter-spacing: -0.02em;
+  margin-bottom: 0.6rem;
+}
+
+/* Hero rotating word animations */
+
+/* Rotating word container to prevent layout shift */
+.rotating-word-wrap {
+  position: relative;
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+/* The two layers (current + next) stacked */
+.rotating-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  will-change: transform, opacity;
+  white-space: nowrap;     /* ensure width measure matches */
+}
+
+/* Slightly stronger type like you had */
+.rotating-layer,
+.rotating-word {
+  font-weight: 800;
+  color: var(--accent-color);
+}
+
+.rotating-word-wrap { perspective: -800px; }
+.rotating-layer { transform-origin: 50% 50%; backface-visibility: hidden; }
+
+/* Looks head-on, with the word traveling down while flipping */
+@keyframes wheelOut {
+  /* current word: center → below */
+  0%   { opacity: 1; transform: translate3d(0, 0%, 0)    rotateX(0deg); }
+  100% { opacity: 0; transform: translate3d(0, 110%, 0)  rotateX(75deg); }
+}
+
+@keyframes wheelIn {
+  /* next word: above → center */
+  0%   { opacity: 0; transform: translate3d(0, -110%, 0) rotateX(-75deg); }
+  100% { opacity: 1; transform: translate3d(0, 0%, 0)    rotateX(0deg); }
+}
+
+.rotating-out {
+  animation: wheelOut 0.7s ease-in-out forwards;
+}
+
+.rotating-in {
+  animation: wheelIn 0.7s ease-in-out forwards;
+}
+
+.rotating-word {
+  display: inline-block;
+  font-weight: 800;              /* emphasize the changing word */
+  color: var(--accent-color);
+}
+
+.hero-subtext {
+  font-size: 1.125rem;
+  opacity: 0.85;
+  margin: 0.25rem 0 1.75rem;
+}
+
+.hero-cta {
+  display: inline-flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-cta .button {
+  padding: 0.8rem 1.4rem;
+  border-radius: 999px;
+  font-weight: 700;
+  line-height: 1;
+  border: 2px solid transparent;
+}
+
+.hero-cta .primary {
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+.hero-cta .primary:hover,
+.hero-cta .primary:focus-visible {
+  background-color: var(--accent-hover);
+  color: var(--text-color);
+}
+
+.hero-cta .secondary {
+  background-color: var(--bg-secondary);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+.hero-cta .secondary:hover,
+.hero-cta .secondary:focus-visible {
+  background-color: ;
+}
+
+/* Subtle divider hinting there's more below */
+#hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: var(--border-color);
+  opacity: 0.7;
+}
   
   /* ===============================
       Sections: Testimonials
@@ -402,6 +513,7 @@ footer {
 .testimonial-rating {
   font-size: 1.5rem;
   margin-bottom: 1rem;
+  color: yellow;
 }
 
 .testimonial-image {
@@ -435,17 +547,6 @@ footer {
 .testimonial-author {
   font-weight: bold;
   font-size: 1rem;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* ===============================

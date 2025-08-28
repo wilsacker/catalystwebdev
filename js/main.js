@@ -144,6 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const ctx = canvas.getContext('2d');
     let dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
     let W = 0, H = 0;
+    let gridOffsetX = 0, gridOffsetY = 0;
     let lastMouse = { x: -9999, y: -9999 };
 
     // Grid config
@@ -167,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const SPECULAR_INTENSITY = 0.22;
     const SHININESS = 18;
 
-    // --- THEME CONFIG: keep light identical to dark for now ---
+    // --- THEME CONFIG:
     const THEMES = {
       dark: {
         baseFill: '#050505',                 // canvas base
@@ -188,8 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         glowRadiusScale: 0.5
       },
       light: {
-        // Start identical to dark; we will tweak these later without touching dark
-        baseFill: '#DBFFE6',
+        baseFill: '#FFFFFF',
         vignetteAlpha: 0.14,
         vignetteCenter: [0.5, 0.2],
         vignetteRadius: 0.9,
@@ -222,13 +222,18 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       tiles.length = 0;
-      const cols = Math.ceil(W / CELL) + 2;
-      const rows = Math.ceil(H / CELL) + 2;
+
+      // Fit full tiles only and center the grid so no partial row/col shows
+      const cols = Math.max(1, Math.floor(W / CELL));
+      const rows = Math.max(1, Math.floor(H / CELL));
+      gridOffsetX = Math.floor((W - cols * CELL) / 2);
+      gridOffsetY = Math.floor((H - rows * CELL) / 2);
+
       for (let j = 0; j < rows; j++) {
         for (let i = 0; i < cols; i++) {
           tiles.push({
-            x: Math.floor((i - 1) * CELL),
-            y: Math.floor((j - 1) * CELL),
+            x: gridOffsetX + i * CELL,
+            y: gridOffsetY + j * CELL,
             phase: Math.random() * Math.PI * 2,
             speed: 0.6 + Math.random() * 0.8,
             amp: BASE_AMP + Math.random() * 10

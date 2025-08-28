@@ -50,6 +50,37 @@ document.addEventListener('DOMContentLoaded', () => {
   const saved = localStorage.getItem('theme');
   if (saved) setTheme(saved);
 
+  // 4b. Sticky header styling on scroll + Back-to-top FAB
+  const headerEl = document.querySelector('header');
+
+  // Create Back-to-top button
+  const backToTopBtn = document.createElement('button');
+  backToTopBtn.id = 'back-to-top';
+  backToTopBtn.className = 'back-to-top';
+  backToTopBtn.type = 'button';
+  backToTopBtn.setAttribute('aria-label', 'Back to top');
+  backToTopBtn.innerHTML = '⇧';
+  document.body.appendChild(backToTopBtn);
+
+  const prefersReduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: prefersReduceMotion ? 'auto' : 'smooth' });
+  });
+
+  const onScroll = () => {
+    const y = window.scrollY || document.documentElement.scrollTop;
+    if (headerEl) {
+      if (y > 8) headerEl.classList.add('is-stuck');
+      else headerEl.classList.remove('is-stuck');
+    }
+    if (y > 600) backToTopBtn.classList.add('show');
+    else backToTopBtn.classList.remove('show');
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
   // 5. Tab switching in Services section
 
   tabs.forEach(tab => {

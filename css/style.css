@@ -3,9 +3,9 @@
    =============================== */
 
 :root {
-  --bg-chrome: #e5e5e5;
-  --bg-primary: #ffffff;
-  --bg-secondary: #f2f2f2;
+  --bg-chrome: #ffffff;
+  --bg-primary: #f2f2f2;
+  --bg-secondary: #ffffff;
   --text-color: #1a1a1a;
 
   --accent-color: #50b465;
@@ -19,9 +19,9 @@
 }
 
 [data-theme="dark"] {
-  --bg-chrome: #1e1e1e;
-  --bg-primary: #000000;
-  --bg-secondary: #1a1a1a;
+  --bg-chrome: #000000;
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #000000;
   --text-color: #f1f1f1;
 
   --accent-color: #50b465;

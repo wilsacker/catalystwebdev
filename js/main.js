@@ -144,6 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const ctx = canvas.getContext('2d');
     let dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
     let W = 0, H = 0;
+    let lastMouse = { x: -9999, y: -9999 };
 
     // Grid config
     let CELL = 56;                    // base cell size (px)
@@ -152,6 +153,60 @@ document.addEventListener('DOMContentLoaded', () => {
     const RIPPLE_SIGMA = 160;         // ripple spread (px)
     const RIPPLE_WAVE_K = 0.06;       // spatial frequency
     const RIPPLE_SPEED = 6;           // wave speed
+
+    // --- Lighting (pins slide in a plane; light from SW so shadows cast NE) ---
+    const DEG = Math.PI / 180;
+    const LIGHT_ELEV = 30 * DEG;           // ~30° above horizon
+    const LIGHT_AZIM = 225 * DEG;          // from SW (shadows toward NE)
+    const Lx = Math.cos(LIGHT_ELEV) * Math.cos(LIGHT_AZIM);
+    const Ly = Math.cos(LIGHT_ELEV) * Math.sin(LIGHT_AZIM);
+    const Lz = Math.sin(LIGHT_ELEV);
+    const LIGHT = { x: Lx, y: Ly, z: Lz };
+    const AMBIENT = 0.12;
+    const DIFFUSE_INTENSITY = 0.85;
+    const SPECULAR_INTENSITY = 0.22;
+    const SHININESS = 18;
+
+    // --- THEME CONFIG: keep light identical to dark for now ---
+    const THEMES = {
+      dark: {
+        baseFill: '#050505',                 // canvas base
+        vignetteAlpha: 0.14,                 // brand glow strength
+        vignetteCenter: [0.5, 0.2],          // x,y as fraction of W,H
+        vignetteRadius: 0.9,                 // relative to max(W,H)
+        tileShadowAlpha: 0.25,               // cast shadow inside plane
+        borderOuterAlpha: 0.0,               // tile seams (0 to disable)
+        borderInnerAlpha: 0.0,
+        hi: 'rgba(255,255,255,0.10)',        // bevel highlight
+        lo: 'rgba(0,0,0,0.35)',              // bevel inner shadow
+        baseCol: { r:12, g:14, b:12 },       // pin base material
+        tintCol: { r:12, g:40, b:16 },       // subtle green tint
+        glowAlphaMax: 0.45,                  // accent glow cap
+        glowAlphaBias: 0.25,
+        glowAlphaScale: 0.5,
+        glowRadiusBase: 0.9,                 // glow radius factors (in CELLs)
+        glowRadiusScale: 0.5
+      },
+      light: {
+        // Start identical to dark; we will tweak these later without touching dark
+        baseFill: '#DBFFE6',
+        vignetteAlpha: 0.14,
+        vignetteCenter: [0.5, 0.2],
+        vignetteRadius: 0.9,
+        tileShadowAlpha: 0.25,
+        borderOuterAlpha: 0.0,
+        borderInnerAlpha: 0.0,
+        hi: 'rgba(255,255,255,0.10)',
+        lo: 'rgba(0,0,0,0.35)',
+        baseCol: { r:12, g:14, b:12 },
+        tintCol: { r:12, g:40, b:16 },
+        glowAlphaMax: 0.45,
+        glowAlphaBias: 0.25,
+        glowAlphaScale: 0.5,
+        glowRadiusBase: 0.9,
+        glowRadiusScale: 0.5
+      }
+    };
 
     // Animation state
     const tiles = [];   // {x,y,phase,speed,amp}
@@ -188,7 +243,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Interactions (attach to hero so links still work)
-    heroSection.addEventListener('mousemove', (e)=> rippleAt(e.clientX, e.clientY, 0.6));
+    heroSection.addEventListener('mousemove', (e)=>{
+      rippleAt(e.clientX, e.clientY, 0.6);
+      const rect = heroSection.getBoundingClientRect();
+      lastMouse.x = e.clientX - rect.left;
+      lastMouse.y = e.clientY - rect.top;
+    });
     heroSection.addEventListener('click',     (e)=> rippleAt(e.clientX, e.clientY, 1.6));
 
     function hexToRgba(hex, a){
@@ -217,16 +277,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
       ctx.clearRect(0,0,W,H);
 
-      // Subtle brand glows
-      const g1 = ctx.createRadialGradient(W*0.1,H*0.18,0, W*0.1,H*0.18, Math.max(W,H)*0.8);
-      g1.addColorStop(0, hexToRgba(ACCENT, 0.20));
-      g1.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.fillStyle = g1; ctx.fillRect(0,0,W,H);
+      // THEME detection and base background (unified for light/dark)
+      const themeIsDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const THEME = themeIsDark ? THEMES.dark : THEMES.light;
 
-      const g2 = ctx.createRadialGradient(W*0.9,H*0.22,0, W*0.9,H*0.22, Math.max(W,H)*0.7);
-      g2.addColorStop(0, hexToRgba('#24a063', 0.16));
-      g2.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.fillStyle = g2; ctx.fillRect(0,0,W,H);
+      // unified base & vignette using THEME
+      ctx.fillStyle = THEME.baseFill;
+      ctx.fillRect(0,0,W,H);
+      const [vx, vy] = THEME.vignetteCenter;
+      const vr = ctx.createRadialGradient(W*vx, H*vy, 0, W*vx, H*vy, Math.max(W,H)*THEME.vignetteRadius);
+      vr.addColorStop(0, `rgba(80,180,101,${THEME.vignetteAlpha})`);
+      vr.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = vr; ctx.fillRect(0,0,W,H);
 
       // Update ripples
       for (let i = ripples.length - 1; i >= 0; i--) {
@@ -235,15 +297,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (r.t > r.life) ripples.splice(i, 1);
       }
 
-      // Draw tiles
+      // Draw pins: long rectangular cylinders sliding in a fixed plane
       for (const tile of tiles) {
         const cx = tile.x + CELL * 0.5;
         const cy = tile.y + CELL * 0.5;
 
-        // base oscillation
+        // base oscillation + interactive ripples
         const base = Math.sin(t * tile.speed + tile.phase);
-
-        // ripple influence
         let influence = 0;
         for (const r of ripples) {
           const age = r.t / r.life; // 0..1
@@ -255,24 +315,115 @@ document.addEventListener('DOMContentLoaded', () => {
           influence += envelope * wave * 1.2;
         }
 
-        const offset = (base + influence) * tile.amp; // vertical jump
-        const alpha  = 0.09 + Math.abs(base) * 0.11 + Math.max(0, influence) * 0.10;
+        // "Depth" indicates how far the pin is pushed in/out within its cell
+        const depth = (base + influence) * (tile.amp / 14); // roughly -1..1
+        const depthClamped = Math.max(-1, Math.min(1, depth));
 
-        const w = CELL - 2;
-        const h = CELL - 2 + offset * 0.15;      // slight height change
+        // Lighting based on a normal derived from the height field around the pin center
+        const EPS = 1.0;
+        const hL = Math.sin(t * tile.speed + tile.phase); // local base for neighbors
+        const nHx = (Math.sin(t * tile.speed + tile.phase + EPS*0.03) - Math.sin(t * tile.speed + tile.phase - EPS*0.03));
+        const nHy = (Math.sin(t * tile.speed + tile.phase + EPS*0.03) - Math.sin(t * tile.speed + tile.phase - EPS*0.03));
+        let nx = -nHx, ny = -nHy, nz = 2.0; // up vector
+        const inv = 1/Math.hypot(nx, ny, nz); nx*=inv; ny*=inv; nz*=inv;
+        const NdotL = Math.max(0, nx*LIGHT.x + ny*LIGHT.y + nz*LIGHT.z);
+        const diffuse = DIFFUSE_INTENSITY * NdotL;
+        const hxv = LIGHT.x, hyv = LIGHT.y, hzv = LIGHT.z + 1; // H ~ L + V (V≈[0,0,1])
+        const hnorm = 1/Math.hypot(hxv, hyv, hzv);
+        const Hx = hxv*hnorm, Hy = hyv*hnorm, Hz = hzv*hnorm;
+        const spec = SPECULAR_INTENSITY * Math.pow(Math.max(0, nx*Hx + ny*Hy + nz*Hz), SHININESS);
+        const I = Math.min(1, AMBIENT + diffuse + spec);
+
+        // Theme palettes
+        const baseCol = THEME.baseCol;
+        const tintCol = THEME.tintCol;
+
+        const rC = Math.min(255, baseCol.r + I * (30 + tintCol.r));
+        const gC = Math.min(255, baseCol.g + I * (30 + tintCol.g));
+        const bC = Math.min(255, baseCol.b + I * (30 + tintCol.b));
+
+        // Pin geometry inside its cell: fixed position; height impression via inner offset & shading
         const x = tile.x + 1;
-        const y = tile.y + 1 - offset * 0.5;     // jump effect
+        const y = tile.y + 1;
+        const w = CELL - 2;
+        const h = CELL - 2;
 
-        // fill
-        ctx.fillStyle = hexToRgba(ACCENT, Math.min(0.6, Math.max(0.05, alpha)));
-        roundRect(ctx, x, y, w, h, RADIUS);
+        // mouse proximity influence (size + glow)
+        const dxm = (tile.x + CELL*0.5) - lastMouse.x;
+        const dym = (tile.y + CELL*0.5) - lastMouse.y;
+        const md  = Math.hypot(dxm, dym);
+        const mouseGlow = Math.exp(-(md*md)/(2*50*50)); // sigma~200px
+
+        // scale geometry slightly toward mouse
+        const scale = 1 + mouseGlow * 0.06; // up to +6%
+        const ws = w * scale;
+        const hs = h * scale;
+        const xs = x + (w - ws) / 2;
+        const ys = y + (h - hs) / 2;
+
+        // Shadow cast within the plane (toward NE), proportional to depth
+        const sLen = (depthClamped + 1) * 0.5 * 6; // 0..6px
+        const sx = (-LIGHT.x) * sLen;
+        const sy = (-LIGHT.y) * sLen;
+        ctx.fillStyle = `rgba(0,0,0,${THEME.tileShadowAlpha})`;
+        roundRect(ctx, xs + sx, ys + sy, ws, hs, 7);
         ctx.fill();
 
+        // Pin body
+        ctx.fillStyle = `rgb(${rC|0},${gC|0},${bC|0})`;
+        roundRect(ctx, xs, ys, ws, hs, 7);
+        ctx.fill();
+        // Add subtle tile border and bevel controlled by THEME (seams disabled by default)
+        if (THEME.borderOuterAlpha > 0 || THEME.borderInnerAlpha > 0) {
+          if (THEME.borderOuterAlpha > 0) {
+            ctx.strokeStyle = `rgba(0,0,0,${THEME.borderOuterAlpha})`;
+            ctx.lineWidth = 1;
+            roundRect(ctx, xs, ys, ws, hs, 7);
+            ctx.stroke();
+          }
+          if (THEME.borderInnerAlpha > 0) {
+            ctx.strokeStyle = `rgba(255,255,255,${THEME.borderInnerAlpha})`;
+            roundRect(ctx, xs+1, ys+1, ws-2, hs-2, 6);
+            ctx.stroke();
+          }
+        }
+
+        // Depth highlight & inner shadow — theme controlled (identical dark/light for now)
+        const hi = THEME.hi;
+        const lo = THEME.lo;
         // highlight stroke
-        ctx.strokeStyle = hexToRgba('#ffffff', Math.min(0.35, alpha*0.35));
-        ctx.lineWidth = 1;
-        roundRect(ctx, x, y, w, h, RADIUS);
-        ctx.stroke();
+        ctx.strokeStyle = hi; ctx.lineWidth = 1; roundRect(ctx, xs+0.5, ys+0.5, ws-1, hs-1, 7); ctx.stroke();
+        // inner shadow via inset path
+        ctx.save();
+        ctx.clip();
+        const grad = ctx.createLinearGradient(xs, ys, xs+ws, ys+hs);
+        // Same orientation in both themes; light mode uses accent green highlight and deeper shadow
+        grad.addColorStop(0.0, hi);
+        grad.addColorStop(0.5 + depthClamped*0.2, 'rgba(0,0,0,0)');
+        grad.addColorStop(1.0, lo);
+        ctx.fillStyle = grad;
+        roundRect(ctx, xs, ys, ws, hs, 7);
+        ctx.fill();
+        ctx.restore();
+
+        // Accent green glow
+        {
+          const peak = Math.max(0, depthClamped);
+          const glow = (mouseGlow * 0.9) + (peak * 0.6);
+          if (glow > 0.02) {
+            ctx.save();
+            ctx.globalCompositeOperation = 'lighter';
+            const cx = tile.x + CELL*0.5;
+            const cy = tile.y + CELL*0.5;
+            const radius = CELL * (THEME.glowRadiusBase + peak*THEME.glowRadiusScale);
+            const rg = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
+            rg.addColorStop(0, `rgba(80,180,101,${Math.min(THEME.glowAlphaMax, THEME.glowAlphaBias + glow*THEME.glowAlphaScale)})`);
+            rg.addColorStop(1, 'rgba(80,180,101,0)');
+            ctx.fillStyle = rg;
+            ctx.beginPath(); ctx.arc(cx, cy, radius, 0, Math.PI*2); ctx.fill();
+            ctx.restore();
+          }
+        }
       }
 
       requestAnimationFrame(draw);

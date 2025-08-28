@@ -338,6 +338,11 @@ footer {
 .rotating-word {
   font-weight: 800;
   color: var(--accent-color);
+  /* border-bottom: 2px solid var(--accent-color); */
+    /* Thin black outline on the letters */
+    -webkit-text-stroke: 1px rgba(0,0,0,0.65);
+    /* Minimal fallback if text-stroke isn't available */
+    text-shadow: 0 0 1px rgba(0,0,0,0.35);
 }
 
 .rotating-word-wrap { perspective: -800px; }

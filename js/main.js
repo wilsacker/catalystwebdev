@@ -190,16 +190,16 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       light: {
         baseFill: '#FFFFFF',
-        vignetteAlpha: 0.14,
+        vignetteAlpha: 0.16,
         vignetteCenter: [0.5, 0.2],
         vignetteRadius: 0.9,
-        tileShadowAlpha: 0.25,
+        tileShadowAlpha: 0.22,
         borderOuterAlpha: 0.0,
         borderInnerAlpha: 0.0,
-        hi: 'rgba(255,255,255,0.10)',
-        lo: 'rgba(0,0,0,0.35)',
-        baseCol: { r:12, g:14, b:12 },
-        tintCol: { r:12, g:40, b:16 },
+        hi: 'rgba(255,255,255,0.05)', // softer highlights
+        lo: 'rgba(0,0,0,0.28)', // less dark than dark mode
+        baseCol: { r: 20, g: 24, b:20 },
+        tintCol: { r: 20, g: 60, b: 30 },
         glowAlphaMax: 0.45,
         glowAlphaBias: 0.25,
         glowAlphaScale: 0.5,

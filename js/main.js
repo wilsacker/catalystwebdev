@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         glowRadiusScale: 0.5
       },
       light: {
-        baseFill: '#FFFFFF',
+        baseFill: '#',
         vignetteAlpha: 0.16,
         vignetteCenter: [0.5, 0.2],
         vignetteRadius: 0.9,
@@ -198,8 +198,8 @@ document.addEventListener('DOMContentLoaded', () => {
         borderInnerAlpha: 0.0,
         hi: 'rgba(255,255,255,0.05)', // softer highlights
         lo: 'rgba(0,0,0,0.28)', // less dark than dark mode
-        baseCol: { r: 20, g: 24, b:20 },
-        tintCol: { r: 20, g: 60, b: 30 },
+        baseCol: { r: 34, g: 66, b: 55 },
+        tintCol: { r: 30, g: 70, b: 40 },
         glowAlphaMax: 0.45,
         glowAlphaBias: 0.25,
         glowAlphaScale: 0.5,

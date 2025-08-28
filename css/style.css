@@ -6,11 +6,12 @@
   --bg-chrome: #ffffff;
   --bg-primary: #f2f2f2;
   --bg-secondary: #ffffff;
+  --bg-primary-backup: #f2f2f2;
   --text-color: #1a1a1a;
 
-  --accent-color: #50b465;
+  --accent-color: #77ce89;
   --accent-color-dark: #3F9852;
-  --accent-hover: #ff8c42;
+  --accent-hover: #ffbe7a;
 
   --border-color: #e1e1e1;
 
@@ -53,7 +54,7 @@ h4 {
   font-weight: 700;
   color: var(--text-color);
   line-height: 1.2;
-  margin-bottom: 0.35em;
+  margin-bottom: 2rem;
 }
 
 h1 {
@@ -164,6 +165,7 @@ button {
   transform: translateX(-50%);
   top: 50%;
   transform: translate(-50%, -50%);
+  font-weight: 600;
 }
 
 .header-nav ul {
@@ -221,7 +223,7 @@ button {
                      radial-gradient(1px 1px at 90% 90%, rgba(255, 255, 255, 0.1) 100%, transparent 0);
    background-repeat: repeat;
    background-size: 100% 100%;
-   border: 1px solid rgba(255, 255, 255, 0.10); /* subtle border for dark mode */
+   border: 1px solid rgba(255, 255, 255, 0.35); /* subtle border for dark mode */
  }
 
 .switch-knob {
@@ -274,9 +276,70 @@ button {
     Layout: Footer
    =============================== */
 
-footer {
-  /* Footer layout and content styles */
-}
+   .site-footer {
+    background-color: var(--bg-chrome);
+    color: var(--text-color);
+    padding: 2rem;
+    font-size: 1rem;
+    border-top: 1px solid var(--border-color);
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .footer-left .footer-logo {
+    height: 40px;
+    width: auto;
+  }
+
+  .footer-left p {
+    margin: 0;
+    opacity: 0.75;
+  }
+  
+  .footer-right {
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .footer-right a {
+    color: var(--text-color);
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+  }
+  
+  .footer-right a:hover {
+    opacity: 1;
+    color: var(--accent-color);
+  }
+
+  /* .footer-socials {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .footer-socials a {
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+    color: var(--text-color);
+  }
+
+  .footer-socials a:hover {
+    opacity: 1;
+    color: var(--accent-color);
+  } */
 
 /* ===============================
     Sections: Hero
@@ -315,6 +378,20 @@ footer {
   margin-bottom: 0.6rem;
 }
 
+/* Stronger, layered hero h1 shadows for both themes */
+[data-theme="light"] #hero h1 {
+  color: #fff;
+  text-shadow:
+    0 3px 6px rgba(0,0,0,0.72),
+    0 10px 24px rgba(0,0,0,0.35);
+}
+
+[data-theme="dark"] #hero h1 {
+  text-shadow:
+    0 3px 6px rgba(0,0,0,0.78),
+    0 10px 24px rgba(0,0,0,0.40);
+}
+
 /* Hero rotating word animations */
 
 /* Rotating word container to prevent layout shift */
@@ -338,28 +415,33 @@ footer {
 .rotating-word {
   font-weight: 800;
   color: var(--accent-color);
-  /* border-bottom: 2px solid var(--accent-color); */
-    /* Thin black outline on the letters */
-    -webkit-text-stroke: 1px rgba(0,0,0,0.65);
-    /* Minimal fallback if text-stroke isn't available */
-    text-shadow: 0 0 1px rgba(0,0,0,0.35);
+  border-bottom: 2px solid var(--accent-color);
+}
+
+/* Dispersed text shadows for rotating word */
+/* Stronger, thicker rotating word shadows for both themes */
+[data-theme="light"] .rotating-layer,
+[data-theme="light"] .rotating-word {
+  color: var(--accent-color);
+  text-shadow:
+    0 3px 6px   rgba(0,0,0,0.72),
+    0 10px 16px rgba(0,0,0,0.30),
+    0 14px 28px rgba(92, 91, 91, 0.24),
+    0 20px 40px rgba(255,255,255,0.18),
+    0 30px 60px rgba(255,255,255,0.12);
+}
+
+[data-theme="dark"] .rotating-layer,
+[data-theme="dark"] .rotating-word {
+  color: var(--accent-color);
+  text-shadow:
+    0 3px 6px   rgba(0,0,0,0.90),
+    0 8px 16px  rgba(0,0,0,0.50),
+    0 16px 32px rgba(0,0,0,0.30);
 }
 
 .rotating-word-wrap { perspective: -800px; }
 .rotating-layer { transform-origin: 50% 50%; backface-visibility: hidden; }
-
-/* Looks head-on, with the word traveling down while flipping */
-@keyframes wheelOut {
-  /* current word: center → below */
-  0%   { opacity: 1; transform: translate3d(0, 0%, 0)    rotateX(0deg); }
-  100% { opacity: 0; transform: translate3d(0, 110%, 0)  rotateX(75deg); }
-}
-
-@keyframes wheelIn {
-  /* next word: above → center */
-  0%   { opacity: 0; transform: translate3d(0, -110%, 0) rotateX(-75deg); }
-  100% { opacity: 1; transform: translate3d(0, 0%, 0)    rotateX(0deg); }
-}
 
 .rotating-out {
   animation: wheelOut 0.7s ease-in-out forwards;
@@ -376,9 +458,12 @@ footer {
 }
 
 .hero-subtext {
-  font-size: 1.125rem;
+  font-size: 1.5rem;
   opacity: 0.85;
   margin: 0.25rem 0 1.75rem;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 3px 5px rgba(0,0,0,0.6);
 }
 
 .hero-cta {
@@ -430,14 +515,173 @@ footer {
   background: var(--border-color);
   opacity: 0.7;
 }
+
+/* Hero Keyframes for text wheel animation */
+
+/* Looks head-on, with the word traveling down while flipping */
+@keyframes wheelOut {
+  /* current word: center → below */
+  0%   { opacity: 1; transform: translate3d(0, 0%, 0)    rotateX(0deg); }
+  100% { opacity: 0; transform: translate3d(0, 110%, 0)  rotateX(75deg); }
+}
+
+@keyframes wheelIn {
+  /* next word: above → center */
+  0%   { opacity: 0; transform: translate3d(0, -110%, 0) rotateX(-75deg); }
+  100% { opacity: 1; transform: translate3d(0, 0%, 0)    rotateX(0deg); }
+}
+
+/* ===============================
+    Sections: Portfolio
+   =============================== */
+
+   #portfolio {
+    padding: 6rem 2rem;
+    background-color: var(--bg-secondary);
+    text-align: center;
+  }
   
-  /* ===============================
-      Sections: Testimonials
-     =============================== */
+  .portfolio-header {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+  }
+  
+  .carousel-wrapper {
+    position: relative;
+    overflow: hidden;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .carousel-track-container {
+    min-height: 500px; /* adjust based on typical video height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .carousel-track {
+    display: flex;
+    transition: transform 0.6s ease-in-out;
+  }
+  
+  .carousel-slide {
+    flex: 0 0 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    display: none; /* Add this to hide all slides by default */
+  }
+  
+  .carousel-slide.current-slide {
+    display: flex;
+  }
+  
+  .carousel-slide video,
+  .carousel-slide iframe {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--accent-color);
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 2;
+    transition: background-color 0.3s ease;
+  }
+  
+  .carousel-btn:hover {
+    background-color: var(--accent-hover);
+  }
+  
+  .carousel-btn.left {
+    left: 1rem;
+  }
+  
+  .carousel-btn.right {
+    right: 1rem;
+  }
+  
+  .portfolio-carousel {
+    position: relative;
+  }
+  
+  @keyframes slideInFromRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInFromLeft {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  .slide-in-right {
+    animation: slideInFromRight 0.6s ease forwards;
+  }
+  
+  .slide-in-left {
+    animation: slideInFromLeft 0.6s ease forwards;
+  }
+  
+  @keyframes slideOutToLeft {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes slideOutToRight {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+  
+  .slide-out-left {
+    animation: slideOutToLeft 0.6s ease forwards;
+  }
+  
+  .slide-out-right {
+    animation: slideOutToRight 0.6s ease forwards;
+  }
+  
+/* ===============================
+    Sections: Testimonials
+    =============================== */
 
 #testimonials {
   padding: 6rem 2rem;
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-primary);
   color: var(--text-color);
   text-align: center;
 }
@@ -460,7 +704,6 @@ footer {
   align-items: center;
   justify-content: center;
   transition: opacity 0.4s ease-in-out;
-  padding: 2rem;
 }
 
 .testimonial-slide.active {
@@ -471,7 +714,11 @@ footer {
 .testimonial-rating {
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  color: yellow;
+  /* Uniform emoji-like gold without per-line variation */
+  color: #e1c162; /* soft gold */
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.30), /* gentle top rim */
+    0 2px 3px rgba(0,0,0,0.20);     /* soft drop for depth */
 }
 
 .testimonial-image {
@@ -514,7 +761,7 @@ footer {
 #services {
   padding: 6rem 2rem;
   text-align: center;
-  background-color: var(--bg-primary);
+  background-color: var(--bg-secondary);
 }
 
 .services-header p {
@@ -534,7 +781,7 @@ footer {
   padding: 0.5rem 1.25rem;
   font-weight: 600;
   border-radius: 20px;
-  background: transparent;
+  background: var(--bg-primary);
   border: 2px solid var(--border-color);
   transition: all 0.3s ease;
 }
@@ -605,150 +852,6 @@ footer {
 }
 
 /* ===============================
-    Sections: Portfolio
-   =============================== */
-
-#portfolio {
-  padding: 6rem 2rem;
-  background-color: var(--bg-secondary);
-  text-align: center;
-}
-
-.portfolio-header {
-  max-width: 600px;
-  margin: 0 auto 2rem;
-}
-
-.carousel-wrapper {
-  position: relative;
-  overflow: hidden;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.carousel-track-container {
-  min-height: 500px; /* adjust based on typical video height */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.carousel-track {
-  display: flex;
-  transition: transform 0.6s ease-in-out;
-}
-
-.carousel-slide {
-  flex: 0 0 100%;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  display: none; /* Add this to hide all slides by default */
-}
-
-.carousel-slide.current-slide {
-  display: flex;
-}
-
-.carousel-slide video,
-.carousel-slide iframe {
-  max-width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-.carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: var(--accent-color);
-  border: none;
-  color: white;
-  padding: 0.5rem 1rem;
-  font-size: 1.25rem;
-  border-radius: 4px;
-  cursor: pointer;
-  z-index: 2;
-  transition: background-color 0.3s ease;
-}
-
-.carousel-btn:hover {
-  background-color: var(--accent-hover);
-}
-
-.carousel-btn.left {
-  left: 1rem;
-}
-
-.carousel-btn.right {
-  right: 1rem;
-}
-
-.portfolio-carousel {
-  position: relative;
-}
-
-@keyframes slideInFromRight {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideInFromLeft {
-  from {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-.slide-in-right {
-  animation: slideInFromRight 0.6s ease forwards;
-}
-
-.slide-in-left {
-  animation: slideInFromLeft 0.6s ease forwards;
-}
-
-@keyframes slideOutToLeft {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-}
-
-@keyframes slideOutToRight {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-}
-
-.slide-out-left {
-  animation: slideOutToLeft 0.6s ease forwards;
-}
-
-.slide-out-right {
-  animation: slideOutToRight 0.6s ease forwards;
-}
-
-/* ===============================
     Sections: About
    =============================== */
 
@@ -757,10 +860,6 @@ footer {
   background-color: var(--bg-primary);
   color: var(--text-color);
   text-align: center;
-}
-
-.about-header h2 {
-  margin-bottom: 1rem;
 }
 
 .about-header p {
@@ -774,7 +873,7 @@ footer {
   justify-content: center;
   gap: 2rem;
   margin-top: 1rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
   flex-wrap: wrap;
 }
 
@@ -1072,75 +1171,6 @@ footer {
 .modal-link:hover {
   color: var(--accent-hover);
 }
-
-/* ===============================
-    Footer
-   =============================== */
-
-   .site-footer {
-    background-color: var(--bg-chrome);
-    color: var(--text-color);
-    padding: 2rem;
-    font-size: 1rem;
-    border-top: 1px solid var(--border-color);
-  }
-  
-  .footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .footer-left {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .footer-left .footer-logo {
-    height: 40px;
-    width: auto;
-  }
-
-  .footer-left p {
-    margin: 0;
-    opacity: 0.75;
-  }
-  
-  .footer-right {
-    display: flex;
-    gap: 1.5rem;
-  }
-  
-  .footer-right a {
-    color: var(--text-color);
-    opacity: 0.8;
-    transition: opacity 0.2s ease;
-  }
-  
-  .footer-right a:hover {
-    opacity: 1;
-    color: var(--accent-color);
-  }
-
-  /* .footer-socials {
-    display: flex;
-    gap: 1rem;
-  }
-
-  .footer-socials a {
-    opacity: 0.8;
-    transition: opacity 0.2s ease;
-    color: var(--text-color);
-  }
-
-  .footer-socials a:hover {
-    opacity: 1;
-    color: var(--accent-color);
-  } */
 
 /* ===============================
     Responsive Styling: Mobile

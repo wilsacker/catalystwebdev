@@ -26,7 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const target = document.getElementById(targetId);
       if (target) {
         e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth' });
+        // Smooth scroll accounting for sticky header height
+        const headerOffset = document.querySelector('header')?.offsetHeight || 0;
+        const elementPosition = target.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = elementPosition - headerOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
       }
     });
   });
@@ -59,7 +66,11 @@ document.addEventListener('DOMContentLoaded', () => {
   backToTopBtn.className = 'back-to-top';
   backToTopBtn.type = 'button';
   backToTopBtn.setAttribute('aria-label', 'Back to top');
-  backToTopBtn.innerHTML = '⇧';
+  backToTopBtn.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+      <path d="M12 4l-8 8h5v8h6v-8h5z"/>
+    </svg>
+  `;
   document.body.appendChild(backToTopBtn);
 
   const prefersReduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;

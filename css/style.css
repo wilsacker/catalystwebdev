@@ -228,8 +228,12 @@ header.is-stuck .header-container {
   transform: translateY(8px) scale(0.95);
   transition: opacity 0.25s ease, transform 0.25s ease, background-color 0.2s ease;
   z-index: 1000;
-  font-size: 1.75rem;
-  font-weight: 900;
+}
+
+.back-to-top svg {
+  width: 22px;
+  height: 22px;
+  display: block;
 }
 
 .back-to-top:hover {

@@ -198,8 +198,8 @@ document.addEventListener('DOMContentLoaded', () => {
         borderInnerAlpha: 0.0,
         hi: 'rgba(255,255,255,0.05)', // softer highlights
         lo: 'rgba(0,0,0,0.28)', // less dark than dark mode
-        baseCol: { r: 34, g: 66, b: 55 },
-        tintCol: { r: 30, g: 70, b: 40 },
+        baseCol: { r: 40, g: 70, b: 60 },
+        tintCol: { r: 70, g: 100, b: 80 },
         glowAlphaMax: 0.45,
         glowAlphaBias: 0.25,
         glowAlphaScale: 0.5,

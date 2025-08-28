@@ -9,8 +9,7 @@
   --bg-primary-backup: #f2f2f2;
   --text-color: #1a1a1a;
 
-  --accent-color: #77ce89;
-  --accent-color-dark: #3F9852;
+  --accent-color: #5ed674;
   --accent-hover: #ffbe7a;
 
   --border-color: #e1e1e1;
@@ -415,7 +414,6 @@ button {
 .rotating-word {
   font-weight: 800;
   color: var(--accent-color);
-  border-bottom: 2px solid var(--accent-color);
 }
 
 /* Dispersed text shadows for rotating word */

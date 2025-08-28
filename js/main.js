@@ -6,10 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelectorAll('a[href^="#"]');
   const toggle = document.getElementById('theme-toggle');
   const html = document.documentElement;
-  const tabs = document.querySelectorAll('.services-tabs .tab');
+  const tabs = document.querySelectorAll('.process-tabs .tab');
   const panels = document.querySelectorAll('.tab-panel');
-  const aboutTabs = document.querySelectorAll('.about-tabs .about-tab');
-  const aboutPanels = document.querySelectorAll('.about-panel');
+  const servicesTabs = document.querySelectorAll('.services-tabs .services-tab');
+  const servicesPanels = document.querySelectorAll('.services-panel');
   const carouselTrack = document.querySelector('.carousel-track');
   const slides = document.querySelectorAll('.carousel-slide');
   const prevBtn = document.querySelector('.carousel-btn.left');
@@ -77,9 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 5b. Tab switching in About section
+  // 5b. Tab switching in Services section
 
-  aboutTabs.forEach(tab => {
+  servicesTabs.forEach(tab => {
     tab.addEventListener('click', (e) => {
       e.preventDefault();
 
@@ -88,8 +88,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!targetPanel) return;
 
       // Deactivate all tabs and panels
-      aboutTabs.forEach(t => t.classList.remove('active'));
-      aboutPanels.forEach(panel => {
+      servicesTabs.forEach(t => t.classList.remove('active'));
+      servicesPanels.forEach(panel => {
         panel.classList.remove('active');
         panel.style.display = 'none';
       });
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // On load, hide all but the first active panel
-  aboutPanels.forEach((panel, index) => {
+  servicesPanels.forEach((panel, index) => {
     panel.style.display = panel.classList.contains('active') || index === 0 ? 'flex' : 'none';
   });
 

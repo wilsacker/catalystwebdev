@@ -287,29 +287,22 @@ footer {
   min-height: 78vh;              /* slightly shorter so CTAs sit above the fold */
   padding: 6rem 2rem 4rem;
   text-align: center;
-  /* Abstract digital gradient + subtle grid (light mode) */
+  /* Abstract digital gradient (light mode, grid removed) */
   background-image:
     radial-gradient(1200px 700px at 0% 10%, rgba(80,180,101,0.35), rgba(80,180,101,0) 60%),
     radial-gradient(900px 600px at 100% 20%, rgba(36,160,99,0.28), rgba(36,160,99,0) 65%),
     radial-gradient(700px 700px at 25% 100%, rgba(40,120,255,0.18), rgba(40,120,255,0) 60%),
-    radial-gradient(800px 800px at 75% 85%, rgba(0,0,0,0.06), rgba(0,0,0,0) 60%),
-    /* grid lines */
-    linear-gradient(rgba(0,0,0,0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,0,0,0.035) 1px, transparent 1px);
+    radial-gradient(800px 800px at 75% 85%, rgba(0,0,0,0.06), rgba(0,0,0,0) 60%);
   background-size:
     cover,
     cover,
     cover,
-    cover,
-    44px 44px,
-    44px 44px;
+    cover;
   background-position:
     center,
     center,
     center,
-    center,
-    0 0,
-    0 0;
+    center;
   background-color: var(--bg-primary);
   position: relative;
   overflow: hidden; /* already present, keep it */
@@ -331,24 +324,17 @@ footer {
     radial-gradient(1200px 700px at 0% 10%, rgba(80,180,101,0.28), rgba(80,180,101,0) 60%),
     radial-gradient(900px 600px at 100% 25%, rgba(20,120,70,0.35), rgba(20,120,70,0) 65%),
     radial-gradient(800px 800px at 30% 90%, rgba(0,180,170,0.22), rgba(0,180,170,0) 60%),
-    radial-gradient(900px 900px at 70% 80%, rgba(255,255,255,0.06), rgba(255,255,255,0) 60%),
-    /* grid lines, brighter in dark */
-    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    radial-gradient(900px 900px at 70% 80%, rgba(255,255,255,0.06), rgba(255,255,255,0) 60%);
   background-size:
     cover,
     cover,
     cover,
-    cover,
-    44px 44px,
-    44px 44px;
+    cover;
   background-position:
     center,
     center,
     center,
-    center,
-    0 0,
-    0 0;
+    center;
   background-color: var(--bg-primary);
 }
 
@@ -458,7 +444,7 @@ footer {
 
 .hero-cta .secondary:hover,
 .hero-cta .secondary:focus-visible {
-  background-color: ;
+  border-color: var(--accent-color);
 }
 
 /* Subtle divider hinting there's more below */

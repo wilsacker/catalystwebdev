@@ -15,7 +15,6 @@
   --border-color: #e1e1e1;
 
   --font-base: "Space Grotesk", sans-serif;
-  --font-size-base: 16px;
 }
 
 [data-theme="dark"] {
@@ -38,7 +37,6 @@
 
 body {
   font-family: var(--font-base);
-  font-size: var(--font-size-base);
   color: var(--text-color);
   background-color: var(--bg-primary);
   line-height: 1.5;
@@ -972,7 +970,7 @@ header.is-stuck .header-container {
     justify-content: center;
     align-items: center;
     gap: 2rem;
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
     opacity: 1;
     transform: translateY(0);
@@ -992,14 +990,18 @@ header.is-stuck .header-container {
     background-color: var(--bg-secondary);
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    padding: 2rem 2rem;
-    max-width: 450px;
+    padding: 2rem 3rem;
+    max-width: 600px;
     width: 100%;
-    min-height: 220px;
+    min-height: 350px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     flex: 1 1 500px;
     margin: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
   }
   
   .process-card:hover {
@@ -1008,7 +1010,7 @@ header.is-stuck .header-container {
   }
 
 /* ===============================
-    Sections: Call To Action
+    Sections: Call To Action (CTA)
    =============================== */
 
 #cta {
@@ -1104,6 +1106,29 @@ header.is-stuck .header-container {
 .pricing-card .cta-button {
   margin-top: auto;
   align-self: center;
+}
+
+
+.cta-section .fine-print {
+  margin-top: 2rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-color);
+  opacity: 0.75;
+}
+
+.cta-section .fine-print a {
+  color: var(--accent-color);
+  text-decoration: underline;
+  font-size: 0.85rem;
+}
+
+.cta-section .fine-print a:hover {
+  color: var(--accent-hover);
 }
 
 /* ===============================

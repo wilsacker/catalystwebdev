@@ -256,6 +256,7 @@ header.is-stuck .header-container {
   box-shadow: 0 10px 24px rgba(0,0,0,0.4);
 }
 
+
 .cta-button {
   background-color: var(--accent-color);
   color: white;
@@ -268,6 +269,35 @@ header.is-stuck .header-container {
 .cta-button:hover {
   background-color: var(--accent-hover);
   color: var(--text-color);
+}
+
+/* --- Buttons: enforce text color across states (fix for disappearing text after click/scroll) --- */
+.button,
+.button:link,
+.button:visited {
+  text-decoration: none;
+}
+
+/* Primary CTA pills */
+.cta-button,
+.cta-button:link,
+.cta-button:visited {
+  color: #fff !important; /* keep white text regardless of visited/focus state */
+}
+.cta-button:active,
+.cta-button:focus {
+  color: #fff !important;
+}
+
+/* Secondary pills keep normal text color across states */
+.button.secondary,
+.button.secondary:link,
+.button.secondary:visited {
+  color: var(--text-color) !important;
+}
+.button.secondary:active,
+.button.secondary:focus {
+  color: var(--text-color) !important;
 }
 
 /* ===============================
@@ -1136,14 +1166,14 @@ header.is-stuck .header-container {
    =============================== */
 
 #about-us {
-  padding: 6rem 2rem;
-  background-color: var(--bg-secondary);
+  padding: 4.5rem 2rem;
+  background-color: var(--bg-primary);
   color: var(--text-color);
 }
 
 .about-header {
   max-width: 800px;
-  margin: 0 auto 3rem;
+  margin: 0 auto 2rem;
   text-align: center;
 }
 
@@ -1169,10 +1199,18 @@ header.is-stuck .header-container {
   margin: 0 auto;
 }
 
-.about-image {
-  flex: 1 1 300px;
-  max-width: 400px;
+.about-panel { 
+  display: flex; 
+  align-items: center; 
+  gap: 2rem; 
+  max-width: 1100px; 
+  margin: 0 auto 2rem; 
 }
+
+.about-image.sm { max-width: 280px; }
+
+/* Slightly smaller default image as well */
+.about-image { flex: 0 0 auto; max-width: 320px; }
 
 .about-image img {
   width: 100%;
@@ -1182,7 +1220,7 @@ header.is-stuck .header-container {
 }
 
 .about-text {
-  flex: 1 1 400px;
+  flex: 1 1 460px;
   text-align: left;
 }
 
@@ -1212,7 +1250,297 @@ header.is-stuck .header-container {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.5rem;
 }
+
+/* About: outlined secondary button with accent-to-green hover */
+.about-cta .button.secondary {
+  background: transparent;
+  border: 2px solid var(--accent-color); /* orange outline */
+  color: var(--accent-color) !important;  /* orange text */
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  font-weight: 700;
+  transition: color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.about-cta .button.secondary:hover,
+.about-cta .button.secondary:focus-visible {
+  border-color: var(--accent-hover); /* green */
+  color: var(--accent-hover) !important; /* green text */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* Keep primary CTA consistent here */
+.about-cta .cta-button {
+  padding: 0.85rem 1.35rem;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+/* Collaborators grid */
+.about-collab { 
+  max-width: 1100px; 
+  margin: 0 auto; 
+}
+.about-collab h3 { 
+  font-size: 1.25rem; 
+  margin: 1rem 0 0.5rem; 
+}
+.collab-list { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+  gap: 0.5rem 1.25rem; 
+  margin: 0 0 0.75rem; 
+  padding-left: 1rem; 
+}
+.collab-list li { list-style: disc; }
+.collab-note { 
+  font-size: 0.95rem; 
+  opacity: 0.8; 
+}
+
+@media (max-width: 1100px) {
+  #about-us { padding: 4rem 1.5rem; }
+}
+@media (max-width: 900px) {
+  .about-image, .about-image.sm { max-width: 240px; }
+  .about-text p { font-size: 1.05rem; }
+}
+@media (max-width: 600px) {
+  .about-panel { align-items: flex-start; }
+  .about-image, .about-image.sm { max-width: 200px; }
+}
+
+/* Team-first layout */
+.about-intro {
+  max-width: 900px;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+.about-intro .about-points {
+  text-align: left;
+  max-width: 760px;
+  margin: 1rem auto 2rem;
+}
+
+/* Team grid */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  gap: 2rem;
+  align-items: start;
+  justify-items: center;
+  max-width: 1100px;
+  margin: 1rem auto 1.5rem;
+}
+
+.team-member {
+  text-align: center;
+}
+
+.team-photo {
+  width: 220px;
+  height: 220px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--bg-secondary);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  margin: 0 auto 0.75rem;
+}
+.team-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team-member h4 {
+  font-size: 1.25rem;
+  margin: 0.25rem 0 0.25rem;
+}
+
+.team-member .role {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .team-grid { grid-template-columns: repeat(2, minmax(200px, 1fr)); }
+  .team-photo { width: 200px; height: 200px; }
+}
+@media (max-width: 560px) {
+  .team-grid { grid-template-columns: 1fr; }
+  .team-photo { width: 180px; height: 180px; }
+}
+
+/* ===============================
+   Sections: FAQ
+   =============================== */
+
+   .faq-section {
+    padding: 6rem 2rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-color);
+  }
+  
+  .faq-header {
+    max-width: 900px;
+    margin: 0 auto 2rem;
+    text-align: center;
+  }
+  
+  .faq-header h2 {
+    font-size: 2.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Search control */
+  .faq-search {
+    display: block;
+    max-width: 900px;
+    margin: 0.75rem auto 1.25rem;
+  }
+  .faq-search input[type="search"] {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background: var(--bg-primary);
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    outline: none;
+  }
+  .faq-search input[type="search"]::placeholder {
+    opacity: 0.7;
+  }
+  .faq-search input[type="search"]:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(80,180,101,0.18);
+  }
+
+  .faq-intro {
+    opacity: 0.85;
+    font-size: 1.1rem;
+  }
+  
+  /* List wrapper */
+  .faq-list {
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;               /* rounds the top/bottom border nicely */
+    border: 1px solid var(--border-color);
+    background: var(--bg-primary);
+    max-height: 540px;          /* fixed viewport for long content */
+    overflow: auto;             /* enable scrolling inside */
+    scroll-behavior: smooth;
+  }
+
+  /* Optional: thin custom scrollbar */
+  .faq-list::-webkit-scrollbar {
+    width: 10px;
+  }
+  .faq-list::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+  }
+  .faq-list::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 999px;
+    border: 2px solid var(--bg-secondary);
+  }
+  /* Firefox */
+  .faq-list {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) var(--bg-secondary);
+  }
+
+  /* Empty-state message for search */
+  .faq-empty {
+    max-width: 900px;
+    margin: 0.75rem auto 0;
+    text-align: center;
+    font-size: 0.95rem;
+    opacity: 0.8;
+  }
+  
+  /* Divider between items */
+
+  .faq-item h3 {
+    /* individual items */
+    margin-bottom: 0rem;
+  }
+
+  .faq-item + .faq-item {
+    border-top: 1px solid var(--border-color);
+  }
+  
+  /* Question button */
+  .faq-toggle {
+    appearance: none;
+    -webkit-appearance: none;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    text-align: left;
+    padding: 1.1rem 1.25rem;
+    background: transparent;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    cursor: pointer;
+  }
+  
+  .faq-toggle:hover,
+  .faq-toggle:focus-visible {
+    background: var(--bg-secondary);
+    outline: none;
+  }
+  
+  /* Left chevron (drawn with borders) */
+  .faq-toggle .chevron {
+    flex: 0 0 0.5rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    border: 2px solid currentColor;
+    border-right: 0;
+    border-bottom: 0;
+    transform: rotate(225deg);      /* points ► when collapsed */
+    border-radius: 2px;
+    transition: transform 0.25s ease;
+  }
+  
+  .faq-toggle[aria-expanded="true"] .chevron {
+    transform: rotate(315deg);      /* points ▼ when expanded */
+  }
+  
+  /* Answer panel */
+  .faq-panel {
+    padding: 0 1.25rem 1.25rem 2.5rem; /* indent to line up under text (past chevron) */
+  }
+  
+  .faq-panel p {
+    margin: 0.5rem 0 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    opacity: 0.95;
+  }
+  
+  /* Utility (used by optional search label you commented out) */
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    margin: -1px; border: 0; padding: 0;
+    clip: rect(0 0 0 0); clip-path: inset(50%);
+    overflow: hidden;
+  }
+  
+  /* Dark theme separators (keeps contrasts consistent) */
+  [data-theme="dark"] .faq-list { border-color: var(--border-color); }
+  [data-theme="dark"] .faq-item + .faq-item { border-top-color: var(--border-color); }
 
 /* ===============================
     Sections: Contact

@@ -43,7 +43,7 @@
       </nav>
 
       <div class="header-right">
-        <a href="#cta" class="button cta-button">Let's Talk</a>
+        <a href="#contact" class="button cta-button">Let's Talk</a>
         <div class="analog-switch" id="theme-toggle">
           <div class="switch-knob"></div>
         </div>
@@ -415,33 +415,363 @@
       </p>
     </section>
 
-    <!-- About Us Section (new personal/team) -->
-    <!-- <section id="about-us" class="about-section about-team">
-      <div class="about-header">
-        <h2>Let’s make a website you’re proud of.</h2>
-        <p>Hi, I’m Wils. I build calm, modern websites with a small team of friendly collaborators. We keep the process light and the communication clear so you can focus on your work.</p>
-      </div>
+    <!-- About Us Section (team-first) -->
+    <section id="about-us" class="about-section about-team">
       <div class="about-content about-team-content">
-        <div class="about-panel active">
-          <div class="about-image">
-            <img src="./images/Wils-Headshot.jpeg" alt="Photo of Wils" />
-          </div>
-          <div class="about-text">
-            <h3>Who we are</h3>
-            <p>Designers and developers who care about craft and clarity. No jargon. No drama. Just a dependable site that fits your business and earns trust.</p>
-            <ul class="about-points">
-              <li>Clear scope, steady cadence, and thoughtful handoff</li>
-              <li>Performance, accessibility, and maintainability by default</li>
-              <li>Personal support after launch</li>
-            </ul>
-            <div class="about-cta">
-              <a href="#portfolio" class="button secondary">See the work</a>
-              <a href="#contact" class="button cta-button">Start a project</a>
-            </div>
+        <!-- Intro / Who we are -->
+        <div class="about-intro">
+          <h3>Who We re</h3>
+          <p>At Catalyst, we care about craft and clarity. No jargon. No drama. Just dependable websites that fit your business and earn trust.</p>
+          <ul class="about-points">
+            <li>Clear scope, steady cadence, and thoughtful handoff</li>
+            <li>Performance, accessibility, and maintainability by default</li>
+            <li>Personal support after launch</li>
+          </ul>
+          <div class="about-cta">
+            <a href="#portfolio" class="button secondary">See the work</a>
+            <a href="#contact" class="button cta-button">Start a project</a>
           </div>
         </div>
+
+        <!-- Team Grid -->
+        <div class="team-grid">
+          <div class="team-member">
+            <div class="team-photo">
+              <img src="./images/Wils-Headshot.jpeg" alt="Wils — Founder; lead developer & designer">
+            </div>
+            <h4>Wils</h4>
+            <p class="role">Founder; lead developer &amp; designer</p>
+          </div>
+
+          <div class="team-member">
+            <div class="team-photo">
+              <img src="./images/CATALYST-LOGO.png" alt="Cris — Design & development consultant (placeholder)">
+            </div>
+            <h4>Cris</h4>
+            <p class="role">Design &amp; development consultant</p>
+          </div>
+
+          <div class="team-member">
+            <div class="team-photo">
+              <img src="./images/CATALYST-LOGO.png" alt="Ian — Branding & marketing consultant (placeholder)">
+            </div>
+            <h4>Ian</h4>
+            <p class="role">Branding &amp; marketing consultant</p>
+          </div>
+
+          <div class="team-member">
+            <div class="team-photo">
+              <img src="./images/CATALYST-LOGO.png" alt="Calvin — Client relations specialist (placeholder)">
+            </div>
+            <h4>Calvin</h4>
+            <p class="role">Client relations specialist (consultant)</p>
+          </div>
+        </div>
+
+        <p class="collab-note">Catalyst is a sole proprietorship. Collaborators are independent contractors engaged on a per‑project basis as needed; availability varies.</p>
       </div>
-    </section> -->
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section" aria-labelledby="faq-title">
+      <div class="faq-header">
+        <h2 id="faq-title">FAQs — clear answers, no jargon.</h2>
+        <label class="faq-search" for="faq-search">
+          <span class="visually-hidden">Search FAQs</span>
+          <input id="faq-search" type="search" placeholder="Search questions and answers…" autocomplete="off" enterkeyhint="search" />
+        </label>
+        <p class="faq-intro">A growing reference for clients and curious builders. Click a question to expand.</p>
+      </div>
+
+      <div class="faq-list" role="list">
+        <!-- 1 -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-wireframe" id="btn-faq-wireframe">
+              <span class="chevron" aria-hidden="true"></span>
+              What is a wireframe?
+            </button>
+          </h3>
+          <div id="faq-wireframe" class="faq-panel" role="region" aria-labelledby="btn-faq-wireframe" hidden>
+            <p>
+              A wireframe is a low-fidelity layout using boxes that resemble wires. The intent is to map out the site structure like flow—navigation, sections, and define priorities—without final
+              colors or imagery. It lets us validate the UX quickly before further design and development commitment. This is just a building block for clarity and the developers understanding, and not a final draft.
+            </p>
+          </div>
+        </article>
+
+        <!-- 2 -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-mockup" id="btn-faq-mockup">
+              <span class="chevron" aria-hidden="true"></span>
+              What’s a hi-fi mockup package?
+            </button>
+          </h3>
+          <div id="faq-mockup" class="faq-panel" role="region" aria-labelledby="btn-faq-mockup" hidden>
+            <p>
+              A hi-fidelity design that shows the final look and feel plus supporting documentation—accepted requirements,
+              UI rules, and notes we both use as the reference going into the build.
+            </p>
+          </div>
+        </article>
+
+        <!-- 3 -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-acceptance" id="btn-faq-acceptance">
+              <span class="chevron" aria-hidden="true"></span>
+              What are “acceptance criteria”?
+            </button>
+          </h3>
+          <div id="faq-acceptance" class="faq-panel" role="region" aria-labelledby="btn-faq-acceptance" hidden>
+            <p>
+              Clear, testable statements that define “done.” They keep scope aligned and make sign-off objective for both of us.
+            </p>
+          </div>
+        </article>
+
+        <!-- 4 -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-qa" id="btn-faq-qa">
+              <span class="chevron" aria-hidden="true"></span>
+              What is QA, and what do you test?
+            </button>
+          </h3>
+          <div id="faq-qa" class="faq-panel" role="region" aria-labelledby="btn-faq-qa" hidden>
+            <p>
+              QA (quality assurance) verifies behavior across devices and browsers—links, forms, performance,
+              accessibility basics, and edge cases—before launch.
+            </p>
+          </div>
+        </article>
+
+        <!-- 5 -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-repo" id="btn-faq-repo">
+              <span class="chevron" aria-hidden="true"></span>
+              What’s a repo, and who owns it?
+            </button>
+          </h3>
+          <div id="faq-repo" class="faq-panel" role="region" aria-labelledby="btn-faq-repo" hidden>
+            <p>
+              A repository (“repo”) is the code home (e.g., GitHub). We create it cleanly and hand it off—under your account—
+              so you retain full control and can work with any developer in the future.
+            </p>
+          </div>
+        </article>
+
+        <!-- 6 -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-staging" id="btn-faq-staging">
+              <span class="chevron" aria-hidden="true"></span>
+              What’s the difference between staging and production?
+            </button>
+          </h3>
+          <div id="faq-staging" class="faq-panel" role="region" aria-labelledby="btn-faq-staging" hidden>
+            <p>
+              Staging is a private preview environment for reviews and QA. Production is the live site your customers see.
+              We deploy to staging first, then promote to production once approved.
+            </p>
+          </div>
+        </article>
+
+        <!-- 7 -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-domain-ssl" id="btn-faq-domain-ssl">
+              <span class="chevron" aria-hidden="true"></span>
+              Domain vs. hosting vs. SSL—what’s what?
+            </button>
+          </h3>
+          <div id="faq-domain-ssl" class="faq-panel" role="region" aria-labelledby="btn-faq-domain-ssl" hidden>
+            <p>
+              Your domain is the address (example.com). Hosting is the server where the site runs. SSL adds encryption (the
+              lock icon) for security and trust—important for SEO and user confidence.
+            </p>
+          </div>
+        </article>
+
+        <!-- 8 -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-responsive" id="btn-faq-responsive">
+              <span class="chevron" aria-hidden="true"></span>
+              What does “responsive” mean?
+            </button>
+          </h3>
+          <div id="faq-responsive" class="faq-panel" role="region" aria-labelledby="btn-faq-responsive" hidden>
+            <p>
+              A responsive site adapts to screens of all sizes—phone, tablet, desktop—so content remains usable and
+              consistent without separate mobile versions.
+            </p>
+          </div>
+        </article>
+
+        <!-- 9 -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-seo" id="btn-faq-seo">
+              <span class="chevron" aria-hidden="true"></span>
+              SEO basics—what do you include by default?
+            </button>
+          </h3>
+          <div id="faq-seo" class="faq-panel" role="region" aria-labelledby="btn-faq-seo" hidden>
+            <p>
+              Semantic HTML, clean URLs, meta tags, performance and accessibility fundamentals, and structured content patterns
+              that search engines can parse—all baked in from the start.
+            </p>
+          </div>
+        </article>
+
+        <!-- 10 -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-analytics" id="btn-faq-analytics">
+              <span class="chevron" aria-hidden="true"></span>
+              Can you set up analytics?
+            </button>
+          </h3>
+          <div id="faq-analytics" class="faq-panel" role="region" aria-labelledby="btn-faq-analytics" hidden>
+            <p>
+              Yes—Google Analytics or alternatives (e.g., Plausible, Umami). You own the accounts; we configure tracking and
+              a simple dashboard so you can monitor traffic and trends.
+            </p>
+          </div>
+        </article>
+
+        <!-- 11 -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-local-max" id="btn-faq-local-max">
+              <span class="chevron" aria-hidden="true"></span>
+              What do you mean by “local maximums”?
+            </button>
+          </h3>
+          <div id="faq-local-max" class="faq-panel" role="region" aria-labelledby="btn-faq-local-max" hidden>
+            <p>
+              A local maximum is a “good enough” solution that prevents you from seeing a better one. We step back, survey the
+              landscape, and design paths that aim for the higher peak—long-term impact over quick wins.
+            </p>
+          </div>
+        </article>
+
+        <!-- 12 -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-revisions" id="btn-faq-revisions">
+              <span class="chevron" aria-hidden="true"></span>
+              How do revisions and feedback work?
+            </button>
+          </h3>
+          <div id="faq-revisions" class="faq-panel" role="region" aria-labelledby="btn-faq-revisions" hidden>
+            <p>
+              Feedback is built into each phase with scheduled review meetings and dedicated dev time. Additional iterations are
+              available hourly—clear, transparent, and paced to your goals.
+            </p>
+          </div>
+        </article>
+
+        <!-- 13 -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-accessibility" id="btn-faq-accessibility">
+              <span class="chevron" aria-hidden="true"></span>
+              Do you consider accessibility?
+            </button>
+          </h3>
+          <div id="faq-accessibility" class="faq-panel" role="region" aria-labelledby="btn-faq-accessibility" hidden>
+            <p>
+              Yes—keyboard navigation, color contrast, alt text, and semantic structure are part of our baseline. Accessibility
+              is good practice and good business.
+            </p>
+          </div>
+        </article>
+
+        <!-- 14 -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-cms" id="btn-faq-cms">
+              <span class="chevron" aria-hidden="true"></span>
+              Can I edit content myself (CMS)?
+            </button>
+          </h3>
+          <div id="faq-cms" class="faq-panel" role="region" aria-labelledby="btn-faq-cms" hidden>
+            <p>
+              If you want a CMS, we’ll recommend a right-sized option (from lightweight markdown to headless platforms) so you
+              can update content without touching code.
+            </p>
+          </div>
+        </article>
+
+        <!-- 15 -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-ownership" id="btn-faq-ownership">
+              <span class="chevron" aria-hidden="true"></span>
+              Who owns the site, assets, and accounts?
+            </button>
+          </h3>
+          <div id="faq-ownership" class="faq-panel" role="region" aria-labelledby="btn-faq-ownership" hidden>
+            <p>
+              You do. Domains, hosting, email, fonts, and any paid services run under your accounts. We build for handoff so
+              you’re never locked in.
+            </p>
+          </div>
+        </article>
+
+        <!-- 16 -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-timeline" id="btn-faq-timeline">
+              <span class="chevron" aria-hidden="true"></span>
+              How long does a project take?
+            </button>
+          </h3>
+          <div id="faq-timeline" class="faq-panel" role="region" aria-labelledby="btn-faq-timeline" hidden>
+            <p>
+              Timelines depend on scope and content readiness. Typical ranges: single-page sites ~1–2 weeks after mockup;
+              multi-page builds ~3–5+ weeks. We’ll confirm a schedule with your proposal.
+            </p>
+          </div>
+        </article>
+
+        <!-- 17 -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-costs" id="btn-faq-costs">
+              <span class="chevron" aria-hidden="true"></span>
+              What affects cost?
+            </button>
+          </h3>
+          <div id="faq-costs" class="faq-panel" role="region" aria-labelledby="btn-faq-costs" hidden>
+            <p>
+              Complexity (features, integrations), content needs, and timeline. Packages give a starting point; extras like
+              premium plugins or third-party services are billed directly to your accounts.
+            </p>
+          </div>
+        </article>
+
+        <!-- 18 -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-support" id="btn-faq-support">
+              <span class="chevron" aria-hidden="true"></span>
+              What support is included after launch?
+            </button>
+          </h3>
+          <div id="faq-support" class="faq-panel" role="region" aria-labelledby="btn-faq-support" hidden>
+            <p>
+              Each package includes a defined post-launch support window. Ongoing help is available hourly—use as much or as
+              little as you need.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact-section">

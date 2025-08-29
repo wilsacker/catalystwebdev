@@ -1522,7 +1522,7 @@ header.is-stuck .header-container {
   }
   
   .faq-toggle[aria-expanded="true"] .chevron {
-    transform: rotate(315deg);      /* points ▼ when expanded */
+    transform: rotate(134.5deg);      /* points ▼ when expanded */
   }
   
   /* Answer panel */

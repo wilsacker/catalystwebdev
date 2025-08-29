@@ -1236,7 +1236,7 @@ header.is-stuck .header-container {
 }
 
 .about-points {
-  list-style: disc inside;
+  list-style: disc;
   margin-bottom: 2rem;
   color: var(--text-color);
   line-height: 1.6;
@@ -1298,7 +1298,8 @@ header.is-stuck .header-container {
 .collab-list li { list-style: disc; }
 .collab-note { 
   font-size: 0.95rem; 
-  opacity: 0.8; 
+  opacity: 0.8;
+  
 }
 
 @media (max-width: 1100px) {
@@ -1527,6 +1528,18 @@ header.is-stuck .header-container {
     font-size: 1.05rem;
     line-height: 1.7;
     opacity: 0.95;
+  }
+
+  .faq-panel ul {
+    display: block;
+    list-style: disc;
+    margin-left: 1.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  .faq-panel li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
   }
   
   /* Utility (used by optional search label you commented out) */

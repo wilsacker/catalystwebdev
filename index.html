@@ -420,15 +420,16 @@
       <div class="about-content about-team-content">
         <!-- Intro / Who we are -->
         <div class="about-intro">
-          <h3>Who We re</h3>
+          <h2>Who We Are</h2>
           <p>At Catalyst, we care about craft and clarity. No jargon. No drama. Just dependable websites that fit your business and earn trust.</p>
           <ul class="about-points">
-            <li>Clear scope, steady cadence, and thoughtful handoff</li>
-            <li>Performance, accessibility, and maintainability by default</li>
-            <li>Personal support after launch</li>
+            <li><em>Clear scope, steady cadence, and thoughtful handoff</em></li>
+            <li><em>Performance, accessibility, and maintainability by default</em></li>
+            <li><em>Personal support after launch</em></li>
           </ul>
+          <h3>Ready to have a site you're proud of?</h3>
           <div class="about-cta">
-            <a href="#portfolio" class="button secondary">See the work</a>
+            <a href="#portfolio" class="button secondary">See our work</a>
             <a href="#contact" class="button cta-button">Start a project</a>
           </div>
         </div>
@@ -510,9 +511,31 @@
           </h3>
           <div id="faq-mockup" class="faq-panel" role="region" aria-labelledby="btn-faq-mockup" hidden>
             <p>
-              A hi-fidelity design that shows the final look and feel plus supporting documentation—accepted requirements,
-              UI rules, and notes we both use as the reference going into the build.
+              A <strong>mockup</strong> is a medium‑ or high‑fidelity visual design that shows what the final website will actually look like. Unlike a wireframe, a mockup includes real colors, fonts, imagery, spacing, and layout behavior—it’s a full‑color preview of your site before any code is written. Mockups help you see how your brand, content, and features come together visually and make it easier to refine or request changes before development starts.
+              <br><br>
+              A <strong>hi‑fi mockup package</strong> in our process means you get the finished, pixel‑precise design <em>plus</em> clear documentation: written requirements, UI rules, component notes, and interaction guidance. This package becomes the single source of truth for both of us in the build phase—keeping expectations aligned and ensuring the implementation matches what you approved.
             </p>
+          </div>
+        </article>
+
+        <!-- NEW: Content readiness / what we need -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-content" id="btn-faq-content">
+              <span class="chevron" aria-hidden="true"></span>
+              What content do you need from me, and when?
+            </button>
+          </h3>
+          <div id="faq-content" class="faq-panel" role="region" aria-labelledby="btn-faq-content" hidden>
+            <p>Content can arrive in phases, but earlier is better. A simple checklist:</p>
+            <ul>
+              <li><strong>Brand assets:</strong> logos (SVG/PNG), colors, typography, brand guidelines (if any).</li>
+              <li><strong>Copy:</strong> headlines, body text, CTAs, product/service descriptions.</li>
+              <li><strong>Images/video:</strong> high-resolution originals or preferred stock; we’ll optimize to WebP/AVIF.</li>
+              <li><strong>Links &amp; integrations:</strong> booking, forms, calendars, payment, or other tools to connect.</li>
+              <li><strong>Legal:</strong> privacy policy, terms, and any disclosures.</li>
+            </ul>
+            <p>Don’t worry if it’s not perfect—wireframes and the <a href="#faq-mockup">hi‑fi mockup package</a> help reveal gaps early, and we can supply placeholder content where needed.</p>
           </div>
         </article>
 
@@ -526,7 +549,16 @@
           </h3>
           <div id="faq-acceptance" class="faq-panel" role="region" aria-labelledby="btn-faq-acceptance" hidden>
             <p>
-              Clear, testable statements that define “done.” They keep scope aligned and make sign-off objective for both of us.
+              <strong>Acceptance criteria</strong> are simple, testable statements that define exactly what “done” means for each part of your project. They remove ambiguity and make sign‑off objective.
+              <br><br>
+              Examples:
+            </p>
+            <ul>
+              <li><em>“The ‘Contact’ button navigates to the contact page and the form submits successfully with validation errors displayed inline.”</em></li>
+              <li><em>“On screens under 640px, the navigation collapses into a keyboard‑accessible menu.”</em></li>
+            </ul>
+            <p>
+              We write criteria in plain language so anyone can check them. They protect scope, keep feedback focused, and give everyone a fair, shared definition of success.
             </p>
           </div>
         </article>
@@ -541,8 +573,16 @@
           </h3>
           <div id="faq-qa" class="faq-panel" role="region" aria-labelledby="btn-faq-qa" hidden>
             <p>
-              QA (quality assurance) verifies behavior across devices and browsers—links, forms, performance,
-              accessibility basics, and edge cases—before launch.
+              <strong>QA</strong> stands for <strong>Quality Assurance</strong>—a systematic review to find and fix problems (bugs) before launch.
+            </p>
+            <ul>
+              <li><strong>Functional:</strong> forms submit, buttons/links work, redirects and error states behave correctly.</li>
+              <li><strong>Visual/Responsive:</strong> layouts hold on common devices and browsers; typography and spacing are consistent.</li>
+              <li><strong>Accessibility basics:</strong> alt text, color contrast, focus order, and keyboard/screen‑reader checks.</li>
+              <li><strong>Performance:</strong> page weight, image optimization, caching, and Core Web Vitals considerations.</li>
+            </ul>
+            <p>
+              Dedicated QA and bug‑fix time is included in every project so users experience a polished, reliable site from day one.
             </p>
           </div>
         </article>
@@ -557,8 +597,25 @@
           </h3>
           <div id="faq-repo" class="faq-panel" role="region" aria-labelledby="btn-faq-repo" hidden>
             <p>
-              A repository (“repo”) is the code home (e.g., GitHub). We create it cleanly and hand it off—under your account—
-              so you retain full control and can work with any developer in the future.
+              A repository ("repo") is the version‑controlled home for your code (e.g., GitHub). Our approach is straightforward: <strong>Catalyst retains ownership of the core codebase</strong>, and you always have permission to <strong>fork</strong> (copy) the full repository at any time—no restrictions. You can hand it to another developer, extend it internally, or redeploy elsewhere whenever you like.
+            </p>
+            <p>
+              This model keeps our portfolio rights intact while protecting your independence. You are never locked in, and we’ll provide clear handoff notes so your fork is easy to run and extend.
+            </p>
+          </div>
+        </article>
+
+        <!-- NEW: Repo hosting & handovers -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-repo-handover" id="btn-faq-repo-handover">
+              <span class="chevron" aria-hidden="true"></span>
+              Where is my code hosted? What if I want to take it elsewhere?
+            </button>
+          </h3>
+          <div id="faq-repo-handover" class="faq-panel" role="region" aria-labelledby="btn-faq-repo-handover" hidden>
+            <p>
+              During the project, the repo lives in Catalyst’s GitHub for security and consistency. At any time you can <strong>fork</strong> a complete copy to your own account and continue development there. We include instructions for forking, environment variables, and deployment so you (or a new developer) can pick up smoothly.
             </p>
           </div>
         </article>
@@ -573,9 +630,21 @@
           </h3>
           <div id="faq-staging" class="faq-panel" role="region" aria-labelledby="btn-faq-staging" hidden>
             <p>
-              Staging is a private preview environment for reviews and QA. Production is the live site your customers see.
-              We deploy to staging first, then promote to production once approved.
+              <strong>Staging</strong> is a private, password‑protected environment used for reviews and QA. It mirrors production closely so we can test real data and integrations safely. <strong>Production</strong> is the public site your customers see. We deploy to staging first, address feedback, then promote the approved build to production.
             </p>
+          </div>
+        </article>
+
+        <!-- NEW: Backups & rollback -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-backups" id="btn-faq-backups">
+              <span class="chevron" aria-hidden="true"></span>
+              Do you set up backups and a rollback plan?
+            </button>
+          </h3>
+          <div id="faq-backups" class="faq-panel" role="region" aria-labelledby="btn-faq-backups" hidden>
+            <p>Yes—production deployments are versioned so we can roll back quickly if needed. For dynamic sites we recommend scheduled database and asset backups via your host. We’ll outline the backup/restore workflow in your handoff notes.</p>
           </div>
         </article>
 
@@ -589,9 +658,21 @@
           </h3>
           <div id="faq-domain-ssl" class="faq-panel" role="region" aria-labelledby="btn-faq-domain-ssl" hidden>
             <p>
-              Your domain is the address (example.com). Hosting is the server where the site runs. SSL adds encryption (the
-              lock icon) for security and trust—important for SEO and user confidence.
+              Your <strong>domain</strong> is the address (example.com). <strong>Hosting</strong> is the server where your site files and APIs run. <strong>SSL</strong> encrypts traffic (the lock icon) to protect users and improve trust/SEO. We help connect your domain, provision SSL, and choose hosting that fits your stack and budget.
             </p>
+          </div>
+        </article>
+
+        <!-- NEW: Forms & email deliverability -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-forms" id="btn-faq-forms">
+              <span class="chevron" aria-hidden="true"></span>
+              How do you handle forms and email deliverability?
+            </button>
+          </h3>
+          <div id="faq-forms" class="faq-panel" role="region" aria-labelledby="btn-faq-forms" hidden>
+            <p>We build forms with validation, spam protection (honeypots/reCAPTCHA options), and clear success/error states. For reliable delivery, we recommend sending through your domain with authenticated DNS (SPF, DKIM, DMARC) or a transactional provider (e.g., Postmark, SendGrid). We’ll document what’s set up and how to monitor it.</p>
           </div>
         </article>
 
@@ -605,9 +686,22 @@
           </h3>
           <div id="faq-responsive" class="faq-panel" role="region" aria-labelledby="btn-faq-responsive" hidden>
             <p>
-              A responsive site adapts to screens of all sizes—phone, tablet, desktop—so content remains usable and
-              consistent without separate mobile versions.
+              A <strong>responsive</strong> site adapts fluidly to phones, tablets, and desktops without separate codebases. We design mobile‑first layouts, flexible grids, and media that scale—so content remains readable and interactive across breakpoints.
             </p>
+          </div>
+        </article>
+
+        <!-- NEW: Browser & device support -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-browsers" id="btn-faq-browsers">
+              <span class="chevron" aria-hidden="true"></span>
+              Which browsers and devices do you support?
+            </button>
+          </h3>
+          <div id="faq-browsers" class="faq-panel" role="region" aria-labelledby="btn-faq-browsers" hidden>
+            <p>We target current versions of modern browsers: Chrome, Safari, Firefox, and Edge. On mobile we test iOS Safari and Android Chrome. Older or discontinued browsers (e.g., IE) aren’t supported by default.</p>
+            <p>If your audience relies on a specific platform or kiosk environment, tell us up front and we’ll include it in the test matrix.</p>
           </div>
         </article>
 
@@ -616,14 +710,29 @@
           <h3>
             <button class="faq-toggle" aria-expanded="false" aria-controls="faq-seo" id="btn-faq-seo">
               <span class="chevron" aria-hidden="true"></span>
-              SEO basics—what do you include by default?
+              SEO basics—what is it and what do you include by default?
             </button>
           </h3>
           <div id="faq-seo" class="faq-panel" role="region" aria-labelledby="btn-faq-seo" hidden>
             <p>
-              Semantic HTML, clean URLs, meta tags, performance and accessibility fundamentals, and structured content patterns
-              that search engines can parse—all baked in from the start.
+              <strong>SEO</strong> stands for <strong>Search Engine Optimization</strong>. It’s the process of improving your website so that it shows up higher in search engine results (Google, Bing) when people look for relevant terms. Higher rankings lead to more visibility, traffic, and potential customers.
             </p>
+            <p>
+              Baseline SEO includes semantic HTML, descriptive titles/meta, Open Graph tags, sitemap/robots files, clean URLs, structured content patterns, and performance/accessibility fundamentals. We also ensure analytics is ready so you can measure results.
+            </p>
+          </div>
+        </article>
+
+        <!-- NEW: Performance approach -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-performance" id="btn-faq-performance">
+              <span class="chevron" aria-hidden="true"></span>
+              How do you approach performance?
+            </button>
+          </h3>
+          <div id="faq-performance" class="faq-panel" role="region" aria-labelledby="btn-faq-performance" hidden>
+            <p>We build with a performance‑first mindset: semantic HTML, lean scripts, image optimization (WebP/AVIF where supported), responsive images, lazy‑loading, caching/CDN configuration, and Core Web Vitals awareness. Performance also feeds into <a href="#faq-seo">SEO</a> and accessibility.</p>
           </div>
         </article>
 
@@ -637,9 +746,21 @@
           </h3>
           <div id="faq-analytics" class="faq-panel" role="region" aria-labelledby="btn-faq-analytics" hidden>
             <p>
-              Yes—Google Analytics or alternatives (e.g., Plausible, Umami). You own the accounts; we configure tracking and
-              a simple dashboard so you can monitor traffic and trends.
+              Yes. We can set up Google Analytics or privacy‑friendly alternatives (Plausible, Umami). You own the accounts; we configure events/goals and a simple dashboard so you can track traffic and key actions.
             </p>
+          </div>
+        </article>
+
+        <!-- NEW: Privacy, cookies, consent -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-privacy" id="btn-faq-privacy">
+              <span class="chevron" aria-hidden="true"></span>
+              What about privacy, cookies, and consent banners?
+            </button>
+          </h3>
+          <div id="faq-privacy" class="faq-panel" role="region" aria-labelledby="btn-faq-privacy" hidden>
+            <p>We implement baseline privacy practices: minimizing third‑party scripts, honoring “Do Not Track” where possible, and loading analytics in a privacy‑aware way. If your business requires consent banners (e.g., GDPR/CCPA), we can integrate a compliant banner and cookie categories. We’ll help you connect it to your analytics so tracking respects user choices. (This is not legal advice; bring your counsel if you need specific language.)</p>
           </div>
         </article>
 
@@ -653,8 +774,7 @@
           </h3>
           <div id="faq-local-max" class="faq-panel" role="region" aria-labelledby="btn-faq-local-max" hidden>
             <p>
-              A local maximum is a “good enough” solution that prevents you from seeing a better one. We step back, survey the
-              landscape, and design paths that aim for the higher peak—long-term impact over quick wins.
+              A <strong>local maximum</strong> is a “good‑enough” solution that hides a better one. We step back to survey the wider landscape—constraints, goals, and options—so we don’t stop at the first peak. The aim is a path toward a higher maximum: longer‑term impact over quick wins.
             </p>
           </div>
         </article>
@@ -669,9 +789,21 @@
           </h3>
           <div id="faq-revisions" class="faq-panel" role="region" aria-labelledby="btn-faq-revisions" hidden>
             <p>
-              Feedback is built into each phase with scheduled review meetings and dedicated dev time. Additional iterations are
-              available hourly—clear, transparent, and paced to your goals.
+              Every project includes <strong>built‑in revision cycles</strong> at key phases (Design, Development, Deployment). Each cycle typically includes a 1‑hour review meeting plus 2 hours of developer time dedicated to implementing the feedback. If you need more changes, we’ll continue at the standard hourly rate—always with clear scope and estimates upfront.
             </p>
+          </div>
+        </article>
+
+        <!-- NEW: Scope changes / change requests -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-scope" id="btn-faq-scope">
+              <span class="chevron" aria-hidden="true"></span>
+              What happens if the scope changes mid-project?
+            </button>
+          </h3>
+          <div id="faq-scope" class="faq-panel" role="region" aria-labelledby="btn-faq-scope" hidden>
+            <p>We’ll flag scope changes early, estimate impact (time/cost), and get written approval before adding work. Clear <a href="#faq-acceptance">acceptance criteria</a> and the <a href="#faq-mockup">mockup package</a> help minimize surprises.</p>
           </div>
         </article>
 
@@ -685,8 +817,7 @@
           </h3>
           <div id="faq-accessibility" class="faq-panel" role="region" aria-labelledby="btn-faq-accessibility" hidden>
             <p>
-              Yes—keyboard navigation, color contrast, alt text, and semantic structure are part of our baseline. Accessibility
-              is good practice and good business.
+              Yes. Accessibility is part of our baseline. We check keyboard navigation, focus states, headings/landmarks, alt text, color contrast, and common screen‑reader paths. Inclusive sites are better for users and better for business.
             </p>
           </div>
         </article>
@@ -701,8 +832,7 @@
           </h3>
           <div id="faq-cms" class="faq-panel" role="region" aria-labelledby="btn-faq-cms" hidden>
             <p>
-              If you want a CMS, we’ll recommend a right-sized option (from lightweight markdown to headless platforms) so you
-              can update content without touching code.
+              If you want a CMS, we’ll recommend a right‑sized option—from lightweight Markdown‑based flows to headless platforms like Contentful or Sanity. The goal is easy updates without adding unnecessary complexity.
             </p>
           </div>
         </article>
@@ -717,8 +847,9 @@
           </h3>
           <div id="faq-ownership" class="faq-panel" role="region" aria-labelledby="btn-faq-ownership" hidden>
             <p>
-              You do. Domains, hosting, email, fonts, and any paid services run under your accounts. We build for handoff so
-              you’re never locked in.
+              You own all of your <strong>accounts and assets</strong>: your domain, hosting, email, fonts, analytics, and any paid third-party services. These run under your accounts, giving you full control over billing and access. You also own the <strong>assets on the site</strong> itself—your copy, images, branding, and any materials you provide.
+              <br><br>
+              Catalyst retains ownership of the <strong>custom codebase</strong> but grants you a permanent license to use, edit, and approve others to work on a forked version. At any time, you or another developer can fork (copy) the repo and deploy it to your production hosting. This gives you <em>total control</em> over your live site, while Catalyst maintains access to the delivered version for portfolio and marketing purposes.
             </p>
           </div>
         </article>
@@ -733,9 +864,34 @@
           </h3>
           <div id="faq-timeline" class="faq-panel" role="region" aria-labelledby="btn-faq-timeline" hidden>
             <p>
-              Timelines depend on scope and content readiness. Typical ranges: single-page sites ~1–2 weeks after mockup;
-              multi-page builds ~3–5+ weeks. We’ll confirm a schedule with your proposal.
+              <strong>Single‑page sites:</strong> typically <strong>2–6 weeks</strong> after the mockup package is approved.
+              <br>
+              <strong>Larger multi‑page builds:</strong> minimum of <strong>2–3 months</strong>.
             </p>
+            <p>
+              Timing varies with scope and readiness. Biggest factors:
+            </p>
+            <ul>
+              <li><strong>Scope & complexity</strong> (features, components, number of pages)</li>
+              <li><strong>Feedback cadence</strong> (how quickly we can review/iterate)</li>
+              <li><strong>Integrations</strong> (payments, booking, APIs) and content availability</li>
+            </ul>
+            <p>
+              You’ll get a custom schedule with your proposal and progress updates throughout.
+            </p>
+          </div>
+        </article>
+
+        <!-- NEW: Migration / redesigns -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-migration" id="btn-faq-migration">
+              <span class="chevron" aria-hidden="true"></span>
+              I already have a site—can you migrate or redesign it without downtime?
+            </button>
+          </h3>
+          <div id="faq-migration" class="faq-panel" role="region" aria-labelledby="btn-faq-migration" hidden>
+            <p>Yes. We build in a staging environment, run redirects and content audits, then switch DNS at go‑live to avoid interruptions. We’ll preserve important URLs where possible and set up 301 redirects to protect <a href="#faq-seo">SEO</a>.</p>
           </div>
         </article>
 
@@ -749,8 +905,7 @@
           </h3>
           <div id="faq-costs" class="faq-panel" role="region" aria-labelledby="btn-faq-costs" hidden>
             <p>
-              Complexity (features, integrations), content needs, and timeline. Packages give a starting point; extras like
-              premium plugins or third-party services are billed directly to your accounts.
+              Cost depends on scope, complexity, content needs, and timeline. Common drivers include custom components, third‑party integrations, migration work, and advanced animations. Packages are starting points; third‑party services are billed directly to your accounts.
             </p>
           </div>
         </article>
@@ -765,9 +920,21 @@
           </h3>
           <div id="faq-support" class="faq-panel" role="region" aria-labelledby="btn-faq-support" hidden>
             <p>
-              Each package includes a defined post-launch support window. Ongoing help is available hourly—use as much or as
-              little as you need.
+              Each package includes a defined post‑launch support window. After that, we offer ongoing help at the hourly rate—use it for content updates, new features, performance tuning, or general consulting. You decide the pace.
             </p>
+          </div>
+        </article>
+
+        <!-- NEW: Maintenance vs. post-launch support -->
+        <article class="faq-item" role="listitem">
+          <h3>
+            <button class="faq-toggle" aria-expanded="false" aria-controls="faq-maintenance" id="btn-faq-maintenance">
+              <span class="chevron" aria-hidden="true"></span>
+              What’s the difference between post-launch support and ongoing maintenance?
+            </button>
+          </h3>
+          <div id="faq-maintenance" class="faq-panel" role="region" aria-labelledby="btn-faq-maintenance" hidden>
+            <p><strong>Post‑launch support</strong> is a short window included with your package for bug fixes and minor polish. <strong>Ongoing maintenance</strong> (optional) covers updates, small enhancements, monitoring, and periodic audits. Maintenance can be hourly or via a monthly retainer—your choice.</p>
           </div>
         </article>
       </div>

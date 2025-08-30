@@ -62,6 +62,17 @@ h2 {
   font-size: 2.5rem;
 }
 
+h2::after {
+  content: "";
+  display: block;
+  width: 75px;
+  height: 1px;
+  margin: 1rem auto 0;
+  background: var(--accent-color);
+  border-radius: 2px;
+  opacity: 0.9;
+}
+
 h3 {
   font-size: 2rem;
 }
@@ -1165,7 +1176,7 @@ header.is-stuck .header-container {
     Sections: About Us
    =============================== */
 
-#about-us {
+/* #about-us {
   padding: 5rem 2rem;
   background-color: var(--bg-primary);
   color: var(--text-color);
@@ -1207,10 +1218,10 @@ header.is-stuck .header-container {
   margin: 0 auto 2rem; 
 }
 
-.about-image.sm { max-width: 280px; }
+.about-image.sm { max-width: 280px; } */
 
 /* Slightly smaller default image as well */
-.about-image { flex: 0 0 auto; max-width: 320px; }
+/* .about-image { flex: 0 0 auto; max-width: 320px; }
 
 .about-image img {
   width: 100%;
@@ -1236,9 +1247,9 @@ header.is-stuck .header-container {
 }
 
 .about-points {
-  display: block;              /* override global flex ul */
+  display: block;
   list-style: disc;
-  padding-left: 1.25rem;       /* standard bullet indent */
+  padding-left: 1.25rem;
   margin: 1rem auto 2rem;
   color: var(--text-color);
   line-height: 1.65;
@@ -1247,29 +1258,20 @@ header.is-stuck .header-container {
 
 
 .about-points li {
-  display: list-item;          /* ensure normal list flow */
+  display: list-item;
   margin: 0.35rem 0;
 }
 
 .about-intro .about-points {
   display: block;
-}
+} */
 
 /* About: refined intro hierarchy */
-.about-intro h2 {
+/* .about-intro h2 {
   position: relative;
   margin-bottom: 0.75rem;
 }
-.about-intro h2::after {
-  content: "";
-  display: block;
-  width: 56px;
-  height: 3px;
-  margin: 0.5rem auto 0;
-  background: var(--accent-color);
-  border-radius: 2px;
-  opacity: 0.9;
-}
+
 .about-intro .about-lead {
   max-width: 760px;
   margin: 0.5rem auto 1rem;
@@ -1289,13 +1291,13 @@ header.is-stuck .header-container {
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 0.5rem;
-}
+} */
 
 /* About: outlined secondary button with accent-to-green hover */
-.about-cta .button.secondary {
+/* .about-cta .button.secondary {
   background: transparent;
-  border: 2px solid var(--accent-color); /* orange outline */
-  color: var(--accent-color) !important;  /* orange text */
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color) !important;
   padding: 0.75rem 1.25rem;
   border-radius: 999px;
   font-weight: 700;
@@ -1304,20 +1306,20 @@ header.is-stuck .header-container {
 
 .about-cta .button.secondary:hover,
 .about-cta .button.secondary:focus-visible {
-  border-color: var(--accent-hover); /* green */
-  color: var(--accent-hover) !important; /* green text */
+  border-color: var(--accent-hover);
+  color: var(--accent-hover) !important;
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-}
+} */
 
 /* Keep primary CTA consistent here */
-.about-cta .cta-button {
+/* .about-cta .cta-button {
   padding: 0.85rem 1.35rem;
   border-radius: 999px;
   font-weight: 700;
-}
+} */
 
 /* Collaborators grid */
-.about-collab { 
+/* .about-collab { 
   max-width: 1100px; 
   margin: 0 auto; 
 }
@@ -1336,11 +1338,10 @@ header.is-stuck .header-container {
 .collab-note { 
   font-size: 0.95rem; 
   opacity: 0.8;
-  
-}
+} */
 
 /* Team-first layout */
-.about-intro {
+/* .about-intro {
   max-width: 900px;
   margin: 0 auto 2rem;
   text-align: center;
@@ -1349,10 +1350,10 @@ header.is-stuck .header-container {
   text-align: left;
   max-width: 760px;
   margin: 1rem auto 2rem;
-}
+} */
 
 /* Team grid */
-.team-grid {
+/* .team-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(180px, 1fr));
   gap: 2rem;
@@ -1389,10 +1390,10 @@ header.is-stuck .header-container {
 .team-member .role {
   font-size: 0.95rem;
   opacity: 0.9;
-}
+} */
 
 /* Team cards: subtle borders + hover polish */
-.team-member {
+/* .team-member {
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: 14px;
@@ -1413,193 +1414,193 @@ header.is-stuck .header-container {
   margin-top: 0.35rem;
   margin-bottom: 0.15rem;
   font-weight: 700;
-}
+} */
 
 /* ===============================
    Sections: FAQ
    =============================== */
 
-   .faq-section {
-    padding: 6rem 2rem;
-    background-color: var(--bg-secondary);
-    color: var(--text-color);
-  }
-  
-  .faq-header {
-    max-width: 900px;
-    margin: 0 auto 2rem;
-    text-align: center;
-  }
-  
-  .faq-header h2 {
-    font-size: 2.25rem;
-    margin-bottom: 0.5rem;
-  }
+.faq-section {
+  padding: 6rem 2rem;
+  background-color: var(--bg-secondary);
+  color: var(--text-color);
+}
 
-  .faq-header p {
-    margin-bottom: 1rem;
-  }
+.faq-header {
+  max-width: 900px;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
 
-  /* Search control */
-  .faq-search {
-    display: block;
-    max-width: 900px;
-    margin: 0.75rem auto 1.25rem;
-  }
+.faq-header h2 {
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+}
 
-  .faq-search input[type="search"] {
-    width: 100%;
-    padding: 0.9rem 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    background: var(--bg-primary);
-    color: var(--text-color);
-    font-size: 1rem;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    outline: none;
-  }
+.faq-header p {
+  margin-bottom: 1rem;
+}
 
-  .faq-search input[type="search"]::placeholder {
-    opacity: 0.7;
-  }
-  
-  .faq-search input[type="search"]:focus {
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px rgba(80,180,101,0.18);
-  }
+/* Search control */
+.faq-search {
+  display: block;
+  max-width: 900px;
+  margin: 0.75rem auto 1.25rem;
+}
 
-  .faq-intro {
-    opacity: 0.85;
-    font-size: 1.1rem;
-  }
-  
-  /* List wrapper */
-  .faq-list {
-    max-width: 900px;
-    margin: 0 auto;
-    border-radius: 12px;
-    overflow: hidden;               /* rounds the top/bottom border nicely */
-    border: 1px solid var(--border-color);
-    background: var(--bg-primary);
-    max-height: 540px;          /* fixed viewport for long content */
-    overflow: auto;             /* enable scrolling inside */
-    scroll-behavior: smooth;
-  }
+.faq-search input[type="search"] {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background: var(--bg-primary);
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
 
-  /* Optional: thin custom scrollbar */
-  .faq-list::-webkit-scrollbar {
-    width: 10px;
-  }
-  .faq-list::-webkit-scrollbar-track {
-    background: var(--bg-secondary);
-  }
-  .faq-list::-webkit-scrollbar-thumb {
-    background-color: var(--border-color);
-    border-radius: 999px;
-    border: 2px solid var(--bg-secondary);
-  }
-  /* Firefox */
-  .faq-list {
-    scrollbar-width: thin;
-    scrollbar-color: var(--border-color) var(--bg-secondary);
-  }
+.faq-search input[type="search"]::placeholder {
+  opacity: 0.7;
+}
 
-  /* Empty-state message for search */
-  .faq-empty {
-    max-width: 900px;
-    margin: 0.75rem auto 0;
-    text-align: center;
-    font-size: 0.95rem;
-    opacity: 0.8;
-  }
-  
-  /* Divider between items */
+.faq-search input[type="search"]:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(80,180,101,0.18);
+}
 
-  .faq-item h3 {
-    /* individual items */
-    margin-bottom: 0rem;
-  }
+.faq-intro {
+  opacity: 0.85;
+  font-size: 1.1rem;
+}
 
-  .faq-item + .faq-item {
-    border-top: 1px solid var(--border-color);
-  }
-  
-  /* Question button */
-  .faq-toggle {
-    appearance: none;
-    -webkit-appearance: none;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    width: 100%;
-    text-align: left;
-    padding: 1.1rem 1.25rem;
-    background: transparent;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--text-color);
-    cursor: pointer;
-  }
-  
-  .faq-toggle:hover,
-  .faq-toggle:focus-visible {
-    background: var(--bg-secondary);
-    outline: none;
-  }
-  
-  /* Left chevron (drawn with borders) */
-  .faq-toggle .chevron {
-    flex: 0 0 0.5rem;
-    width: 0.5rem;
-    height: 0.5rem;
-    border: 2px solid currentColor;
-    border-right: 0;
-    border-bottom: 0;
-    transform: rotate(225deg);      /* points ► when collapsed */
-    border-radius: 2px;
-    transition: transform 0.25s ease;
-  }
-  
-  .faq-toggle[aria-expanded="true"] .chevron {
-    transform: rotate(134.5deg);      /* points ▼ when expanded */
-  }
-  
-  /* Answer panel */
-  .faq-panel {
-    padding: 0 1.25rem 1.25rem 2.5rem; /* indent to line up under text (past chevron) */
-  }
-  
-  .faq-panel p {
-    margin: 0.5rem 0 0;
-    font-size: 1.05rem;
-    line-height: 1.7;
-    opacity: 0.95;
-  }
+/* List wrapper */
+.faq-list {
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;               /* rounds the top/bottom border nicely */
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  max-height: 540px;          /* fixed viewport for long content */
+  overflow: auto;             /* enable scrolling inside */
+  scroll-behavior: smooth;
+}
 
-  .faq-panel ul {
-    display: block;
-    list-style: disc;
-    margin-left: 1.5rem;
-    margin-top: 0.5rem;
-  }
-  
-  .faq-panel li {
-    margin-bottom: 0.5rem;
-    line-height: 1.5;
-  }
-  
-  /* Utility (used by optional search label you commented out) */
-  .visually-hidden {
-    position: absolute !important;
-    width: 1px; height: 1px;
-    margin: -1px; border: 0; padding: 0;
-    clip: rect(0 0 0 0); clip-path: inset(50%);
-    overflow: hidden;
-  }
-  
-  /* Dark theme separators (keeps contrasts consistent) */
-  [data-theme="dark"] .faq-list { border-color: var(--border-color); }
-  [data-theme="dark"] .faq-item + .faq-item { border-top-color: var(--border-color); }
+/* Optional: thin custom scrollbar */
+.faq-list::-webkit-scrollbar {
+  width: 10px;
+}
+.faq-list::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+.faq-list::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 999px;
+  border: 2px solid var(--bg-secondary);
+}
+/* Firefox */
+.faq-list {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) var(--bg-secondary);
+}
+
+/* Empty-state message for search */
+.faq-empty {
+  max-width: 900px;
+  margin: 0.75rem auto 0;
+  text-align: center;
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+/* Divider between items */
+
+.faq-item h3 {
+  /* individual items */
+  margin-bottom: 0rem;
+}
+
+.faq-item + .faq-item {
+  border-top: 1px solid var(--border-color);
+}
+
+/* Question button */
+.faq-toggle {
+  appearance: none;
+  -webkit-appearance: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  text-align: left;
+  padding: 1.1rem 1.25rem;
+  background: transparent;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.faq-toggle:hover,
+.faq-toggle:focus-visible {
+  background: var(--bg-secondary);
+  outline: none;
+}
+
+/* Left chevron (drawn with borders) */
+.faq-toggle .chevron {
+  flex: 0 0 0.5rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border: 2px solid currentColor;
+  border-right: 0;
+  border-bottom: 0;
+  transform: rotate(225deg);      /* points ► when collapsed */
+  border-radius: 2px;
+  transition: transform 0.25s ease;
+}
+
+.faq-toggle[aria-expanded="true"] .chevron {
+  transform: rotate(134.5deg);      /* points ▼ when expanded */
+}
+
+/* Answer panel */
+.faq-panel {
+  padding: 0 1.25rem 1.25rem 2.5rem; /* indent to line up under text (past chevron) */
+}
+
+.faq-panel p {
+  margin: 0.5rem 0 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  opacity: 0.95;
+}
+
+.faq-panel ul {
+  display: block;
+  list-style: disc;
+  margin-left: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.faq-panel li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+/* Utility (used by optional search label you commented out) */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; border: 0; padding: 0;
+  clip: rect(0 0 0 0); clip-path: inset(50%);
+  overflow: hidden;
+}
+
+/* Dark theme separators (keeps contrasts consistent) */
+[data-theme="dark"] .faq-list { border-color: var(--border-color); }
+[data-theme="dark"] .faq-item + .faq-item { border-top-color: var(--border-color); }
 
 /* ===============================
     Sections: Contact

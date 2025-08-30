@@ -619,13 +619,13 @@ document.addEventListener('DOMContentLoaded', () => {
       'Founders',
       'Small Businesses',
       'Creatives',
+      'Innovators',
       'Small Teams',
       'Makers',
       'Startups',
       'Entrepreneurs',
       'Freelancers',
       'Clinicians',
-      'Coaches',
       'Local Brands',
       'Nonprofits',
       'Creators'
@@ -885,32 +885,73 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Testimonials Carousel
+  // Testimonials Carousel (robust: aria-hidden + hidden; pause on hover/focus)
+  const testimonialsRoot = document.querySelector('.testimonials-carousel');
   const testimonialTrack = document.querySelector('.testimonial-track');
-  const testimonialSlides = document.querySelectorAll('.testimonial-slide');
-
+  const testimonialSlides = testimonialTrack ? Array.from(testimonialTrack.querySelectorAll('.testimonial-slide')) : [];
+  
   let testimonialIndex = 0;
-
-  const updateTestimonial = (index) => {
-    testimonialSlides.forEach((slide, i) => {
-      slide.classList.remove('active');
-      slide.style.display = i === index ? 'flex' : 'none';
+  let testimonialTimer = null;
+  const TESTIMONIAL_INTERVAL = 12000;
+  const prefersReducedMotion_TEST = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  
+  function showTestimonial(i) {
+    testimonialIndex = (i + testimonialSlides.length) % testimonialSlides.length;
+    testimonialSlides.forEach((slide, idx) => {
+      const isActive = idx === testimonialIndex;
+      slide.classList.toggle('active', isActive);
+      slide.setAttribute('aria-hidden', String(!isActive));
+      // use hidden to fully remove from flow; CSS ensures display:none
+      if (!isActive) {
+        slide.setAttribute('hidden', '');
+      } else {
+        slide.removeAttribute('hidden');
+      }
     });
-
-    const current = testimonialSlides[index];
-    if (current) {
-      void current.offsetWidth; // Force reflow
-      current.classList.add('active');
+  }
+  
+  function nextTestimonial() {
+    showTestimonial(testimonialIndex + 1);
+  }
+  
+  function startTestimonials() {
+    if (prefersReducedMotion_TEST || testimonialSlides.length <= 1) return;
+    stopTestimonials();
+    testimonialTimer = setInterval(nextTestimonial, TESTIMONIAL_INTERVAL);
+  }
+  
+  function stopTestimonials() {
+    if (testimonialTimer) {
+      clearInterval(testimonialTimer);
+      testimonialTimer = null;
     }
-  };
-
-  const cycleTestimonials = () => {
-    testimonialIndex = (testimonialIndex + 1) % testimonialSlides.length;
-    updateTestimonial(testimonialIndex);
-  };
-
-  if (testimonialTrack && testimonialSlides.length > 0) {
-    updateTestimonial(testimonialIndex);
-    setInterval(cycleTestimonials, 12000);
+  }
+  
+  if (testimonialsRoot && testimonialSlides.length > 0) {
+    // Initialize state
+    testimonialSlides.forEach((s, idx) => {
+      s.style.removeProperty('display'); // clear inline displays from previous code
+      s.setAttribute('role', 'group');
+      s.setAttribute('aria-roledescription', 'testimonial');
+      s.setAttribute('aria-hidden', String(idx !== 0));
+      if (idx !== 0) s.setAttribute('hidden', '');
+    });
+    showTestimonial(0);
+    startTestimonials();
+  
+    // Pause on hover/focus inside carousel
+    ['mouseenter', 'focusin'].forEach(evt => testimonialsRoot.addEventListener(evt, stopTestimonials, { passive: true }));
+    ['mouseleave', 'focusout'].forEach(evt => testimonialsRoot.addEventListener(evt, startTestimonials, { passive: true }));
+  
+    // (Optional) pause when offscreen to save cycles
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) startTestimonials();
+          else stopTestimonials();
+        });
+      }, { threshold: 0.1 });
+      io.observe(testimonialsRoot);
+    }
   }
 });

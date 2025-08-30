@@ -236,8 +236,8 @@ header.is-stuck .header-container {
    =============================== */
 .back-to-top {
   position: fixed;
-  right: 1.25rem;
-  bottom: 1.25rem;
+  right: 2.1rem;
+  bottom: 2.1rem;
   width: 48px;
   height: 48px;
   border-radius: 999px;
@@ -404,70 +404,95 @@ header.is-stuck .header-container {
     Layout: Footer
    =============================== */
 
-   .site-footer {
-    background-color: var(--bg-chrome);
-    color: var(--text-color);
-    padding: 2rem;
-    font-size: 1rem;
-    border-top: 1px solid var(--border-color);
-  }
-  
-  .footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .footer-left {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
+.site-footer {
+  background-color: var(--bg-chrome);
+  color: var(--text-color);
+  padding: 2rem;
+  font-size: 1rem;
+  border-top: 1px solid var(--border-color);
+}
 
-  .footer-left .footer-logo {
-    height: 40px;
-    width: auto;
-  }
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 85%;
+  margin: 0 auto;
+}
 
-  .footer-left p {
-    margin: 0;
-    opacity: 0.75;
-  }
-  
-  .footer-right {
-    display: flex;
-    gap: 1.5rem;
-  }
-  
-  .footer-right a {
-    color: var(--text-color);
-    opacity: 0.8;
-    transition: opacity 0.2s ease;
-  }
-  
-  .footer-right a:hover {
-    opacity: 1;
-    color: var(--accent-color);
-  }
+.footer-left {
+  display: flex;
+  flex-direction: row;   /* side by side instead of stacked */
+  align-items: center;   /* vertical alignment */
+  gap: 1rem;             /* spacing between logo and text block */
+}
 
-  /* .footer-socials {
-    display: flex;
-    gap: 1rem;
-  }
+.footer-info {
+  display: flex;
+  flex-direction: column;   /* keep the two text lines stacked */
+  justify-content: center;
+}
 
-  .footer-socials a {
-    opacity: 0.8;
-    transition: opacity 0.2s ease;
-    color: var(--text-color);
-  }
+.footer-left .footer-logo {
+  height: 60px;
+  width: auto;
+}
 
-  .footer-socials a:hover {
-    opacity: 1;
-    color: var(--accent-color);
-  } */
+.footer-left p,
+.footer-credit {
+  margin: 0;
+  opacity: 0.75;
+  line-height: 1.4;
+  font-size: 0.9em;
+}
+
+.footer-credit {
+  margin: 2px 0 0;
+  opacity: 0.75;
+  font-size: 0.9em;
+}
+
+.footer-credit a {
+  color: #50B465; /* Catalyst accent green */
+  text-decoration: none;
+  font-size: 0.9em;
+}
+.footer-credit a:hover {
+  text-decoration: underline;
+}
+
+.footer-right {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-right a {
+  color: var(--text-color);
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.footer-right a:hover {
+  opacity: 1;
+  color: var(--accent-color);
+}
+
+/* .footer-socials {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-socials a {
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+  color: var(--text-color);
+}
+
+.footer-socials a:hover {
+  opacity: 1;
+  color: var(--accent-color);
+} */
 
 /* ===============================
     Sections: Hero
@@ -1197,18 +1222,17 @@ header.is-stuck .header-container {
   align-items: center;
   gap: 3rem;
   flex-wrap: wrap;
-  max-width: 1100px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
 .about-panel { 
   display: flex;
   align-items: center;
-  gap: 4rem;
-  max-width: 1100px;
+  gap: 5rem;
 }
 
-.about-image.sm { max-width: 300px; }
+.about-image.sm { max-width: 350px; }
 
 /* Slightly smaller default image as well */
 .about-image { flex: 0 0 auto; max-width: 320px; }
@@ -1222,6 +1246,7 @@ header.is-stuck .header-container {
 
 .about-text {
   margin-bottom: 2rem;
+  max-width: 900px;
 }
 
 .about-text h2::after {
@@ -1267,7 +1292,7 @@ header.is-stuck .header-container {
   gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 0.5rem;
+  margin-top: 3rem;
 }
 
 /* About: outlined secondary button with accent-to-green hover */

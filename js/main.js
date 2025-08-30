@@ -892,7 +892,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   let testimonialIndex = 0;
   let testimonialTimer = null;
-  const TESTIMONIAL_INTERVAL = 12000;
+  const TESTIMONIAL_INTERVAL = 8000;
   const prefersReducedMotion_TEST = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   
   function showTestimonial(i) {

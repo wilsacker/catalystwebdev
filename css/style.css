@@ -16,12 +16,14 @@
 
   --font-base: "Space Grotesk", sans-serif;
   /* Fluid type scale */
-  --fs-0: clamp(1.1rem, 1.02rem + 0.30vw, 1.25rem); /* base text (was 1.25rem; ~1.1rem on small) */
-  --fs-1: clamp(1.3rem, 1.15rem + 0.50vw, 1.5rem);  /* h4 (was 1.5rem) */
-  --fs-2: clamp(1.6rem, 1.30rem + 0.90vw, 2rem);   /* h3 (was 2rem) */
-  --fs-3: clamp(2.2rem, 1.90rem + 0.60vw, 2.5rem); /* h2 (was 2.5rem) */
-  --fs-4: clamp(3.5rem, 2.20rem + 3.20vw, 5rem);   /* h1 (was 5rem / 3.5rem ≤768px) */
-  --header-offset: 72px;
+  --fs-0: clamp(1.1rem, 1.02rem + 0.30vw, 1.25rem);
+  --fs-1: clamp(1.3rem, 1.15rem + 0.50vw, 1.5rem);
+  --fs-2: clamp(1.6rem, 1.30rem + 0.90vw, 2rem);
+  --fs-3: clamp(2.2rem, 1.90rem + 0.60vw, 2.5rem);
+  --fs-4: clamp(3.5rem, 2.20rem + 3.20vw, 5rem);
+
+  /* Fluid Title scale */
+  --title-size: clamp(1.2rem, 1rem + 3vw, 2.5rem);
 }
 
 [data-theme="dark"] {
@@ -117,9 +119,8 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 2rem;
+  padding: clamp(0.75rem, 1.2vw, 1.5rem) clamp(1rem, 2vw, 2rem);
   background-color: var(--bg-chrome);
-  /* sticky & blur transitions */
   transition: background-color 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease;
   border-bottom: 1px solid transparent;
 }
@@ -135,25 +136,25 @@ header {
 }
 
 .logo {
-  height: 60px;
+  height: clamp(36px, 6vw, 60px);
   width: auto;
 }
 
 .site-title {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* optional, helps vertical alignment */
+  justify-content: center;
   line-height: 1;
 }
 
 .site-title h1 {
-  font-size: 2.5rem;
-  line-height: 1.2;
+  font-size: var(--title-size);
+  line-height: 1.1;
   margin: 0;
 }
 
 .site-title .subtitle {
-  font-size: 1rem;
+  font-size: calc(var(--title-size) * 0.4);
   opacity: 0.75;
   margin-top: 0.2rem;
 }
@@ -179,11 +180,48 @@ header {
 
 /* Header Right */
 
+.header-right { display: flex; align-items: center; gap: 2rem; }
+.nav-toggle { order: 2; }         /* default: after switch */
+.analog-switch { order: 1; }
+
 .header-right {
   display: flex;
   align-items: center;
   gap: 2rem;
 }
+
+/* Nav Toggle */
+.nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
+/* Simple hamburger icon (uses the <span class="nav-icon"> you already have) */
+.nav-toggle .nav-icon,
+.nav-toggle .nav-icon::before,
+.nav-toggle .nav-icon::after {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text-color);
+  border-radius: 2px;
+  transition: transform .25s ease, opacity .25s ease;
+}
+.nav-toggle .nav-icon { position: relative; }
+.nav-toggle .nav-icon::before { position: absolute; top: -7px; left: 0; }
+.nav-toggle .nav-icon::after  { position: absolute; top:  7px; left: 0; }
+
+/* X state */
+.nav-toggle[aria-expanded="true"] .nav-icon { background: transparent; }
+.nav-toggle[aria-expanded="true"] .nav-icon::before { transform: translateY(7px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-icon::after  { transform: translateY(-7px) rotate(-45deg); }
 
 /* Sticky state styling with subtle blur + thin border */
 header.is-stuck .header-container {
@@ -466,7 +504,7 @@ header.is-stuck .header-container {
     Sections: Hero
    =============================== */
 
-  #hero {
+#hero {
   position: relative;
   display: grid;
   place-items: center;
@@ -520,6 +558,7 @@ header.is-stuck .header-container {
   position: relative;
   display: inline-block;
   vertical-align: baseline;
+  max-width: 100%;
 }
 
 /* The two layers (current + next) stacked */
@@ -528,7 +567,8 @@ header.is-stuck .header-container {
   left: 0;
   top: 0;
   will-change: transform, opacity;
-  white-space: nowrap;     /* ensure width measure matches */
+  white-space: normal;
+  width: 100%;
 }
 
 /* Slightly stronger type like you had */
@@ -1739,9 +1779,43 @@ header.is-stuck .header-container {
     Responsive Styling: Mobile
    =============================== */
 
-/* Responsive */
+@media (max-width: 1250px) {
+  .nav-toggle { display: inline-flex; }
+
+  /* convert nav to a hidden bar that appears under the header */
+  .header-nav {
+    position: fixed;
+    top: var(--header-h, 72px);   /* set by small JS below */
+    left: 0;
+    right: 0;
+    transform: none;
+    background: var(--bg-chrome);
+    border-bottom: 1px solid var(--border-color);
+    display: none;                /* hidden by default */
+    z-index: 998;                 /* below sticky header (999) */
+  }
+}
+
 @media (max-width: 1100px) {
   #about-us { padding: 4rem 1.5rem; }
+
+  /* tighten header spacing a touch */
+  .header-container { padding: 1rem 1.25rem; }
+
+  .header-nav ul {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem 1rem;
+    align-items: flex-start;
+  }
+  
+  /* when open */
+  body.nav-open .header-nav { display: block; }
+  body.nav-open { overflow: hidden; } /* optional: lock page scroll when menu open */
+
+  /* avoid crowding on the right */
+  .header-right { gap: 1rem; }
+  .cta-button { padding: 0.6rem 1.1rem; }
 }
 
 @media (max-width: 1000px) {
@@ -1749,8 +1823,11 @@ header.is-stuck .header-container {
   .team-photo { width: 200px; height: 200px; }
 }
 
-  @media (max-width: 900px) {
+@media (max-width: 900px) {
   #hero { min-height: 70vh; padding: 5rem 1.5rem 3rem; }
+
+  .header-nav { display: none; }
+  .nav-toggle { display: inline-flex; }
 
   .about-image, .about-image.sm { max-width: 240px; }
   .about-text p { font-size: 1.05rem; }
@@ -1761,6 +1838,8 @@ header.is-stuck .header-container {
   #hero h1 { margin-bottom: 0.4rem; }
   .hero-subtext { margin-bottom: 1.5rem; }
   .hero-cta .button { padding: 0.75rem 1.2rem; }
+
+  .header-right .cta-button { display: none; }
 }
 
 @media (max-width: 600px) {
@@ -1782,4 +1861,26 @@ header.is-stuck .header-container {
   .team-member {
     padding: 0.75rem 0.85rem;
   }
+}
+
+/* Phone-tightening: reduce gaps + pill size a touch */
+@media (max-width: 480px) {
+  .header-left { gap: 0.65rem; }
+  .header-right { gap: 0.8rem; }
+
+  .cta-button {
+    padding: 0.55rem 1rem; /* a bit slimmer so everything fits */
+  }
+
+  .analog-switch {
+    transform: scale(0.9);
+    transform-origin: right center;
+  }
+}
+
+/* Extra-small safety (very narrow devices) */
+@media (max-width: 360px) {
+  .site-title h1 { font-size: clamp(1.25rem, 3.8vw, 1.6rem); }
+  .site-title .subtitle { font-size: 0.8rem; }
+  .logo { height: 34px; }
 }

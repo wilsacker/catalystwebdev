@@ -33,7 +33,8 @@
         </div>
       </a>
 
-      <nav class="header-nav">
+      <!-- add id -->
+      <nav class="header-nav" id="primary-nav">
         <ul>
           <li><a href="#portfolio">Portfolio</a></li>
           <li><a href="#services">Services</a></li>
@@ -43,6 +44,11 @@
       </nav>
 
       <div class="header-right">
+        <!-- NEW: burger -->
+        <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu">
+          <span class="nav-icon" aria-hidden="true"></span>
+        </button>
+
         <a href="#contact" class="button cta-button">Let's Talk</a>
         <div class="analog-switch" id="theme-toggle">
           <div class="switch-knob"></div>

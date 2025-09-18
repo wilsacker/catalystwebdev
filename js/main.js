@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const contactForm = document.querySelector('.contact-form');
   const thankYouModal = document.getElementById('thank-you-modal');
   const closeModalBtn = document.querySelector('.close-modal');
+  const header = document.querySelector('header');
+  const burger = document.querySelector('.nav-toggle');
 
   // 2. Smooth scroll for anchor nav links
 
@@ -79,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo({ top: 0, behavior: prefersReduceMotion ? 'auto' : 'smooth' });
   });
 
+  // 4c. Close burger on scroll
   const onScroll = () => {
     const y = window.scrollY || document.documentElement.scrollTop;
     if (headerEl) {
@@ -91,6 +94,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  document.querySelectorAll('#primary-nav a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (document.body.classList.contains('nav-open')) {
+        document.body.classList.remove('nav-open');
+        burger?.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  // 5. Nav Burger
+  function setHeaderVar() {
+    const h = header ? header.offsetHeight : 72;
+    document.documentElement.style.setProperty('--header-h', h + 'px');
+  }
+  setHeaderVar();
+  window.addEventListener('resize', setHeaderVar, { passive: true });
+  
+  if (burger) {
+    burger.addEventListener('click', () => {
+      const open = burger.getAttribute('aria-expanded') === 'true';
+      burger.setAttribute('aria-expanded', String(!open));
+      document.body.classList.toggle('nav-open', !open);
+      // recalc in case sticky state/line wraps changed header height
+      setHeaderVar();
+    });
+  }
 
   // 5. Tab switching in Services section
 
@@ -783,9 +813,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }, INTERVAL_MS);
     }
   }
-
   
-  // Carousel
+  // Portfolio Carousel
   let currentIndex = 0;
   let slideInterval;
 

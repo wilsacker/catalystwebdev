@@ -567,8 +567,7 @@ header.is-stuck .header-container {
   left: 0;
   top: 0;
   will-change: transform, opacity;
-  white-space: normal;
-  width: 100%;
+  white-space: nowrap; /* desktop: keep one line so the dot hugs the word */
 }
 
 /* Slightly stronger type like you had */
@@ -602,6 +601,11 @@ header.is-stuck .header-container {
 
 .rotating-word-wrap { perspective: -800px; }
 .rotating-layer { transform-origin: 50% 50%; backface-visibility: hidden; }
+
+@media (max-width: 520px) {
+  .rotating-layer { white-space: normal; width: 100%; }
+  .rotating-word-wrap { max-width: 100%; width: auto; }
+}
 
 .rotating-out {
   animation: wheelOut 0.7s ease-in-out forwards;
@@ -1856,8 +1860,7 @@ header.is-stuck .header-container {
 @media (max-width: 560px) {
   .team-grid { grid-template-columns: 1fr; }
   .team-photo { width: 180px; height: 180px; }
-}
-@media (max-width: 560px) {
+
   .team-member {
     padding: 0.75rem 0.85rem;
   }
@@ -1867,6 +1870,8 @@ header.is-stuck .header-container {
 @media (max-width: 480px) {
   .header-left { gap: 0.65rem; }
   .header-right { gap: 0.8rem; }
+  
+  #hero h1 { font-size: clamp(2.1rem, 7.8vw, 3rem); }
 
   .cta-button {
     padding: 0.55rem 1rem; /* a bit slimmer so everything fits */
@@ -1883,4 +1888,7 @@ header.is-stuck .header-container {
   .site-title h1 { font-size: clamp(1.25rem, 3.8vw, 1.6rem); }
   .site-title .subtitle { font-size: 0.8rem; }
   .logo { height: 34px; }
+
+  #hero h1 { font-size: clamp(1.9rem, 8.2vw, 2.7rem); }
+  .hero-subtext { font-size: clamp(1rem, 8.2vw, 1.5rem);}
 }

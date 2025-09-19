@@ -177,126 +177,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ============================
-  // FAQ accordion (accessible)
-  // ============================
-  const faqToggles = document.querySelectorAll('.faq-toggle');
-
-  function closeAllFaq(exceptBtn) {
-    faqToggles.forEach(btn => {
-      if (btn !== exceptBtn) {
-        const panelId = btn.getAttribute('aria-controls');
-        const panel = document.getElementById(panelId);
-        if (!panel) return;
-        btn.setAttribute('aria-expanded', 'false');
-        panel.hidden = true;
-      }
-    });
-  }
-
-  faqToggles.forEach(btn => {
-    const panelId = btn.getAttribute('aria-controls');
-    const panel = document.getElementById(panelId);
-    if (!panel) return;
-
-    btn.addEventListener('click', () => {
-      const expanded = btn.getAttribute('aria-expanded') === 'true';
-      if (expanded) {
-        btn.setAttribute('aria-expanded', 'false');
-        panel.hidden = true;
-      } else {
-        // keep one open at a time (remove next line if you want multi-open)
-        closeAllFaq(btn);
-        btn.setAttribute('aria-expanded', 'true');
-        panel.hidden = false;
-      }
-    });
-
-    // Keyboard navigation among questions
-    btn.addEventListener('keydown', (e) => {
-      const list = Array.from(faqToggles);
-      const i = list.indexOf(btn);
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        list[(i + 1) % list.length].focus();
-      } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        list[(i - 1 + list.length) % list.length].focus();
-      } else if (e.key === 'Home') {
-        e.preventDefault();
-        list[0].focus();
-      } else if (e.key === 'End') {
-        e.preventDefault();
-        list[list.length - 1].focus();
-      }
-    });
-  });
-
-  // Open from hash (e.g., /#faq-seo)
-  if (location.hash) {
-    const panel = document.querySelector(location.hash);
-    const btn = panel ? document.querySelector(`[aria-controls="${panel.id}"]`) : null;
-    if (panel && btn) {
-      closeAllFaq(btn);
-      btn.setAttribute('aria-expanded', 'true');
-      panel.hidden = false;
-      // scroll to it accounting for sticky header
-      const headerOffset = document.querySelector('header')?.offsetHeight || 0;
-      const y = panel.getBoundingClientRect().top + window.scrollY - headerOffset - 12;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
-  }
-
-  // ============================
-  // FAQ search / filter
-  // ============================
-  const faqSearch = document.getElementById('faq-search');
-  const faqList = document.querySelector('.faq-list');
-  const faqItems = document.querySelectorAll('.faq-item');
-
-  // Simple debounce helper
-  const debounce = (fn, delay = 160) => {
-    let t;
-    return (...args) => {
-      clearTimeout(t);
-      t = setTimeout(() => fn(...args), delay);
-    };
-  };
-
-  // Empty-state message
-  let faqEmpty = document.querySelector('.faq-empty');
-  if (!faqEmpty) {
-    faqEmpty = document.createElement('p');
-    faqEmpty.className = 'faq-empty';
-    faqEmpty.textContent = 'No matches found. Try a different term.';
-    faqEmpty.hidden = true;
-    faqList.insertAdjacentElement('afterend', faqEmpty);
-  }
-
-  const normalize = (s) => (s || '').toLowerCase().trim();
-
-  const filterFaq = () => {
-    const q = normalize(faqSearch.value);
-    let shown = 0;
-
-    // Close all open items before filtering
-    closeAllFaq();
-
-    faqItems.forEach(item => {
-      const question = item.querySelector('h3')?.innerText || '';
-      const answer = item.querySelector('.faq-panel')?.innerText || '';
-      const hit = !q || (normalize(question).includes(q) || normalize(answer).includes(q));
-      item.style.display = hit ? '' : 'none';
-      if (hit) shown++;
-    });
-
-    faqEmpty.hidden = shown !== 0;
-  };
-
-  if (faqSearch) {
-    faqSearch.addEventListener('input', debounce(filterFaq, 120));
-    faqSearch.addEventListener('search', filterFaq); // for clear "x" on WebKit
-  }
-  // ============================
   // Hero: "Websites for ____." synchronized wheel-like swap
   // ============================
   const rotatingEl = document.getElementById('audience-word');
@@ -1024,5 +904,73 @@ document.addEventListener('DOMContentLoaded', () => {
       }, { threshold: 0.1 });
       io.observe(testimonialsRoot);
     }
+  }
+
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('.about-readmore');
+    if (!link) return;
+
+    e.preventDefault();
+    const box = link.closest('.about-text');
+    const isClamped = box.getAttribute('data-clamp') !== '0';
+
+    // Toggle state
+    box.setAttribute('data-clamp', isClamped ? '0' : '1');
+    link.setAttribute('aria-expanded', String(isClamped));
+
+    // Keep the anchor width identical between labels to avoid any nudge
+    // (CSS gives it a fixed width, so we just swap the text)
+    link.textContent = isClamped ? 'Read less' : 'Read more';
+  });
+
+  // ============================
+  // FAQ search / filter
+  // ============================
+  const faqSearch = document.getElementById('faq-search');
+  const faqList = document.querySelector('.faq-list');
+  const faqItems = document.querySelectorAll('.faq-item');
+
+  // Simple debounce helper
+  const debounce = (fn, delay = 160) => {
+    let t;
+    return (...args) => {
+      clearTimeout(t);
+      t = setTimeout(() => fn(...args), delay);
+    };
+  };
+
+  // Empty-state message
+  let faqEmpty = document.querySelector('.faq-empty');
+  if (!faqEmpty) {
+    faqEmpty = document.createElement('p');
+    faqEmpty.className = 'faq-empty';
+    faqEmpty.textContent = 'No matches found. Try a different term.';
+    faqEmpty.hidden = true;
+    faqList.insertAdjacentElement('afterend', faqEmpty);
+  }
+
+  const normalize = (s) => (s || '').toLowerCase().trim();
+
+  const filterFaq = () => {
+    const q = normalize(faqSearch.value);
+    let shown = 0;
+
+    // Close all open items before filtering
+    closeAllFaq();
+
+    faqItems.forEach(item => {
+      const question = item.querySelector('h3')?.innerText || '';
+      const answer = item.querySelector('.faq-panel')?.innerText || '';
+      const hit = !q || (normalize(question).includes(q) || normalize(answer).includes(q));
+      item.style.display = hit ? '' : 'none';
+      if (hit) shown++;
+    });
+
+    faqEmpty.hidden = shown !== 0;
+  };
+
+  if (faqSearch) {
+    faqSearch.addEventListener('input', debounce(filterFaq, 120));
+    faqSearch.addEventListener('search', filterFaq); // for clear "x" on WebKit
   }
 });

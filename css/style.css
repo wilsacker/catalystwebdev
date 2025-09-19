@@ -998,6 +998,12 @@ header.is-stuck .header-container {
     Sections: Process
    =============================== */
 
+/* === About: simple mobile clamp (only under 1100px) === */
+.about-text { position: relative; }
+
+/* Hide the link by default (shown only when clamp is active under 1100px) */
+.about-readmore { display: none; }
+
 #process {
   padding: 6rem 2rem;
   text-align: center;
@@ -1309,6 +1315,10 @@ header.is-stuck .header-container {
   margin-bottom: 1.5rem;
 }
 
+.about-readmore {
+  display: none;
+}
+
 .about-intro {
   display: block;
 }
@@ -1325,6 +1335,7 @@ header.is-stuck .header-container {
   line-height: 1.75;
   opacity: 0.95;
 }
+
 .about-intro .about-sub {
   margin-top: 1.25rem;
   font-size: 1.35rem;
@@ -1336,7 +1347,7 @@ header.is-stuck .header-container {
   gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 3rem;
+  margin-top: 1.5rem;
 }
 
 /* About: outlined secondary button with accent-to-green hover */
@@ -1840,16 +1851,6 @@ header.is-stuck .header-container {
     margin: 2rem;
   }
 
-  .about-text::after {
-    content: "";
-    display: block;
-    width: 75px;
-    height: 1px;
-    margin: 4rem auto 0;
-    background: var(--accent-color);
-    border-radius: 2px;
-  }
-
   .about-image {
     order: 0;
     scale: 1.1;
@@ -1932,6 +1933,73 @@ header.is-stuck .header-container {
   .hero-cta .button { padding: 0.75rem 1.2rem; }
 
   .header-right .cta-button { display: none; }
+
+  /* The clamped text lives here; we fade only this box */
+  .about-text[data-clamp="1"] .about-body {
+    display: inline-block;
+    vertical-align: bottom;
+    max-height: var(--about-clamp-max, 32rem);
+    overflow: hidden;
+
+    /* bottom fade-out */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0));
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0));
+  }
+
+  .about-readmore {
+    display: inline-block;
+    float: right;
+    margin-bottom: 2rem;
+    color: var(--accent-color);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1.5px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .about-cta{ clear: both; }
+
+  .about-text[data-clamp="0"] .about-body {
+    max-height: none;
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+
+  .about-text::after {
+    content: "";
+    display: block;
+    width: 75px;
+    height: 1px;
+    margin: 4rem auto 0;
+    background: var(--accent-color);
+    border-radius: 2px;
+  }
+
+  /* === About clamp + readmore: additive merge === */
+
+  /* 1) Tune how much shows before "Read more" */
+  .about-text {
+    /* number of lines to show when clamped + the exact line-height used for math */
+    --about-lines: 14;     /* try 4–6 for shorter/longer preview */
+    --about-lh: 1.58;     /* match your body copy line-height */
+  }
+
+  /* 2) Make the line-height explicit so clamp math is stable */
+  .about-text .about-body {
+    line-height: var(--about-lh);
+  }
+
+  /* 3) Convert your max-height to line-count based height
+        (works with multiple <p> blocks) */
+  .about-text[data-clamp="1"] .about-body {
+    max-height: calc(var(--about-lines) * 1em * var(--about-lh));
+    /* keep your fade */
+  }
+
+  /* 4) Only show the link when clamped; keep your styling */
+  .about-text[data-clamp="1"] .about-readmore { display: inline-block; }
 }
 
 @media (max-width: 600px) {
@@ -1965,6 +2033,13 @@ header.is-stuck .header-container {
   .analog-switch {
     transform: scale(0.9);
     transform-origin: right center;
+  }
+
+  /* 1) Tune how much shows before "Read more" */
+  .about-text {
+    /* number of lines to show when clamped + the exact line-height used for math */
+    --about-lines: 20;     /* try 4–6 for shorter/longer preview */
+    --about-lh: 1.58;     /* match your body copy line-height */
   }
 }
 

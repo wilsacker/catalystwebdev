@@ -790,7 +790,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const startAutoSlide = () => {
-    slideInterval = setInterval(showNextSlide, 15000);
+    slideInterval = setInterval(showNextSlide, 12000);
   };
 
   const stopAutoSlide = () => {

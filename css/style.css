@@ -1921,7 +1921,6 @@ header.is-stuck .header-container {
   #hero { min-height: 70vh; padding: 5rem 1.5rem 3rem; }
 
   .header-nav { display: none; }
-  .nav-toggle { display: inline-flex; }
 
   .about-image, .about-image.sm { max-width: 240px; }
   .about-text p { font-size: 1.05rem; }
@@ -1976,4 +1975,11 @@ header.is-stuck .header-container {
   .logo { height: 34px; }
 
   #hero h1 { font-size: clamp(1.9rem, 8.2vw, 2.7rem); }
+
+  .header-right { gap: 0rem;}
+
+  .nav-toggle {
+    padding: 0.5rem 0.9rem;
+
+  }
 }

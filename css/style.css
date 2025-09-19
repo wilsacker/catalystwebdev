@@ -4,13 +4,16 @@
   
 :root {
   --bg-chrome: #fff;
-  --bg-primary: #e5e5e5;
-  --bg-secondary: #ededed;
+  --bg-primary: #e0e0e0;
+  --bg-secondary: #F5F5F5;
   --bg-primary-backup: #f2f2f2;
   --text-color: #1a1a1a;
 
   --accent-color: #5ed674;
   --accent-hover: #ffbe7a;
+  --accent-green: #50b465;
+  --accent-red: #ff4c4c;
+  --accent-blue: #191970;
 
   --border-color: #e1e1e1;
 
@@ -32,8 +35,11 @@
   --bg-secondary: #000000;
   --text-color: #f1f1f1;
 
-  --accent-color: #50b465;
+  --accent-color: #5ed674;
   --accent-hover: #ff8c42;
+  --accent-green: #50b465;
+  --accent-red: #ff4c4c;
+  --accent-blue: #4da6ff;
 
   --border-color: #2e2e2e;
 }
@@ -344,9 +350,10 @@ header.is-stuck .header-container {
   width: 50px;
   height: 26px;
   background: linear-gradient(135deg, #cce6ff, #99ccff);
+  background-color: #060625;
   border-radius: 30px;
   cursor: pointer;
-  border: 1px solid rgba(0, 0, 0, 0.10); /* subtle border for light mode */
+  border: 1px solid rgba(0, 0, 0, 0.10);
   transition: background-color 0.4s ease, border-color 0.3s ease;
 }
 
@@ -508,7 +515,7 @@ header.is-stuck .header-container {
   position: relative;
   display: grid;
   place-items: center;
-  min-height: 84vh;              /* slightly shorter so CTAs sit above the fold */
+  min-height: 100vh;              /* slightly shorter so CTAs sit above the fold */
   padding: 6rem 2rem 4rem;
   text-align: center;
   background-color: var(--bg-primary);
@@ -693,7 +700,7 @@ header.is-stuck .header-container {
    =============================== */
 
    #portfolio {
-    padding: 6rem 2rem;
+    padding: clamp(3rem, 6vw, 6rem) 1rem;
     background-color: var(--bg-secondary);
     text-align: center;
   }
@@ -711,7 +718,6 @@ header.is-stuck .header-container {
   }
   
   .carousel-track-container {
-    min-height: 500px; /* adjust based on typical video height */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -916,7 +922,7 @@ header.is-stuck .header-container {
    =============================== */
 
 #services {
-  padding: 6rem 2rem;
+  padding: 6rem 4rem;
   background-color: var(--bg-secondary);
   color: var(--text-color);
   text-align: center;
@@ -1139,7 +1145,7 @@ header.is-stuck .header-container {
   background-color: var(--bg-primary);
   padding: 2.5rem 2rem;
   border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 1px 1px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 360px;
   text-align: center;
@@ -1152,6 +1158,7 @@ header.is-stuck .header-container {
 .pricing-card h3 {
   font-size: 1.5rem;
   margin-bottom: 0.75rem;
+  color: var(--accent-blue);
 }
 
 .pricing-card .subtitle {
@@ -1159,10 +1166,11 @@ header.is-stuck .header-container {
 }
 
 .pricing-card .price {
-  font-size: 3.5rem;
+  font-size: clamp(3rem, 2rem + 2vw, 3.5rem);
   font-weight: 700;
   margin: 0;
   margin-bottom: 1.5rem;
+  color: var(--accent-green);
 }
 
 .pricing-card ul {
@@ -1175,19 +1183,26 @@ header.is-stuck .header-container {
   margin-bottom: 2rem;
 }
 
+/* Keep the same left gutter on every feature line */
 .pricing-card ul li {
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  position: relative;
+}
+
+/* Span version of the checkmark – sits in the gutter, but stays in flow */
+.pricing-card ul li .checkmark {
+  display: inline-block;
+  width: 1.2em;                /* same as the li’s left gutter */
+  margin-left: -1.1em;         /* pull it back into that gutter */
+  font-weight: 700;
+  color: #FFE066;              /* yellow (tweak as you like) */
+  /* or: color: #FFD54A;  // softer yellow
+         color: #FFE066;  // warmer yellow */
 }
 
 .pricing-card .cta-button {
   margin-top: auto;
   align-self: center;
 }
-
 
 .cta-section .fine-print {
   margin-top: 2rem;
@@ -1216,7 +1231,7 @@ header.is-stuck .header-container {
    =============================== */
 
 #about-us {
-  padding: 5rem 2rem;
+  padding: 5rem 4rem;
   background-color: var(--bg-primary);
   color: var(--text-color);
 }
@@ -1234,7 +1249,7 @@ header.is-stuck .header-container {
 .about-panel { 
   display: flex;
   align-items: center;
-  gap: 5rem;
+  gap: 3rem;
 }
 
 .about-image.sm { max-width: 350px; }
@@ -1791,10 +1806,56 @@ header.is-stuck .header-container {
     display: none;                /* hidden by default */
     z-index: 998;                 /* below sticky header (999) */
   }
+
+  /* Portfolio Section */
+  .carousel-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 2rem;
+    padding: 0.25rem;
+    color: white;
+    z-index: 3;
+  }
+
+  .carousel-btn.left {
+    left: 0.5rem;
+  }
+
+  .carousel-btn.right {
+    right: 0.5rem;
+  }
 }
 
+
+/* Responsive: Adjust carousel arrows under 1100px */
 @media (max-width: 1100px) {
   #about-us { padding: 4rem 1.5rem; }
+
+  .about-panel { 
+    flex-direction: column;
+  }
+
+  .about-text {
+    order: -1;
+    margin: 2rem;
+  }
+
+  .about-text::after {
+    content: "";
+    display: block;
+    width: 75px;
+    height: 1px;
+    margin: 4rem auto 0;
+    background: var(--accent-color);
+    border-radius: 2px;
+  }
+
+  .about-image {
+    order: 0;
+    scale: 1.1;
+    align-self: center;
+    text-align: center;
+  }
 
   /* tighten header spacing a touch */
   .header-container { padding: 1rem 1.25rem; }
@@ -1813,6 +1874,42 @@ header.is-stuck .header-container {
   /* avoid crowding on the right */
   .header-right { gap: 1rem; }
   .cta-button { padding: 0.6rem 1.1rem; }
+
+  /* Services Section */
+  .services-panel {
+    flex-direction: column;      /* stack */
+    align-items: center;
+    gap: 2.25rem;                /* tighter than desktop's 5rem */
+  }
+
+  .services-text {
+    flex: 1 1 100%;
+    text-align: center;          /* center copy on mobile/tablet */
+    max-width: 780px;
+    order: 2;
+  }
+
+  .services-text p {             /* tighten paragraph spacing a touch */
+    margin-bottom: 1.75rem;
+  }
+
+  .services-image {
+    order: 1;
+  }
+
+  .services-image {
+    flex: 1 1 100%;
+    max-width: 760px;            /* prevent “too wide” image on mid screens */
+  }
+
+  .services-image img {
+    width: min(92vw, 760px);
+    height: auto;
+  }
+
+  .services-text p {
+    padding: 0 1rem;
+  }
 }
 
 @media (max-width: 1000px) {
@@ -1839,9 +1936,6 @@ header.is-stuck .header-container {
 }
 
 @media (max-width: 600px) {
-  .about-panel { align-items: flex-start; }
-  .about-image, .about-image.sm { max-width: 200px; }
-  
   .footer-content {
     flex-direction: column;
     text-align: center;

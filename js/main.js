@@ -123,7 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 5. Tab switching in Services section
-
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
       // Skip if already active
@@ -150,7 +149,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 5b. Tab switching in Services section
-
   servicesTabs.forEach(tab => {
     tab.addEventListener('click', (e) => {
       e.preventDefault();
@@ -667,6 +665,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const prefersReducedMotion = window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    // Baseline tweak (in px) to fine-tune after metrics; use small values if needed
+    const BASELINE_TWEAK = 0; // negative raises, positive lowers
+
     // 1) Create a fixed-width wrapper to prevent layout shift
     const wrap = document.createElement('span');
     wrap.className = 'rotating-word-wrap';
@@ -703,6 +704,9 @@ document.addEventListener('DOMContentLoaded', () => {
     measure.style.fontStyle = cs.fontStyle;
     if (cs.fontStretch) measure.style.fontStretch = cs.fontStretch;
     measure.style.letterSpacing = cs.letterSpacing;
+    // Always inherit font and letterSpacing so measurer stays in sync
+    measure.style.font = 'inherit';
+    measure.style.letterSpacing = 'inherit';
     h1.appendChild(measure);
 
     const BUFFER = 2; // px – small safety margin
@@ -723,28 +727,66 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Make the wrapper exactly one line tall (no clipping)
-    wrap.style.height = lineHeightPx + 'px';
-    wrap.style.lineHeight = lineHeightPx + 'px';
 
-    // Offset: center the font-size box inside the line box
-    const baselineOffset = Math.max(0, Math.round((lineHeightPx - fontSizePx) / 2)) + 13.5;
+    // ---- Baseline alignment (responsive + font-metrics based) ----
+    // One offscreen canvas for font metrics (reuse across recalcs)
+    const _fmCanvas = document.createElement('canvas');
+    const _fmCtx = _fmCanvas.getContext('2d');
 
-    // Place both layers at the same vertical offset
-    layerCurrent.style.top = baselineOffset + 'px';
-    layerNext.style.top = baselineOffset + 'px';
+    function applyBaseline() {
+      // Recompute styles every time (font-size/line-height can change with viewport)
+      const wrapCS = getComputedStyle(wrap);
+      const h1CS = getComputedStyle(h1);
 
-    // Apply to both layers (inline styles override CSS top:0)
-    layerCurrent.style.top = baselineOffset + 'px';
-    layerNext.style.top = baselineOffset + 'px';
+      // Font string that matches rendering
+      _fmCtx.font = [
+        wrapCS.fontStyle || 'normal',
+        wrapCS.fontVariant || 'normal',
+        wrapCS.fontWeight || '400',
+        wrapCS.fontSize,
+        wrapCS.fontFamily
+      ].join(' ');
 
-    // Keep the wrapper using the same line-height as the h1 for consistency
-    wrap.style.lineHeight = lineHeightPx + 'px';
+      // Prefer fontBoundingBox*; fall back to actualBoundingBox*
+      const metrics = _fmCtx.measureText('Hg');
+      const fontSizePx = parseFloat(wrapCS.fontSize) || 16;
+      const ascent  = (metrics.fontBoundingBoxAscent ?? metrics.actualBoundingBoxAscent ?? fontSizePx * 0.8);
+      const descent = (metrics.fontBoundingBoxDescent ?? metrics.actualBoundingBoxDescent ?? fontSizePx * 0.2);
+
+      // Resolve 'normal' line-height to px
+      let lineHeightPx = parseFloat(h1CS.lineHeight);
+      if (isNaN(lineHeightPx)) lineHeightPx = Math.round(fontSizePx * 1.2);
+
+      // Compute the baseline position from the top of the line box:
+      // baseline = half-leading + ascent
+      const baselineFromTop = Math.max(0, (lineHeightPx - (ascent + descent)) / 2 + ascent);
+
+      // Lock wrapper to single line height, but do NOT force line-height (inherit from h1)
+      wrap.style.height = lineHeightPx + 'px';
+      wrap.style.lineHeight = '';
+    }
 
     // Smoothly animate width changes to keep the period aligned without jumps
     wrap.style.transition = `width ${ANIM_MS}ms ease-in-out`;
 
     // Initial width for the first word
     wrap.style.width = widthOf(WORDS[i]) + 'px';
+
+    // initial application
+    applyBaseline();
+
+    // ensure we recalc after webfonts finish swapping in
+    if ('fonts' in document && document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(applyBaseline);
+    }
+
+    // recalc on resize (debounced) and whenever the H1 box changes size
+    const _debounce = (fn, d = 100) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), d); }; };
+    window.addEventListener('resize', _debounce(applyBaseline, 80), { passive: true });
+
+    // catch any reflow (clamps, container width, etc.)
+    const ro = new ResizeObserver(() => applyBaseline());
+    ro.observe(h1);
 
     // 3) Animation loop
     let ticking = false;

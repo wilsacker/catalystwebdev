@@ -3,9 +3,9 @@
    =============================== */
   
 :root {
-  --bg-chrome: #ffffff;
-  --bg-primary: #f2f2f2;
-  --bg-secondary: #ffffff;
+  --bg-chrome: #fff;
+  --bg-primary: #e5e5e5;
+  --bg-secondary: #ededed;
   --bg-primary-backup: #f2f2f2;
   --text-color: #1a1a1a;
 
@@ -532,9 +532,10 @@ header.is-stuck .header-container {
   margin: 0 auto;
 }
 
-#hero h1 {
+.hero h1 {
   letter-spacing: -0.02em;
   margin-bottom: 0.6rem;
+  line-height: 1.1;
 }
 
 /* Stronger, layered hero h1 shadows for both themes */
@@ -555,19 +556,20 @@ header.is-stuck .header-container {
 
 /* Rotating word container to prevent layout shift */
 .rotating-word-wrap {
-  position: relative;
-  display: inline-block;
+  display: inline-grid;           /* overlay children, but keep inline baseline */
+  grid-auto-flow: row;
+  align-items: center;            /* vertically center glyph box within line box */
+  justify-items: start;           /* left-align both layers so they don't drift right */
   vertical-align: baseline;
-  max-width: 100%;
+  position: relative;
+  white-space: nowrap;
 }
 
-/* The two layers (current + next) stacked */
 .rotating-layer {
-  position: absolute;
-  left: 0;
-  top: 0;
+  position: static;        /* let grid do the overlap; avoids baseline drift */
+  grid-area: 1 / 1;        /* both layers occupy the same grid cell */
   will-change: transform, opacity;
-  white-space: nowrap; /* desktop: keep one line so the dot hugs the word */
+  white-space: inherit; /* follow the wrap’s setting */
 }
 
 /* Slightly stronger type like you had */
@@ -602,11 +604,6 @@ header.is-stuck .header-container {
 .rotating-word-wrap { perspective: -800px; }
 .rotating-layer { transform-origin: 50% 50%; backface-visibility: hidden; }
 
-@media (max-width: 520px) {
-  .rotating-layer { white-space: normal; width: 100%; }
-  .rotating-word-wrap { max-width: 100%; width: auto; }
-}
-
 .rotating-out {
   animation: wheelOut 0.7s ease-in-out forwards;
 }
@@ -617,12 +614,20 @@ header.is-stuck .header-container {
 
 .rotating-word {
   display: inline-block;
-  font-weight: 800;              /* emphasize the changing word */
   color: var(--accent-color);
 }
 
+/* Keep rotating word and dot together, dot stays unanimated */
+.hero-tail {
+  display: inline-grid;          /* aligns nicely with your grid-based rotator */
+  grid-auto-flow: column;
+  align-items: baseline;
+  white-space: nowrap;           /* <-- prevents the dot from dropping */
+}
+
+
 .hero-subtext {
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 0.9rem + 0.9vw, 1.5rem);
   opacity: 0.85;
   margin: 0.25rem 0 1.75rem;
   font-weight: 800;
@@ -666,18 +671,6 @@ header.is-stuck .header-container {
 .hero-cta .secondary:hover,
 .hero-cta .secondary:focus-visible {
   border-color: var(--accent-color);
-}
-
-/* Subtle divider hinting there's more below */
-#hero::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  background: var(--border-color);
-  opacity: 0.7;
 }
 
 /* Hero Keyframes for text wheel animation */
@@ -1839,8 +1832,7 @@ header.is-stuck .header-container {
 
 @media (max-width: 768px) {
   /* hero section <768px */
-  #hero h1 { margin-bottom: 0.4rem; }
-  .hero-subtext { margin-bottom: 1.5rem; }
+  #hero h1 { margin-bottom: 1rem; }
   .hero-cta .button { padding: 0.75rem 1.2rem; }
 
   .header-right .cta-button { display: none; }
@@ -1871,7 +1863,7 @@ header.is-stuck .header-container {
   .header-left { gap: 0.65rem; }
   .header-right { gap: 0.8rem; }
   
-  #hero h1 { font-size: clamp(2.1rem, 7.8vw, 3rem); }
+  #hero h1 { font-size: clamp(2.2rem, 7.8vw, 3rem); }
 
   .cta-button {
     padding: 0.55rem 1rem; /* a bit slimmer so everything fits */
@@ -1890,5 +1882,4 @@ header.is-stuck .header-container {
   .logo { height: 34px; }
 
   #hero h1 { font-size: clamp(1.9rem, 8.2vw, 2.7rem); }
-  .hero-subtext { font-size: clamp(1rem, 8.2vw, 1.5rem);}
 }

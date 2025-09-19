@@ -1175,6 +1175,7 @@ header.is-stuck .header-container {
   font-size: clamp(3rem, 2rem + 2vw, 3.5rem);
   font-weight: 700;
   margin: 0;
+  margin-left: 0.4rem;
   margin-bottom: 1.5rem;
   color: var(--accent-green);
 }
@@ -1198,7 +1199,7 @@ header.is-stuck .header-container {
 .pricing-card ul li .checkmark {
   display: inline-block;
   width: 1.2em;                /* same as the li’s left gutter */
-  margin-left: -1.1em;         /* pull it back into that gutter */
+  margin-left: -0.5rem;         /* pull it back into that gutter */
   font-weight: 700;
   color: #FFE066;              /* yellow (tweak as you like) */
   /* or: color: #FFD54A;  // softer yellow

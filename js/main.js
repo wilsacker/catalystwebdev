@@ -944,6 +944,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // ============================
+  // About "Read more" toggle 
+  // ============================
+
   document.addEventListener('click', (e) => {
     const link = e.target.closest('.about-readmore');
     if (!link) return;

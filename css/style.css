@@ -1854,7 +1854,7 @@ header.is-stuck .header-container {
 
   .about-image {
     order: 0;
-    scale: 1.1;
+    transform: scale(1.1);
     align-self: center;
     text-align: center;
   }

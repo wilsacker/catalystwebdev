@@ -56,8 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
   toggle?.addEventListener('click', toggleTheme);
 
   // 4. Initialize saved preference
-  const saved = localStorage.getItem('theme');
-  if (saved) setTheme(saved);
+  const saved = localStorage.getItem('theme') || 'light';
+  setTheme(saved);
 
   // 4b. Sticky header styling on scroll + Back-to-top FAB
   const headerEl = document.querySelector('header');
@@ -191,13 +191,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const ACCENT = '#50b465';
     const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    let animating = true;
+
     // Create canvas and layer it behind hero content
     const canvas = document.createElement('canvas');
     canvas.id = 'hero-canvas';
     canvas.setAttribute('aria-hidden', 'true');
     Object.assign(canvas.style, {
       position: 'absolute',
-      inset: '0',
+      top: '0',
+      right: '0',
+      bottom: '0',
+      left: '0',
       width: '100%',
       height: '100%',
       zIndex: '0',
@@ -507,15 +512,22 @@ document.addEventListener('DOMContentLoaded', () => {
     function start(){
       resize();
       lastT = 0;
-      requestAnimationFrame(draw);
+      if (animating) requestAnimationFrame(draw);
     }
 
     function setDpr(){
       dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
     }
 
-    // Init
-    if (!prefersReducedMotion) start();
+    // Init (respect Reduce Motion but still render one frame)
+    if (prefersReducedMotion) {
+      animating = false;
+      resize();
+      lastT = 0;
+      draw(0);   // draw a single static frame
+    } else {
+      start();   // full animation
+    }
 
     // Events
     window.addEventListener('resize', () => { setDpr(); resize(); });
@@ -644,6 +656,18 @@ document.addEventListener('DOMContentLoaded', () => {
       // Lock wrapper to single line height, but do NOT force line-height (inherit from h1)
       wrap.style.height = lineHeightPx + 'px';
       wrap.style.lineHeight = '';
+    }
+
+    // Ensure fonts are ready before sizing — prevents the period from “sticking”
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        applyBaseline();
+        try { wrap.style.width = widthOf(WORDS[i]) + 'px'; } catch {}
+      });
+    } else {
+      // Fallback: apply immediately
+      applyBaseline();
+      try { wrap.style.width = widthOf(WORDS[i]) + 'px'; } catch {}
     }
 
     // Smoothly animate width changes to keep the period aligned without jumps

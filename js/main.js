@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
         glowRadiusScale: 0.5
       },
       light: {
-        baseFill: '',
+        baseFill: null,
         vignetteAlpha: 0.16,
         vignetteCenter: [0.5, 0.2],
         vignetteRadius: 0.9,
@@ -357,19 +357,32 @@ document.addEventListener('DOMContentLoaded', () => {
       lastT = t;
 
       ctx.clearRect(0,0,W,H);
+      ctx.globalCompositeOperation = 'source-over';
 
       // THEME detection and base background (unified for light/dark)
       const themeIsDark = document.documentElement.getAttribute('data-theme') === 'dark';
       const THEME = themeIsDark ? THEMES.dark : THEMES.light;
 
+      // Paint solid base only when provided
+      if (THEME.baseFill) {
+        ctx.fillStyle = THEME.baseFill;
+        ctx.fillRect(0, 0, W, H);
+      }
+    
       // unified base & vignette using THEME
       ctx.fillStyle = THEME.baseFill;
       ctx.fillRect(0,0,W,H);
+      
+      // Vignette/glow over transparent base
       const [vx, vy] = THEME.vignetteCenter;
-      const vr = ctx.createRadialGradient(W*vx, H*vy, 0, W*vx, H*vy, Math.max(W,H)*THEME.vignetteRadius);
+      const vr = ctx.createRadialGradient(
+        W * vx, H * vy, 0,
+        W * vx, H * vy, Math.max(W, H) * THEME.vignetteRadius
+      );
       vr.addColorStop(0, `rgba(80,180,101,${THEME.vignetteAlpha})`);
       vr.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.fillStyle = vr; ctx.fillRect(0,0,W,H);
+      ctx.fillStyle = vr;
+      ctx.fillRect(0, 0, W, H);
 
       // Update ripples
       for (let i = ripples.length - 1; i >= 0; i--) {

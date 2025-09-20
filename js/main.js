@@ -415,7 +415,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Lighting based on a normal derived from the height field around the pin center
         const EPS = 1.0;
-        const hL = Math.sin(t * tile.speed + tile.phase); // local base for neighbors
         const nHx = (Math.sin(t * tile.speed + tile.phase + EPS*0.03) - Math.sin(t * tile.speed + tile.phase - EPS*0.03));
         const nHy = (Math.sin(t * tile.speed + tile.phase + EPS*0.03) - Math.sin(t * tile.speed + tile.phase - EPS*0.03));
         let nx = -nHx, ny = -nHy, nz = 2.0; // up vector

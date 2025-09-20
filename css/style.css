@@ -515,7 +515,7 @@ header.is-stuck .header-container {
   position: relative;
   display: grid;
   place-items: center;
-  min-height: 100vh;              /* slightly shorter so CTAs sit above the fold */
+  min-height: 86vh;
   padding: 6rem 2rem 4rem;
   text-align: center;
   background-color: var(--bg-primary);

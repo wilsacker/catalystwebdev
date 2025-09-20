@@ -223,8 +223,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let lastMouse = { x: -9999, y: -9999 };
 
     // Grid config
-    let CELL = 56;                    // base cell size (px)
+    let CELL = 39;                    // base cell size (px)
     const RADIUS = 6;                 // tile corner radius
+    const GAP = 0.5;                // gap between tiles (px)
     const BASE_AMP = 8;               // base jump amplitude
     const RIPPLE_SIGMA = 160;         // ripple spread (px)
     const RIPPLE_WAVE_K = 0.06;       // spatial frequency
@@ -264,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
         glowRadiusScale: 0.5
       },
       light: {
-        baseFill: '#',
+        baseFill: '',
         vignetteAlpha: 0.16,
         vignetteCenter: [0.5, 0.2],
         vignetteRadius: 0.9,
@@ -423,10 +424,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const bC = Math.min(255, baseCol.b + I * (30 + tintCol.b));
 
         // Pin geometry inside its cell: fixed position; height impression via inner offset & shading
-        const x = tile.x + 1;
-        const y = tile.y + 1;
-        const w = CELL - 2;
-        const h = CELL - 2;
+        const x = tile.x + GAP;
+        const y = tile.y + GAP;
+        const w = CELL - GAP * 2;
+        const h = CELL - GAP * 2;
 
         // mouse proximity influence (size + glow)
         const dxm = (tile.x + CELL*0.5) - lastMouse.x;
@@ -446,24 +447,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const sx = (-LIGHT.x) * sLen;
         const sy = (-LIGHT.y) * sLen;
         ctx.fillStyle = `rgba(0,0,0,${THEME.tileShadowAlpha})`;
-        roundRect(ctx, xs + sx, ys + sy, ws, hs, 7);
+        roundRect(ctx, xs + sx, ys + sy, ws, hs, RADIUS);
         ctx.fill();
 
         // Pin body
         ctx.fillStyle = `rgb(${rC|0},${gC|0},${bC|0})`;
-        roundRect(ctx, xs, ys, ws, hs, 7);
+        roundRect(ctx, xs, ys, ws, hs, RADIUS);
         ctx.fill();
         // Add subtle tile border and bevel controlled by THEME (seams disabled by default)
         if (THEME.borderOuterAlpha > 0 || THEME.borderInnerAlpha > 0) {
           if (THEME.borderOuterAlpha > 0) {
             ctx.strokeStyle = `rgba(0,0,0,${THEME.borderOuterAlpha})`;
             ctx.lineWidth = 1;
-            roundRect(ctx, xs, ys, ws, hs, 7);
+            roundRect(ctx, xs, ys, ws, hs, RADIUS);
             ctx.stroke();
           }
           if (THEME.borderInnerAlpha > 0) {
             ctx.strokeStyle = `rgba(255,255,255,${THEME.borderInnerAlpha})`;
-            roundRect(ctx, xs+1, ys+1, ws-2, hs-2, 6);
+            roundRect(ctx, xs+1, ys+1, ws-2, hs-2, Math.max(0, RADIUS - 1));
             ctx.stroke();
           }
         }
@@ -472,7 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const hi = THEME.hi;
         const lo = THEME.lo;
         // highlight stroke
-        ctx.strokeStyle = hi; ctx.lineWidth = 1; roundRect(ctx, xs+0.5, ys+0.5, ws-1, hs-1, 7); ctx.stroke();
+        ctx.strokeStyle = hi; ctx.lineWidth = 1; roundRect(ctx, xs+0.5, ys+0.5, ws-1, hs-1, RADIUS); ctx.stroke();
         // inner shadow via inset path
         ctx.save();
         ctx.clip();
@@ -482,7 +483,7 @@ document.addEventListener('DOMContentLoaded', () => {
         grad.addColorStop(0.5 + depthClamped*0.2, 'rgba(0,0,0,0)');
         grad.addColorStop(1.0, lo);
         ctx.fillStyle = grad;
-        roundRect(ctx, xs, ys, ws, hs, 7);
+        roundRect(ctx, xs, ys, ws, hs, RADIUS);
         ctx.fill();
         ctx.restore();
 

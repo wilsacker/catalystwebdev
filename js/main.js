@@ -570,9 +570,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const prefersReducedMotion = window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Baseline tweak (in px) to fine-tune after metrics; use small values if needed
-    const BASELINE_TWEAK = 0; // negative raises, positive lowers
-
     // 1) Create a fixed-width wrapper to prevent layout shift
     const wrap = document.createElement('span');
     wrap.className = 'rotating-word-wrap';
@@ -873,15 +870,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Testimonials Carousel (robust: aria-hidden + hidden; pause on hover/focus)
+  // Testimonials Carousel
   const testimonialsRoot = document.querySelector('.testimonials-carousel');
   const testimonialTrack = document.querySelector('.testimonial-track');
   const testimonialSlides = testimonialTrack ? Array.from(testimonialTrack.querySelectorAll('.testimonial-slide')) : [];
   
   let testimonialIndex = 0;
   let testimonialTimer = null;
-  const TESTIMONIAL_INTERVAL = 8000;
-  const prefersReducedMotion_TEST = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const TESTIMONIAL_INTERVAL = 7000;
   
   function showTestimonial(i) {
     testimonialIndex = (i + testimonialSlides.length) % testimonialSlides.length;
@@ -903,7 +899,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   function startTestimonials() {
-    if (prefersReducedMotion_TEST || testimonialSlides.length <= 1) return;
+    if (testimonialSlides.length <= 1) return;
     stopTestimonials();
     testimonialTimer = setInterval(nextTestimonial, TESTIMONIAL_INTERVAL);
   }

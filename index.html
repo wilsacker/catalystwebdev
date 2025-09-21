@@ -21,12 +21,15 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <script>
+    try { history.scrollRestoration = 'manual'; } catch {}
+  </script>
 </head>
 <body>
   <!-- Header Section -->
   <header>
     <div class="header-container">
-      <a href="#" class="header-left">
+      <a href="#hero" class="header-left">
         <img src="./images/CATALYST-LOGO.png" alt="Catalyst Logo" class="logo" />
         <div class="site-title">
           <h1>Catalyst Web</h1>
@@ -158,7 +161,7 @@
         <div class="testimonial-track">
           <div class="testimonial-slide active">
             <div class="testimonial-image">
-              <img src="./images/lillian-headshot.jpg" alt="Headshot photo of Lillian Morton">
+              <img src="./images/lillian-headshot.jpg" alt="Headshot photo of Lillian Morton" width="80" height="80">
             </div>
             <div class="testimonial-text">
               <div class="testimonial-rating">
@@ -170,7 +173,7 @@
           </div>
           <div class="testimonial-slide">
             <div class="testimonial-image">
-              <img src="./images/lisa-headshot.jpg" alt="Headshot photo of Lisa Acker" class="lisa-headshot-offset">
+              <img src="./images/lisa-headshot.jpg" alt="Headshot photo of Lisa Acker" class="lisa-headshot-offset" width="80" height="80">
             </div>
             <div class="testimonial-text">
               <div class="testimonial-rating">
@@ -440,12 +443,12 @@
           </div>
           <div class="about-text" data-clamp="1">
             <h2>I'm Wils, Founder of Catalyst Web</h2>
-            <div class="about-body">
+            <div class="about-body" id="about-body">
               <p>Catalyst was born out of a lifelong curiosity for technology and a deep love of creative expression. My background spans <strong>music, digital media, and full‑stack web production</strong>. Over time, those paths naturally converged into something greater. What started as a passion for building things grew into a mission: to create digital spaces that innovate, generate growth, and give businesses the flexibility to reach new heights.</p>
               <p><em>Catalyst</em> isn’t just a brand — it’s the role I strive to play. In science, a catalyst sparks a reaction, helping elements come together and transform into something more powerful. Every project is an opportunity to give your ideas, your vision, and your brand the momentum it needs to connect, grow, and leave a lasting impact.</p>
               <p>My goal is to deliver more than just a polished website. I aim to help you unlock potential by building a foundation for growth, visibility, and identity that reflects both who you are and where you’re going. Catalyst exists to be that spark — powered by the collaboration between your vision and the skills I bring. Together, we create momentum that expands far beyond the website itself.</p>
             </div>
-            <a href="#" class="about-readmore">Read more</a>
+            <a href="#about-body" class="about-readmore">Read more</a>
             <div></div>
             <div class="about-cta">
               <a href="#portfolio" class="button secondary">See our work</a>
@@ -1148,7 +1151,7 @@
     <section id="contact" class="contact-section">
       <div class="contact-header">
         <h2>Get in Touch</h2>
-        <p>Have a project in mind? Let’s talk. Fill out the form and I’ll get back to you soon.</p>
+        <p>Have a project in mind? Let’s talk.</p>
       </div>
       <div class="contact-container">
         <form action="https://formsubmit.co/wils@catalystwebdev.com" method="POST" class="contact-form">
@@ -1164,7 +1167,6 @@
           <button type="submit" class="button submit-button">Send Message</button>
         </form>
         <p class="direct-email-note">
-          Or reach out directly at 
           <a href="mailto:wils@catalystwebdev.com">wils@catalystwebdev.com</a>
         </p>
       </div>
@@ -1187,15 +1189,15 @@
       <div class="footer-left">
         <img src="./images/CATALYST-LOGO.png" alt="Catalyst Logo" class="footer-logo" />
         <div class="footer-info">
-          <p class="footer-credit">Website Designed by <a href="#">Catalyst Web.</a></p>
+          <p class="footer-credit">Website Designed by <a href="#hero">Catalyst Web.</a></p>
           <p>© <span id="year"></span> Catalyst Web Development</p>
         </div>
       </div>
       <!--
       <div class="footer-socials">
-        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#hero" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="#hero" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#hero" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
       </div>
       -->
       <div class="footer-right">

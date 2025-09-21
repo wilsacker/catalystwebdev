@@ -680,21 +680,6 @@ header.is-stuck .header-container {
   border-color: var(--accent-color);
 }
 
-/* Hero Keyframes for text wheel animation */
-
-/* Looks head-on, with the word traveling down while flipping */
-@keyframes wheelOut {
-  /* current word: center → below */
-  0%   { opacity: 1; transform: translate3d(0, 0%, 0)    rotateX(0deg); }
-  100% { opacity: 0; transform: translate3d(0, 110%, 0)  rotateX(75deg); }
-}
-
-@keyframes wheelIn {
-  /* next word: above → center */
-  0%   { opacity: 0; transform: translate3d(0, -110%, 0) rotateX(-75deg); }
-  100% { opacity: 1; transform: translate3d(0, 0%, 0)    rotateX(0deg); }
-}
-
 /* ===============================
     Sections: Portfolio
    =============================== */
@@ -778,56 +763,12 @@ header.is-stuck .header-container {
     position: relative;
   }
   
-  @keyframes slideInFromRight {
-    from {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-  
-  @keyframes slideInFromLeft {
-    from {
-      transform: translateX(-100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-  
   .slide-in-right {
     animation: slideInFromRight 0.6s ease forwards;
   }
   
   .slide-in-left {
     animation: slideInFromLeft 0.6s ease forwards;
-  }
-  
-  @keyframes slideOutToLeft {
-    from {
-      transform: translateX(0);
-      opacity: 1;
-    }
-    to {
-      transform: translateX(-100%);
-      opacity: 0;
-    }
-  }
-  
-  @keyframes slideOutToRight {
-    from {
-      transform: translateX(0);
-      opacity: 1;
-    }
-    to {
-      transform: translateX(100%);
-      opacity: 0;
-    }
   }
   
   .slide-out-left {
@@ -2060,3 +2001,84 @@ header.is-stuck .header-container {
 
   }
 }
+
+/* ===============================
+    Accessibility: Reduce Motion
+   =============================== */
+
+   @media (prefers-reduced-motion: reduce) {
+    .testimonial-slide { transition: none !important; }
+    .testimonial-slide.active { animation: none !important; }
+  }
+  
+  /* ===============================
+      Utilities: Animations
+     =============================== */
+  
+  /* Hero Section Text Wheel Animation */
+  
+  /* Looks head-on, with the word traveling down while flipping */
+  @keyframes wheelOut {
+    /* current word: center → below */
+    0%   { opacity: 1; transform: translate3d(0, 0%, 0)    rotateX(0deg); }
+    100% { opacity: 0; transform: translate3d(0, 110%, 0)  rotateX(75deg); }
+  }
+  
+  @keyframes wheelIn {
+    /* next word: above → center */
+    0%   { opacity: 0; transform: translate3d(0, -110%, 0) rotateX(-75deg); }
+    100% { opacity: 1; transform: translate3d(0, 0%, 0)    rotateX(0deg); }
+  }
+  
+  /* Portfolio Section Portfolio Animation */
+  
+  @keyframes slideOutToLeft {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes slideOutToRight {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes slideInFromRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInFromLeft {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Testimonials Section Reviews Carousel Animation */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-16px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  

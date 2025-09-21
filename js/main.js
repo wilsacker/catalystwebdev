@@ -971,6 +971,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const faqList = document.querySelector('.faq-list');
   const faqItems = document.querySelectorAll('.faq-item');
 
+  // Close all open FAQ items (hoisted so filterFaq can call it)
+  function closeAllFaq() {
+    const toggles = document.querySelectorAll('.faq-toggle');
+    toggles.forEach(btn => {
+      const panelId = btn.getAttribute('aria-controls');
+      const panel = panelId ? document.getElementById(panelId) : null;
+      if (panel) panel.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+    });
+  }
+
   // Simple debounce helper
   const debounce = (fn, delay = 160) => {
     let t;
@@ -1014,4 +1025,42 @@ document.addEventListener('DOMContentLoaded', () => {
     faqSearch.addEventListener('input', debounce(filterFaq, 120));
     faqSearch.addEventListener('search', filterFaq); // for clear "x" on WebKit
   }
+
+  // ============================
+  // FAQ accordion (click/keyboard)
+  // ============================
+  const faqToggles = document.querySelectorAll('.faq-toggle');
+
+  faqToggles.forEach(btn => {
+    // Click toggles its panel
+    btn.addEventListener('click', () => {
+      const panelId = btn.getAttribute('aria-controls');
+      const panel = panelId ? document.getElementById(panelId) : null;
+      if (!panel) return;
+
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      panel.hidden = expanded; // hide if it was open; show if it was closed
+    });
+
+    // Keyboard support (Enter / Space)
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        btn.click();
+      }
+    });
+  });
+
+  // Optional: open a specific FAQ when linked as ...#faq-services
+  (function openFaqFromHash() {
+    const hash = window.location.hash;
+    if (!hash) return;
+    const panel = document.querySelector(hash);
+    if (!panel || !panel.classList.contains('faq-panel')) return;
+    const btn = document.querySelector(`[aria-controls="${panel.id}"]`);
+    if (!btn) return;
+    btn.setAttribute('aria-expanded', 'true');
+    panel.hidden = false;
+  })();
 });

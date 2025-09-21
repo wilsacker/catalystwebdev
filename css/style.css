@@ -1202,6 +1202,7 @@ header.is-stuck .header-container {
   margin-left: -0.5rem;         /* pull it back into that gutter */
   font-weight: 700;
   color: #FFE066;              /* yellow (tweak as you like) */
+  text-shadow: 0 1px 1px rgba(0,0,0,0.35);
   /* or: color: #FFD54A;  // softer yellow
          color: #FFE066;  // warmer yellow */
 }

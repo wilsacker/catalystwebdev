@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 3. Analog theme toggle
-
   const setTheme = (theme) => {
     html.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
@@ -570,9 +569,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const prefersReducedMotion = window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Baseline tweak (in px) to fine-tune after metrics; use small values if needed
-    const BASELINE_TWEAK = 0; // negative raises, positive lowers
-
     // 1) Create a fixed-width wrapper to prevent layout shift
     const wrap = document.createElement('span');
     wrap.className = 'rotating-word-wrap';
@@ -880,7 +876,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   let testimonialIndex = 0;
   let testimonialTimer = null;
-  const TESTIMONIAL_INTERVAL = 8000;
+  const TESTIMONIAL_INTERVAL = 7000;
   const prefersReducedMotion_TEST = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   
   function showTestimonial(i) {
